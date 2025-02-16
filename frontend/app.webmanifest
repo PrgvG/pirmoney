@@ -1,0 +1,26 @@
+{
+  "name": "My First Application",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "public/vite174.svg",
+      "type": "image/svg+xml",
+      "sizes": "174x174"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "public/screenshot.png",
+      "type": "image/png",
+      "sizes": "540x566",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "public/screenshot1.png",
+      "type": "image/png",
+      "sizes": "566x540",
+      "form_factor": "wide"
+    }
+  ]
+}

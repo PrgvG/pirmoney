@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.registration_warning {
+    display: flex;
+    padding: 24px;
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+}

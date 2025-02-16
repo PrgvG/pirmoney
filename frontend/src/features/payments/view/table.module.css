@@ -1,0 +1,27 @@
+.table {
+    table-layout: fixed;
+}
+
+.resizer {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background-color: gray;
+    cursor: col-resize;
+}
+
+.header {
+    background-color: rgba(0, 0, 0, 0.05);
+    height: 24px;
+}
+
+.separator {
+    font-weight: 700;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.separatorContent {
+    padding: 4px;
+}
