@@ -11,7 +11,7 @@ import {
 } from './features';
 import {
     enrichByPaymentDate,
-    filterByActiveMonth,
+    filterByActiveDate,
     getPaymentsByMonth,
     getPaymentsSummary,
     mapPaymentDtoToPayment,
@@ -26,10 +26,14 @@ type Payments = Required<ComponentPropsWithoutRef<typeof Payments>['payments']>;
 
 export const App: FC = () => {
     const today = new Date();
-    const todayMonth = today.getMonth();
+
+    const initialActiveDate = {
+        month: today.getMonth(),
+        year: today.getFullYear(),
+    };
 
     const [payments, setPayments] = useState<Payment[]>([]);
-    const [activeMonth, setActiveMonth] = useState(todayMonth);
+    const [activeDate, setActiveDate] = useState(initialActiveDate);
 
     const { outcomeAmount, closestPayment, paymentsAmountLeft, incomeAmount } =
         useMemo(() => getPaymentsSummary(payments), [payments]);
@@ -86,20 +90,20 @@ export const App: FC = () => {
                     <Payments
                         monthSwitcher={
                             <MonthSwitcher
-                                onMonthChange={setActiveMonth}
-                                activeMonth={activeMonth}
+                                onDateChange={setActiveDate}
+                                activeDate={activeDate}
                                 paymentsByMonth={paymentsByMonth}
                             />
                         }
                         payments={enrichByPaymentDate(
-                            filterByActiveMonth(payments, activeMonth),
-                            activeMonth,
+                            filterByActiveDate(payments, activeDate),
+                            activeDate,
                         )}
-                        activeMonth={activeMonth}
+                        activeDate={activeDate}
                         renderCheckboxInput={(completePayment) => (
                             <CompletePayment
                                 payment={completePayment}
-                                activeMonth={activeMonth}
+                                activeDate={activeDate}
                                 onChange={(completed_at) =>
                                     setPayments((prev) =>
                                         prev.map((payment) =>
@@ -126,7 +130,7 @@ export const App: FC = () => {
                                         ),
                                     );
 
-                                    setActiveMonth(todayMonth);
+                                    setActiveDate(initialActiveDate);
                                 }}
                             />
                         )}

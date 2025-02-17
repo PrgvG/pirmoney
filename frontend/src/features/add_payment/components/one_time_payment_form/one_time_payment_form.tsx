@@ -45,7 +45,10 @@ export const OneTimePaymentForm: FC<Props> = ({
                 <input
                     type="number"
                     step={0.01}
-                    {...register('payment_amount', { required: true })}
+                    {...register('payment_amount', {
+                        required: true,
+                        valueAsNumber: true,
+                    })}
                 />
             </label>
             <label>

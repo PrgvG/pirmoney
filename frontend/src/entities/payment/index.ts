@@ -20,7 +20,7 @@ export { paymentApi } from './api';
 
 export {
     enrichByPaymentDate,
-    filterByActiveMonth,
+    filterByActiveDate,
     getPaymentsByMonth,
     getPaymentsSummary,
     sortPaymentsByPaymentDay,

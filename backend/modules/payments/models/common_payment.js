@@ -2,7 +2,7 @@ import { Schema } from 'mongoose';
 
 export const CommonPaymentSchema = new Schema({
     _id: { type: String, required: true },
-    label: { type: String, required: true },
+    label: { type: String, required: true, trim: true },
     payment_amount: { type: Number, required: true },
     payment_type: { type: String, required: true },
     payment_kind: { type: String, enum: ['income', 'outcome'], required: true },

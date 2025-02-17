@@ -9,18 +9,18 @@ const columnHelper = createColumnHelper<Payment>();
 type Props = {
     renderDeleteButton(payment: Payment): ReactNode;
     renderCheckboxInput(payment: Payment): ReactNode;
-    activeMonth: number;
+    activeDate: { month: number; year: number };
 };
 
 export const getColumns = ({
     renderDeleteButton,
     renderCheckboxInput,
-    activeMonth,
+    activeDate,
 }: Props) => {
     const cellRenderer = new CellRenderer(
         renderDeleteButton,
         renderCheckboxInput,
-        activeMonth,
+        activeDate,
     );
     const headerRenderer = new HeaderRenderer();
 

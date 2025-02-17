@@ -10,7 +10,7 @@ type Props = {
     payments: (Payment & { payment_date: Date })[];
     renderDeleteButton(payment: Payment): ReactNode;
     renderCheckboxInput(payment: Payment): ReactNode;
-    activeMonth: number;
+    activeDate: { month: number; year: number };
     monthSwitcher: ReactNode;
 };
 
@@ -18,7 +18,7 @@ export const Payments: FC<Props> = ({
     payments,
     renderDeleteButton,
     renderCheckboxInput,
-    activeMonth,
+    activeDate,
     monthSwitcher,
 }) => {
     const table = useReactTable({
@@ -26,7 +26,7 @@ export const Payments: FC<Props> = ({
         columns: getColumns({
             renderDeleteButton,
             renderCheckboxInput,
-            activeMonth,
+            activeDate,
         }),
         getCoreRowModel: getCoreRowModel(),
         columnResizeMode: 'onChange',

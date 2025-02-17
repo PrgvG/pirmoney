@@ -45,7 +45,10 @@ export const RepeatPaymentForm: FC<Props> = ({
                 <input
                     type="number"
                     step={0.01}
-                    {...register('payment_amount', { required: true })}
+                    {...register('payment_amount', {
+                        required: true,
+                        valueAsNumber: true,
+                    })}
                 />
             </label>
             <label>
@@ -55,7 +58,10 @@ export const RepeatPaymentForm: FC<Props> = ({
                     step={1}
                     min={1}
                     max={31}
-                    {...register('payment_day', { required: true })}
+                    {...register('payment_day', {
+                        required: true,
+                        valueAsNumber: true,
+                    })}
                 />
             </label>
             <div className={styles.paymentKind}>

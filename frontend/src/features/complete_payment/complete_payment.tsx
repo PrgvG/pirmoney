@@ -4,12 +4,12 @@ import styles from './complete_payment.module.css';
 
 type Props = {
     payment: Payment;
-    activeMonth: number;
+    activeDate: { month: number; year: number };
     onChange: (completed_at: Date | null) => void;
 };
 
 export const CompletePayment: FC<Props> = ({
-    activeMonth,
+    activeDate,
     payment,
     onChange,
 }) => {
@@ -18,9 +18,12 @@ export const CompletePayment: FC<Props> = ({
             return false;
         }
 
-        const paidMonth = new Date(paymentDate).getMonth();
+        const paidDate = new Date(paymentDate);
 
-        return activeMonth <= paidMonth;
+        return (
+            activeDate.month <= paidDate.getMonth() &&
+            activeDate.year <= paidDate.getFullYear()
+        );
     }
     const isPaid = getIsPaid(payment.completed_at);
 
@@ -31,7 +34,8 @@ export const CompletePayment: FC<Props> = ({
             checked={isPaid}
             onChange={async () => {
                 const date = new Date();
-                date.setMonth(activeMonth);
+                date.setMonth(activeDate.month);
+                date.setFullYear(activeDate.year);
 
                 const completed_at = isPaid ? null : date;
 

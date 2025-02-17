@@ -13,16 +13,16 @@ import { Payment } from '../../../entities';
 export class CellRenderer {
     private renderDeleteButton;
     private renderCheckboxInput;
-    private activeMonth;
+    private activeDate;
 
     constructor(
         renderDeleteButton: (payment: Payment) => ReactNode,
         renderCheckboxInput: (payment: Payment) => ReactNode,
-        activeMonth: number,
+        activeDate: { month: number; year: number },
     ) {
         this.renderDeleteButton = renderDeleteButton;
         this.renderCheckboxInput = renderCheckboxInput;
-        this.activeMonth = activeMonth;
+        this.activeDate = activeDate;
     }
 
     getPaymentDate(paymentDate: Date): string {
@@ -68,14 +68,17 @@ export class CellRenderer {
             currency: 'RUB',
         });
 
-        function getColor(activeMonth: number): string {
+        function getColor(activeDate: { month: number; year: number }): string {
             if (row.original.payment_kind === 'income') {
                 return 'green';
             }
 
             const today = new Date();
 
-            if (today.getMonth() !== activeMonth) {
+            if (
+                today.getMonth() !== activeDate.month ||
+                today.getFullYear() !== activeDate.year
+            ) {
                 return 'black';
             }
 
@@ -91,7 +94,7 @@ export class CellRenderer {
         }
 
         return (
-            <Cell align="right" color={getColor(this.activeMonth)}>
+            <Cell align="right" color={getColor(this.activeDate)}>
                 {value}
             </Cell>
         );
