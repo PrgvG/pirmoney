@@ -90,8 +90,6 @@ export function getPaymentsByMonth(
                     paymentDate.getMonth() +
                     (paymentDate.getFullYear() - todayYear) * 12;
 
-                console.log('month: ', month);
-
                 lastMonth = Math.max(lastMonth, month);
 
                 if (month in acc) {
@@ -119,37 +117,9 @@ export function getPaymentsByMonth(
         {},
     );
 
-    console.log('oneTimePaymentsMap: ', oneTimePaymentsMap, lastMonth);
-
-    const a = new Array(lastMonth + 1).fill(0).map((_, index) => {
-        console.log('map: ', index);
-        if (index in oneTimePaymentsMap) {
-            return {
-                outcome: outcomeAmount + oneTimePaymentsMap[index].outcome,
-                income: incomeAmount + oneTimePaymentsMap[index].income,
-            };
-        }
-        return { outcome: outcomeAmount, income: incomeAmount };
-    });
-
-    console.log('a: ', a);
-
-    const b = a.reduce((acc, { outcome, income }, index) => {
-        if (index < todayMonth) {
-            return acc;
-        }
-        console.log('reduce: ', index);
-        return { ...acc, [index]: { outcome, income } };
-    }, {});
-
-    console.log('b: ', b);
-
-    return b;
-
     return new Array(lastMonth + 1)
         .fill(0)
         .map((_, index) => {
-            console.log('map: ', index);
             if (index in oneTimePaymentsMap) {
                 return {
                     outcome: outcomeAmount + oneTimePaymentsMap[index].outcome,
@@ -162,7 +132,7 @@ export function getPaymentsByMonth(
             if (index < todayMonth) {
                 return acc;
             }
-            console.log('reduce: ', index);
+
             return { ...acc, [index]: { outcome, income } };
         }, {});
 }

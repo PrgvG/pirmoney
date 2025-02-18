@@ -1,13 +1,13 @@
-import { ComponentPropsWithoutRef, FC, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import {
-    Payments,
+    PaymentsGrid,
     Summary,
     PageLayout,
     AddPaymentButton,
     CompletePayment,
-    UserRegistrationButton,
     DeletePayment,
     MonthSwitcher,
+    UserButton,
 } from './features';
 import {
     enrichByPaymentDate,
@@ -20,9 +20,6 @@ import {
     sortPaymentsByPaymentDay,
 } from './entities';
 import styles from './App.module.css';
-import { authService } from './services/authService';
-
-type Payments = Required<ComponentPropsWithoutRef<typeof Payments>['payments']>;
 
 export const App: FC = () => {
     const today = new Date();
@@ -43,20 +40,12 @@ export const App: FC = () => {
         [payments, outcomeAmount, incomeAmount],
     );
 
-    const hasToken = Boolean(authService.getToken());
+    useEffect(() => {
+        paymentApi.getAllPayments().then(setPayments);
+    }, []);
 
-    if (!hasToken) {
-        return (
-            <div className={styles.registration_warning}>
-                <UserRegistrationButton
-                    onLogin={async () => {
-                        const payments = await paymentApi.getAllPayments();
-                        setPayments(payments);
-                    }}
-                    onLogout={() => setPayments([])}
-                />
-            </div>
-        );
+    if (!payments.length) {
+        return null;
     }
 
     return (
@@ -71,74 +60,60 @@ export const App: FC = () => {
                         );
                     }}
                 />
-                <UserRegistrationButton
-                    onLogin={async () => {
-                        const payments = await paymentApi.getAllPayments();
-                        setPayments(payments);
-                    }}
-                    onLogout={() => setPayments([])}
-                />
+                <UserButton onLogout={() => setPayments([])} />
             </div>
+            <Summary
+                closestPayment={closestPayment}
+                paymentsAmountLeft={paymentsAmountLeft}
+            />
 
-            {payments.length > 1 ? (
-                <>
-                    <Summary
-                        closestPayment={closestPayment}
-                        paymentsAmountLeft={paymentsAmountLeft}
-                    />
-
-                    <Payments
-                        monthSwitcher={
-                            <MonthSwitcher
-                                onDateChange={setActiveDate}
-                                activeDate={activeDate}
-                                paymentsByMonth={paymentsByMonth}
-                            />
-                        }
-                        payments={enrichByPaymentDate(
-                            filterByActiveDate(payments, activeDate),
-                            activeDate,
-                        )}
+            <PaymentsGrid
+                monthSwitcher={
+                    <MonthSwitcher
+                        onDateChange={setActiveDate}
                         activeDate={activeDate}
-                        renderCheckboxInput={(completePayment) => (
-                            <CompletePayment
-                                payment={completePayment}
-                                activeDate={activeDate}
-                                onChange={(completed_at) =>
-                                    setPayments((prev) =>
-                                        prev.map((payment) =>
-                                            payment._id === completePayment._id
-                                                ? {
-                                                      ...payment,
-                                                      completed_at,
-                                                  }
-                                                : payment,
-                                        ),
-                                    )
-                                }
-                            />
-                        )}
-                        renderDeleteButton={(deletingPayment) => (
-                            <DeletePayment
-                                payment={deletingPayment}
-                                onDelete={() => {
-                                    setPayments((prev) =>
-                                        prev.filter(
-                                            (payment) =>
-                                                payment._id !==
-                                                deletingPayment._id,
-                                        ),
-                                    );
-
-                                    setActiveDate(initialActiveDate);
-                                }}
-                            />
-                        )}
+                        paymentsByMonth={paymentsByMonth}
                     />
-                </>
-            ) : (
-                'Добавь новый платеж чтобы увидеть таблицу.'
-            )}
+                }
+                payments={enrichByPaymentDate(
+                    filterByActiveDate(payments, activeDate),
+                    activeDate,
+                )}
+                activeDate={activeDate}
+                renderCheckboxInput={(completePayment) => (
+                    <CompletePayment
+                        payment={completePayment}
+                        activeDate={activeDate}
+                        onChange={(completed_at) =>
+                            setPayments((prev) =>
+                                prev.map((payment) =>
+                                    payment._id === completePayment._id
+                                        ? {
+                                              ...payment,
+                                              completed_at,
+                                          }
+                                        : payment,
+                                ),
+                            )
+                        }
+                    />
+                )}
+                renderDeleteButton={(deletingPayment) => (
+                    <DeletePayment
+                        payment={deletingPayment}
+                        onDelete={() => {
+                            setPayments((prev) =>
+                                prev.filter(
+                                    (payment) =>
+                                        payment._id !== deletingPayment._id,
+                                ),
+                            );
+
+                            setActiveDate(initialActiveDate);
+                        }}
+                    />
+                )}
+            />
         </PageLayout>
     );
 };

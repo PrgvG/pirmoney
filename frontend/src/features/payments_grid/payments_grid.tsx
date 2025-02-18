@@ -4,7 +4,7 @@ import { getColumns } from './model/column_config';
 
 import { Table } from './view/table';
 import { Payment } from '../../entities';
-import styles from './payments.module.css';
+import styles from './payments_grid.module.css';
 
 type Props = {
     payments: (Payment & { payment_date: Date })[];
@@ -14,7 +14,7 @@ type Props = {
     monthSwitcher: ReactNode;
 };
 
-export const Payments: FC<Props> = ({
+export const PaymentsGrid: FC<Props> = ({
     payments,
     renderDeleteButton,
     renderCheckboxInput,

@@ -3,9 +3,13 @@ import { createRoot } from 'react-dom/client';
 
 import { App } from './App';
 import './styles.css';
+import { AuthProvider } from './context';
+import { LoginPage } from './pages';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <App />
+        <AuthProvider loginPage={<LoginPage />}>
+            <App />
+        </AuthProvider>
     </StrictMode>,
 );
