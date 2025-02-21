@@ -2,6 +2,7 @@ import { FC } from 'react';
 import styles from './user_button.module.css';
 
 import { useAuth } from '../../context';
+import { Button } from 'antd';
 
 type Props = {
     onLogout: () => void;
@@ -14,15 +15,14 @@ export const UserButton: FC<Props> = ({ onLogout }) => {
         <div>
             <div className={styles.user}>
                 {user?.username}
-                <button
-                    className={styles.button}
+                <Button
                     onClick={() => {
                         clearUser();
                         onLogout();
                     }}
                 >
                     Выйти
-                </button>
+                </Button>
             </div>
         </div>
     );
