@@ -58,7 +58,7 @@ export const AddPaymentButton: FC<Props> = ({ onAdd }) => {
     return (
         <>
             <Button type="primary" onClick={handleOpenDialog}>
-                Добавить плановый платеж
+                Запланировать
             </Button>
 
             <dialog ref={dialogRef}>

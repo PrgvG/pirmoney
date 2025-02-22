@@ -35,7 +35,7 @@ export const AddMomentPaymentButton: FC<Props> = ({ onAdd }) => {
     return (
         <>
             <Button type="primary" onClick={handleOpenDialog}>
-                Добавить совершенный платеж
+                Записать
             </Button>
 
             <dialog ref={dialogRef}>
