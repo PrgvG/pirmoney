@@ -51,7 +51,7 @@ export const App: FC = () => {
 
     return (
         <PageLayout>
-            <div className={styles.container}>
+            <header className={styles.header}>
                 <div className={styles.buttons}>
                     <AddPaymentButton
                         onAdd={async (payment) => {
@@ -73,7 +73,7 @@ export const App: FC = () => {
                     />
                 </div>
                 <UserButton onLogout={() => setPayments([])} />
-            </div>
+            </header>
             <Summary
                 closestPayment={closestPayment}
                 paymentsAmountLeft={paymentsAmountLeft}

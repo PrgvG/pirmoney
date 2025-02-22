@@ -1,7 +1,8 @@
-.container {
+.header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 24px;
 }
 
 .registration_warning {
