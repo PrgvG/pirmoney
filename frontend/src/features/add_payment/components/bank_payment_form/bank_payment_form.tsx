@@ -2,7 +2,7 @@ import { FC } from 'react';
 import styles from './bank_payment_form.module.css';
 
 import { useForm } from 'react-hook-form';
-import { BankPayment } from '../../../../entities';
+import { BankPayment, useCategories } from '../../../../entities';
 import { bankOptions } from '../../../../shared';
 
 type Props = {
@@ -18,6 +18,8 @@ export const BankPaymentForm: FC<Props> = ({
     onSubmit,
     onReset,
 }) => {
+    const { categories } = useCategories();
+
     const { handleSubmit, register, reset } = useForm<BankPayment>({
         defaultValues: initialValues || {
             payment_kind: 'outcome',
@@ -76,6 +78,16 @@ export const BankPaymentForm: FC<Props> = ({
                     {Object.entries(bankOptions).map(([key, value]) => (
                         <option key={key} value={key}>
                             {value}
+                        </option>
+                    ))}
+                </select>
+            </label>
+            <label>
+                Категория
+                <select {...register('category_id', { required: true })}>
+                    {categories.map((category) => (
+                        <option key={category._id} value={category._id}>
+                            {category.name}
                         </option>
                     ))}
                 </select>

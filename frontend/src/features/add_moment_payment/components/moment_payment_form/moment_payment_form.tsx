@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import styles from './one_time_payment_form.module.css';
+import styles from './moment_payment_form.module.css';
 import { useForm } from 'react-hook-form';
 import { OneTimePayment, useCategories } from '../../../../entities';
 
@@ -10,7 +10,7 @@ type Props = {
     onReset: () => void;
 };
 
-export const OneTimePaymentForm: FC<Props> = ({
+export const MomentPaymentForm: FC<Props> = ({
     formId,
     onSubmit,
     onReset,

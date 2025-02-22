@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styles from './repeat_payment_form.module.css';
 import { useForm } from 'react-hook-form';
-import { RepeatPayment } from '../../../../entities';
+import { RepeatPayment, useCategories } from '../../../../entities';
 
 type Props = {
     formId: string;
@@ -16,6 +16,8 @@ export const RepeatPaymentForm: FC<Props> = ({
     onReset,
     initialValues,
 }) => {
+    const { categories } = useCategories();
+
     const { handleSubmit, register, reset } = useForm<RepeatPayment>({
         defaultValues: initialValues || {
             payment_kind: 'outcome',
@@ -67,6 +69,16 @@ export const RepeatPaymentForm: FC<Props> = ({
                         valueAsNumber: true,
                     })}
                 />
+            </label>
+            <label>
+                Категория
+                <select {...register('category_id', { required: true })}>
+                    {categories.map((category) => (
+                        <option key={category._id} value={category._id}>
+                            {category.name}
+                        </option>
+                    ))}
+                </select>
             </label>
             <div className={styles.paymentKind}>
                 Тип транзакции

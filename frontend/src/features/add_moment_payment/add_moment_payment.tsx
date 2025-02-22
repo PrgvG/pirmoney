@@ -3,7 +3,7 @@ import styles from './add_moment_payment.module.css';
 
 import { OneTimePayment, paymentApi } from '../../entities';
 
-import { OneTimePaymentForm } from './components/one_time_payment_form/one_time_payment_form';
+import { MomentPaymentForm } from './components/moment_payment_form/moment_payment_form';
 
 import { nanoid } from 'nanoid';
 import { Button } from 'antd';
@@ -40,7 +40,7 @@ export const AddMomentPaymentButton: FC<Props> = ({ onAdd }) => {
 
             <dialog ref={dialogRef}>
                 <div className={styles.dialog}>
-                    <OneTimePaymentForm
+                    <MomentPaymentForm
                         onReset={handleCloseDialog}
                         onSubmit={handleSubmit}
                         formId="addMomentPaymentForm"
