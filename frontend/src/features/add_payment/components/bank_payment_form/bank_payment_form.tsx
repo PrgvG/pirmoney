@@ -18,7 +18,7 @@ export const BankPaymentForm: FC<Props> = ({
     onSubmit,
     onReset,
 }) => {
-    const { categories } = useCategories();
+    const { categories, hasCategories } = useCategories();
 
     const { handleSubmit, register, reset } = useForm<BankPayment>({
         defaultValues: initialValues || {
@@ -82,16 +82,18 @@ export const BankPaymentForm: FC<Props> = ({
                     ))}
                 </select>
             </label>
-            <label>
-                Категория
-                <select {...register('category_id', { required: true })}>
-                    {categories.map((category) => (
-                        <option key={category._id} value={category._id}>
-                            {category.name}
-                        </option>
-                    ))}
-                </select>
-            </label>
+            {hasCategories && (
+                <label>
+                    Категория
+                    <select {...register('category_id', { required: true })}>
+                        {categories.map((category) => (
+                            <option key={category._id} value={category._id}>
+                                {category.name}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+            )}
             <div className={styles.paymentKind}>
                 Тип транзакции
                 <div className={styles.radioGroup}>

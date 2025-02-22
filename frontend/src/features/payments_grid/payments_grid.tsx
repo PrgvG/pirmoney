@@ -5,6 +5,7 @@ import { getColumns } from './model/column_config';
 import { Table } from './view/table';
 import { Payment } from '../../entities';
 import styles from './payments_grid.module.css';
+import { Alert } from 'antd';
 
 type Props = {
     payments: (Payment & { payment_date: Date })[];
@@ -21,7 +22,6 @@ export const PaymentsGrid: FC<Props> = ({
     activeDate,
     monthSwitcher,
 }) => {
-    console.log('payments: ', payments);
     const table = useReactTable({
         data: payments,
         columns: getColumns({
@@ -39,8 +39,15 @@ export const PaymentsGrid: FC<Props> = ({
 
     return (
         <div style={{ width: table.getTotalSize() }}>
-            <div className={styles.month_wrapper}>{monthSwitcher}</div>
-            <Table table={table} />
+            {payments.filter((payment) => payment._id !== 'separator').length >
+            0 ? (
+                <>
+                    <div className={styles.month_wrapper}>{monthSwitcher}</div>
+                    <Table table={table} />
+                </>
+            ) : (
+                <Alert message="Пока что тут нет платежей" type="info" />
+            )}
         </div>
     );
 };

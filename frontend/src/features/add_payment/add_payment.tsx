@@ -110,7 +110,7 @@ export const AddPaymentButton: FC<Props> = ({ onAdd }) => {
                             Добавить
                         </Button>
                         <Button htmlType="reset" form="addPaymentForm">
-                            Отменить
+                            Закрыть
                         </Button>
                     </div>
                 </div>

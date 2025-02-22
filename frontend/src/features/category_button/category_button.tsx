@@ -1,4 +1,4 @@
-import { Button, Input, Space } from 'antd';
+import { Alert, Button, Input, Space } from 'antd';
 import { FC, useRef, useState } from 'react';
 import styles from './category_button.module.css';
 import { categoryApi, useCategories } from '../../entities';
@@ -6,7 +6,7 @@ import { categoryApi, useCategories } from '../../entities';
 export const CategoryButton: FC = () => {
     const dialogRef = useRef<HTMLDialogElement>(null);
     const [inputValue, setInputValue] = useState('');
-    const { categories, setCategories } = useCategories();
+    const { categories, setCategories, hasCategories } = useCategories();
 
     const handleSubmit = async (value: string) => {
         await categoryApi.addCategory(value).then(({ _id }) => {
@@ -48,27 +48,35 @@ export const CategoryButton: FC = () => {
                         </Button>
                     </Space.Compact>
                     <section className={styles.list}>
-                        {categories.map((category) => (
-                            <div key={category._id} className={styles.row}>
-                                {category.name}
-                                <Button
-                                    size="small"
-                                    type="text"
-                                    onClick={async () => {
-                                        await categoryApi.delCategory(
-                                            category._id,
-                                        );
-                                        setCategories(
-                                            categories.filter(
-                                                (c) => c._id !== category._id,
-                                            ),
-                                        );
-                                    }}
-                                >
-                                    🗑️
-                                </Button>
-                            </div>
-                        ))}
+                        {hasCategories ? (
+                            categories.map((category) => (
+                                <div key={category._id} className={styles.row}>
+                                    {category.name}
+                                    <Button
+                                        size="small"
+                                        type="text"
+                                        onClick={async () => {
+                                            await categoryApi.delCategory(
+                                                category._id,
+                                            );
+                                            setCategories(
+                                                categories.filter(
+                                                    (c) =>
+                                                        c._id !== category._id,
+                                                ),
+                                            );
+                                        }}
+                                    >
+                                        🗑️
+                                    </Button>
+                                </div>
+                            ))
+                        ) : (
+                            <Alert
+                                message="Пока что тут нет категорий"
+                                type="info"
+                            />
+                        )}
                     </section>
                     <Button
                         onClick={() => {

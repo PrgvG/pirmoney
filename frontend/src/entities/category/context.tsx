@@ -13,6 +13,7 @@ const CategoriesContext = createContext<{
     categories: Category[];
     categoriesById: Record<string, Category>;
     setCategories: (categories: Category[]) => void;
+    hasCategories: boolean;
 } | null>(null);
 
 export const CategoriesProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -27,6 +28,7 @@ export const CategoriesProvider: FC<PropsWithChildren> = ({ children }) => {
             value={{
                 categories,
                 setCategories,
+                hasCategories: categories.length > 0,
                 categoriesById: categories.reduce(
                     (acc, category) => ({ ...acc, [category._id]: category }),
                     {},
