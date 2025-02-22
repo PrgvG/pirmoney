@@ -8,3 +8,4 @@ export { UserButton } from './user_button/user_button';
 export { MonthSwitcher } from './month_switcher/month_switcher';
 export { LoginForm } from './login_form/login_form';
 export { RegisterForm } from './register_form/register_form';
+export { CategoryButton } from './category_button/category_button';

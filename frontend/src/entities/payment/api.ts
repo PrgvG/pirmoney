@@ -29,6 +29,7 @@ function getSeparator(): Payment {
         payment_day: isDayOfMonth(date) ? date : 1,
         payment_amount: 0,
         payment_type: 'repeat_payment',
+        category_id: '',
         completed_at: null,
     };
 }

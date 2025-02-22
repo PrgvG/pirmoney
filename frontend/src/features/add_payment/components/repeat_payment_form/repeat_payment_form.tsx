@@ -38,7 +38,11 @@ export const RepeatPaymentForm: FC<Props> = ({
         >
             <label>
                 Название
-                <input type="text" {...register('label', { required: true })} />
+                <input
+                    type="text"
+                    autoComplete="off"
+                    {...register('label', { required: true })}
+                />
             </label>
             <label>
                 Сумма платежа

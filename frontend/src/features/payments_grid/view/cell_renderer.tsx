@@ -9,6 +9,7 @@ import {
 import { isSeparatorRow } from '../model/helpers';
 import { ReactNode } from 'react';
 import { Payment } from '../../../entities';
+import { CategoryCell } from './category_cell';
 
 export class CellRenderer {
     private renderDeleteButton;
@@ -106,6 +107,10 @@ export class CellRenderer {
         }
         const bank = getValue();
         return <Cell>{bankLabels[bank]}</Cell>;
+    };
+
+    renderCategory = ({ getValue }: CellContext<Payment, string>) => {
+        return <CategoryCell categoryId={getValue()} />;
     };
 
     renderPaymentType = ({

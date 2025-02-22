@@ -21,6 +21,7 @@ export const PaymentsGrid: FC<Props> = ({
     activeDate,
     monthSwitcher,
 }) => {
+    console.log('payments: ', payments);
     const table = useReactTable({
         data: payments,
         columns: getColumns({

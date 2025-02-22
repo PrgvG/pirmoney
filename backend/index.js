@@ -6,12 +6,13 @@ import { authMiddleware } from './auth_middleware.js';
 import { compareSync } from 'bcrypt';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
+import { setupRoutes } from './setup_routes.js';
+import { categoriesController } from './modules/categories/controller.js';
 import {
+    bankPaymentsController,
     oneTimePaymentsController,
     repeatPaymentsController,
-    bankPaymentsController,
-} from './modules/payments/index.js';
-import { setupRoutes } from './setup_routes.js';
+} from './modules/payments/controllers/payments.js';
 
 dotenv.config();
 export const JWT_SECRET = process.env.JWT_SECRET || 'secret';
@@ -108,6 +109,7 @@ app.get('/api/user', authMiddleware, async (req, res) => {
 setupRoutes(app, '/api/one_time_payments', oneTimePaymentsController);
 setupRoutes(app, '/api/repeat_payments', repeatPaymentsController);
 setupRoutes(app, '/api/bank_payments', bankPaymentsController);
+setupRoutes(app, '/api/categories', categoriesController);
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);

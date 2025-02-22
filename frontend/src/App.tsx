@@ -8,6 +8,7 @@ import {
     DeletePayment,
     MonthSwitcher,
     UserButton,
+    CategoryButton,
 } from './features';
 import {
     enrichByPaymentDate,
@@ -72,8 +73,12 @@ export const App: FC = () => {
                         }}
                     />
                 </div>
-                <UserButton onLogout={() => setPayments([])} />
+                <div className={styles.buttons}>
+                    <CategoryButton />
+                    <UserButton onLogout={() => setPayments([])} />
+                </div>
             </header>
+
             <Summary
                 closestPayment={closestPayment}
                 paymentsAmountLeft={paymentsAmountLeft}

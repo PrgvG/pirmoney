@@ -47,6 +47,11 @@ export const getColumns = ({
             cell: cellRenderer.renderBank,
             size: 150,
         }),
+        columnHelper.accessor('category_id', {
+            header: headerRenderer.renderCategory,
+            cell: cellRenderer.renderCategory,
+            size: 150,
+        }),
         columnHelper.accessor('payment_amount', {
             header: headerRenderer.renderPaymentAmount,
             cell: cellRenderer.renderPaymentAmount,

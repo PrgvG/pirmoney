@@ -24,6 +24,7 @@ const mapBankPaymentToPayment = (payment: BankPayment): Payment => {
         bank: payment.bank,
         completed_at: payment.completed_at,
         payment_kind: payment.payment_kind,
+        category_id: payment.category_id,
     };
 };
 
@@ -36,6 +37,7 @@ const mapRepeatPaymentToPayment = (payment: RepeatPayment): Payment => {
         payment_type: payment.payment_type,
         completed_at: payment.completed_at,
         payment_kind: payment.payment_kind,
+        category_id: payment.category_id,
     };
 };
 
@@ -50,5 +52,6 @@ const mapOneTimePaymentToPayment = (payment: OneTimePayment): Payment => {
         payment_type: payment.payment_type,
         completed_at: payment.completed_at,
         payment_kind: payment.payment_kind,
+        category_id: payment.category_id,
     };
 };

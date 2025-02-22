@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styles from './one_time_payment_form.module.css';
 import { useForm } from 'react-hook-form';
-import { OneTimePayment } from '../../../../entities';
+import { OneTimePayment, useCategories } from '../../../../entities';
 
 type Props = {
     formId: string;
@@ -16,6 +16,8 @@ export const OneTimePaymentForm: FC<Props> = ({
     onReset,
     initialValues,
 }) => {
+    const { categories } = useCategories();
+
     const { handleSubmit, register, reset } = useForm<OneTimePayment>({
         defaultValues: initialValues || {
             payment_kind: 'outcome',
@@ -40,7 +42,11 @@ export const OneTimePaymentForm: FC<Props> = ({
         >
             <label>
                 Название
-                <input type="text" {...register('label', { required: true })} />
+                <input
+                    type="text"
+                    autoComplete="off"
+                    {...register('label', { required: true })}
+                />
             </label>
             <label>
                 Сумма платежа
@@ -53,6 +59,17 @@ export const OneTimePaymentForm: FC<Props> = ({
                     })}
                 />
             </label>
+            <label>
+                Категория
+                <select {...register('category_id', { required: true })}>
+                    {categories.map((category) => (
+                        <option key={category._id} value={category._id}>
+                            {category.name}
+                        </option>
+                    ))}
+                </select>
+            </label>
+
             <div className={styles.paymentKind}>
                 Тип транзакции
                 <div className={styles.radioGroup}>

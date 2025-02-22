@@ -1,23 +1,27 @@
-import { HeaderCell } from "./header";
+import { HeaderCell } from './header';
 
 export class HeaderRenderer {
-  renderLabel = () => {
-    return <HeaderCell>Название</HeaderCell>;
-  };
+    renderLabel = () => {
+        return <HeaderCell>Название</HeaderCell>;
+    };
 
-  renderPaymentType = () => {
-    return <HeaderCell>Тип</HeaderCell>;
-  };
+    renderPaymentType = () => {
+        return <HeaderCell>Тип</HeaderCell>;
+    };
 
-  renderBank = () => {
-    return <HeaderCell>Банк</HeaderCell>;
-  };
+    renderBank = () => {
+        return <HeaderCell>Банк</HeaderCell>;
+    };
 
-  renderPaymentAmount = () => {
-    return <HeaderCell>Сумма</HeaderCell>;
-  };
+    renderPaymentAmount = () => {
+        return <HeaderCell>Сумма</HeaderCell>;
+    };
 
-  renderPaymentDay = () => {
-    return <HeaderCell>Дата</HeaderCell>;
-  };
+    renderCategory = () => {
+        return <HeaderCell>Категория</HeaderCell>;
+    };
+
+    renderPaymentDay = () => {
+        return <HeaderCell>Дата</HeaderCell>;
+    };
 }

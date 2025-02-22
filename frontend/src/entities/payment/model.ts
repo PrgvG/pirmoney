@@ -11,6 +11,7 @@ type CommonPaymentDto = {
     _id: string;
     label: string;
     payment_amount: number;
+    category_id: string;
     payment_kind: 'income' | 'outcome';
     completed_at: Date | null;
 };
