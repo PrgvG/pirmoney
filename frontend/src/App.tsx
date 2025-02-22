@@ -20,6 +20,8 @@ import {
     sortPaymentsByPaymentDay,
 } from './entities';
 import styles from './App.module.css';
+import { AddMomentPaymentButton } from './features/add_moment_payment/add_moment_payment';
+import { Space } from 'antd';
 
 export const App: FC = () => {
     const today = new Date();
@@ -51,15 +53,26 @@ export const App: FC = () => {
     return (
         <PageLayout>
             <div className={styles.container}>
-                <AddPaymentButton
-                    onAdd={async (payment) => {
-                        setPayments((prev) =>
-                            prev
-                                .concat(mapPaymentDtoToPayment(payment))
-                                .sort(sortPaymentsByPaymentDay),
-                        );
-                    }}
-                />
+                <div className={styles.buttons}>
+                    <AddPaymentButton
+                        onAdd={async (payment) => {
+                            setPayments((prev) =>
+                                prev
+                                    .concat(mapPaymentDtoToPayment(payment))
+                                    .sort(sortPaymentsByPaymentDay),
+                            );
+                        }}
+                    />
+                    <AddMomentPaymentButton
+                        onAdd={async (payment) => {
+                            setPayments((prev) =>
+                                prev
+                                    .concat(mapPaymentDtoToPayment(payment))
+                                    .sort(sortPaymentsByPaymentDay),
+                            );
+                        }}
+                    />
+                </div>
                 <UserButton onLogout={() => setPayments([])} />
             </div>
             <Summary
