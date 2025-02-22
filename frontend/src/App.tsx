@@ -21,7 +21,6 @@ import {
 } from './entities';
 import styles from './App.module.css';
 import { AddMomentPaymentButton } from './features/add_moment_payment/add_moment_payment';
-import { Space } from 'antd';
 
 export const App: FC = () => {
     const today = new Date();
