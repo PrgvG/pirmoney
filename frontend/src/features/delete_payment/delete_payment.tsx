@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Payment, paymentApi } from '../../entities';
-import styles from './delete_payment.module.css';
+import { Button } from 'antd';
 
 type Props = {
     onDelete: () => void;
@@ -9,8 +9,9 @@ type Props = {
 
 export const DeletePayment: FC<Props> = ({ onDelete, payment }) => {
     return (
-        <button
-            className={styles.button}
+        <Button
+            size="small"
+            type="text"
             onClick={async () => {
                 onDelete();
 
@@ -21,6 +22,6 @@ export const DeletePayment: FC<Props> = ({ onDelete, payment }) => {
             }}
         >
             🗑️
-        </button>
+        </Button>
     );
 };
