@@ -24,6 +24,7 @@ export const AuthProvider: FC<
     }>
 > = ({ children, loginPage }) => {
     const [user, setUser] = useState<User | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const hasToken = Boolean(authService.getToken());
@@ -36,6 +37,8 @@ export const AuthProvider: FC<
             } catch (error) {
                 console.error('Failed to fetch user info:', error);
                 authService.removeToken();
+            } finally {
+                setIsLoading(false);
             }
         };
 
@@ -53,6 +56,10 @@ export const AuthProvider: FC<
         setUser(user);
         authService.setToken(token);
     };
+
+    if (isLoading) {
+        return null;
+    }
 
     return (
         <AuthContext.Provider
