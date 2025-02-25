@@ -23,12 +23,11 @@ export const AuthProvider: FC<
         loginPage: ReactNode;
     }>
 > = ({ children, loginPage }) => {
+    const hasToken = Boolean(authService.getToken());
     const [user, setUser] = useState<User | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(hasToken);
 
     useEffect(() => {
-        const hasToken = Boolean(authService.getToken());
-
         const handleCheckAuth = async () => {
             try {
                 const user = await userApi.getUser();
