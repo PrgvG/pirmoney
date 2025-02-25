@@ -28,13 +28,6 @@ export const Table: FC<Props> = ({ table }) => (
                                 header.column.columnDef.header,
                                 header.getContext(),
                             )}
-                            {header.column.getCanResize() && (
-                                <div
-                                    className={styles.resizer}
-                                    onMouseDown={header.getResizeHandler()}
-                                    onTouchStart={header.getResizeHandler()}
-                                />
-                            )}
                         </th>
                     ))}
                 </tr>

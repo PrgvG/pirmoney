@@ -12,6 +12,7 @@ import { OneTimePaymentForm } from './components/one_time_payment_form/one_time_
 import { RepeatPaymentForm } from './components/repeat_payment_form/repeat_payment_form';
 import { nanoid } from 'nanoid';
 import { Button } from 'antd';
+import { paymentTypeIcons } from '../../entities/payment/types';
 
 type Props = {
     onAdd(data: BankPayment | RepeatPayment | OneTimePayment): void;
@@ -20,15 +21,15 @@ type Props = {
 const paymentTypes = [
     {
         value: 'bank_payment',
-        label: paymentTypeLabels.bank_payment,
+        label: `${paymentTypeIcons.bank_payment} ${paymentTypeLabels.bank_payment}`,
     },
     {
         value: 'repeat_payment',
-        label: paymentTypeLabels.repeat_payment,
+        label: `${paymentTypeIcons.repeat_payment} ${paymentTypeLabels.repeat_payment}`,
     },
     {
         value: 'one_time_payment',
-        label: paymentTypeLabels.one_time_payment,
+        label: `${paymentTypeIcons.one_time_payment} ${paymentTypeLabels.one_time_payment}`,
     },
 ];
 

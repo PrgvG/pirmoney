@@ -12,3 +12,9 @@ export const paymentTypeLabels: Record<PaymentType, string> = {
     bank_payment: 'Банковский платеж',
     one_time_payment: 'Единоразовый платеж',
 };
+
+export const paymentTypeIcons: Record<PaymentType, string> = {
+    repeat_payment: '🔁',
+    bank_payment: '🏦',
+    one_time_payment: '🔂',
+};

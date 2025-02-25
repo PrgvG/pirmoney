@@ -1,16 +1,22 @@
-import { FC, PropsWithChildren } from "react";
+import { CSSProperties, FC, PropsWithChildren } from 'react';
 
-export const HeaderCell: FC<PropsWithChildren> = ({ children }) => {
-  return (
-    <div
-      style={{
-        whiteSpace: "nowrap",
-        textOverflow: "ellipsis",
-        overflow: "hidden",
-        userSelect: "none",
-      }}
-    >
-      {children}
-    </div>
-  );
+type Props = PropsWithChildren<{
+    align?: CSSProperties['textAlign'];
+}>;
+
+export const HeaderCell: FC<Props> = ({ children, align = 'start' }) => {
+    return (
+        <div
+            style={{
+                whiteSpace: 'nowrap',
+                textOverflow: 'ellipsis',
+                overflow: 'hidden',
+                userSelect: 'none',
+                padding: '0 8px',
+                textAlign: align,
+            }}
+        >
+            {children}
+        </div>
+    );
 };

@@ -46,10 +46,6 @@ export const App: FC = () => {
         paymentApi.getAllPayments().then(setPayments);
     }, []);
 
-    if (!payments.length) {
-        return null;
-    }
-
     return (
         <PageLayout>
             <header className={styles.header}>
@@ -79,58 +75,65 @@ export const App: FC = () => {
                 </div>
             </header>
 
-            <Summary
-                closestPayment={closestPayment}
-                paymentsAmountLeft={paymentsAmountLeft}
-            />
-
-            <PaymentsGrid
-                monthSwitcher={
-                    <MonthSwitcher
-                        onDateChange={setActiveDate}
-                        activeDate={activeDate}
-                        paymentsByMonth={paymentsByMonth}
+            {payments.length ? (
+                <>
+                    <Summary
+                        closestPayment={closestPayment}
+                        paymentsAmountLeft={paymentsAmountLeft}
                     />
-                }
-                payments={enrichByPaymentDate(
-                    filterByActiveDate(payments, activeDate),
-                    activeDate,
-                )}
-                activeDate={activeDate}
-                renderCheckboxInput={(completePayment) => (
-                    <CompletePayment
-                        payment={completePayment}
-                        activeDate={activeDate}
-                        onChange={(completed_at) =>
-                            setPayments((prev) =>
-                                prev.map((payment) =>
-                                    payment._id === completePayment._id
-                                        ? {
-                                              ...payment,
-                                              completed_at,
-                                          }
-                                        : payment,
-                                ),
-                            )
+
+                    <PaymentsGrid
+                        monthSwitcher={
+                            <MonthSwitcher
+                                onDateChange={setActiveDate}
+                                activeDate={activeDate}
+                                paymentsByMonth={paymentsByMonth}
+                            />
                         }
-                    />
-                )}
-                renderDeleteButton={(deletingPayment) => (
-                    <DeletePayment
-                        payment={deletingPayment}
-                        onDelete={() => {
-                            setPayments((prev) =>
-                                prev.filter(
-                                    (payment) =>
-                                        payment._id !== deletingPayment._id,
-                                ),
-                            );
+                        payments={enrichByPaymentDate(
+                            filterByActiveDate(payments, activeDate),
+                            activeDate,
+                        )}
+                        activeDate={activeDate}
+                        renderCheckboxInput={(completePayment) => (
+                            <CompletePayment
+                                payment={completePayment}
+                                activeDate={activeDate}
+                                onChange={(completed_at) =>
+                                    setPayments((prev) =>
+                                        prev.map((payment) =>
+                                            payment._id === completePayment._id
+                                                ? {
+                                                      ...payment,
+                                                      completed_at,
+                                                  }
+                                                : payment,
+                                        ),
+                                    )
+                                }
+                            />
+                        )}
+                        renderDeleteButton={(deletingPayment) => (
+                            <DeletePayment
+                                payment={deletingPayment}
+                                onDelete={() => {
+                                    setPayments((prev) =>
+                                        prev.filter(
+                                            (payment) =>
+                                                payment._id !==
+                                                deletingPayment._id,
+                                        ),
+                                    );
 
-                            setActiveDate(initialActiveDate);
-                        }}
+                                    setActiveDate(initialActiveDate);
+                                }}
+                            />
+                        )}
                     />
-                )}
-            />
+                </>
+            ) : (
+                'Получаю данные...'
+            )}
         </PageLayout>
     );
 };

@@ -40,7 +40,7 @@ export const getColumns = ({
         columnHelper.accessor('payment_type', {
             header: headerRenderer.renderPaymentType,
             cell: cellRenderer.renderPaymentType,
-            size: 200,
+            size: 50,
         }),
         columnHelper.accessor('bank', {
             header: headerRenderer.renderBank,

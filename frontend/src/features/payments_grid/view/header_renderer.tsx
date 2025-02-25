@@ -6,7 +6,7 @@ export class HeaderRenderer {
     };
 
     renderPaymentType = () => {
-        return <HeaderCell>Тип</HeaderCell>;
+        return <HeaderCell align="center">Тип</HeaderCell>;
     };
 
     renderBank = () => {
@@ -14,7 +14,7 @@ export class HeaderRenderer {
     };
 
     renderPaymentAmount = () => {
-        return <HeaderCell>Сумма</HeaderCell>;
+        return <HeaderCell align="end">Сумма</HeaderCell>;
     };
 
     renderCategory = () => {
@@ -22,6 +22,6 @@ export class HeaderRenderer {
     };
 
     renderPaymentDay = () => {
-        return <HeaderCell>Дата</HeaderCell>;
+        return <HeaderCell align="end">Дата</HeaderCell>;
     };
 }

@@ -6,11 +6,15 @@ import { useAuth } from '../../context';
 import { Alert, Button, Form, Input, Typography } from 'antd';
 const { Title } = Typography;
 
-export const RegisterForm: FC = () => {
+type Props = {
+    onChangeMode: () => void;
+};
+
+export const RegisterForm: FC<Props> = ({ onChangeMode }) => {
     const [error, setError] = useState<string | null>(null);
     const { setUser } = useAuth();
 
-    const { handleSubmit, control } = useForm<{
+    const { handleSubmit, control, formState } = useForm<{
         username: string;
         password: string;
     }>();
@@ -48,7 +52,11 @@ export const RegisterForm: FC = () => {
                 control={control}
                 render={({ field }) => (
                     <Form.Item label="Логин">
-                        <Input size="large" {...field} />
+                        <Input
+                            size="large"
+                            readOnly={formState.isSubmitting}
+                            {...field}
+                        />
                     </Form.Item>
                 )}
             />
@@ -58,15 +66,31 @@ export const RegisterForm: FC = () => {
                 control={control}
                 render={({ field }) => (
                     <Form.Item label="Пароль">
-                        <Input.Password size="large" {...field} />
+                        <Input.Password
+                            size="large"
+                            readOnly={formState.isSubmitting}
+                            {...field}
+                        />
                     </Form.Item>
                 )}
             />
 
             {error && <Alert message={error} type="error" />}
 
-            <Button type="primary" size="large" htmlType="submit">
+            <Button
+                type="primary"
+                size="large"
+                htmlType="submit"
+                loading={formState.isSubmitting}
+            >
                 Зарегистрироваться
+            </Button>
+            <Button
+                onClick={onChangeMode}
+                type="link"
+                disabled={formState.isSubmitting}
+            >
+                Войти
             </Button>
         </form>
     );

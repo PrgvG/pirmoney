@@ -1,15 +1,11 @@
 import { CellContext } from '@tanstack/react-table';
 import { Cell } from './cell';
-import {
-    Bank,
-    bankLabels,
-    PaymentType,
-    paymentTypeLabels,
-} from '../../../shared';
+import { Bank, bankLabels, PaymentType } from '../../../shared';
 import { isSeparatorRow } from '../model/helpers';
 import { ReactNode } from 'react';
 import { Payment } from '../../../entities';
 import { CategoryCell } from './category_cell';
+import { paymentTypeIcons } from '../../../entities/payment/types';
 
 export class CellRenderer {
     private renderDeleteButton;
@@ -121,7 +117,8 @@ export class CellRenderer {
             return null;
         }
         const paymentType = getValue();
-        return <Cell>{paymentTypeLabels[paymentType]}</Cell>;
+
+        return <Cell align="center">{paymentTypeIcons[paymentType]}</Cell>;
     };
 
     renderLabel = ({ getValue }: CellContext<Payment, string>) => {
