@@ -117,9 +117,13 @@ export function getPaymentsByMonth(
         {},
     );
 
+    console.log('oneTimePaymentsMap: ', oneTimePaymentsMap);
+
     return new Array(lastMonth + 1)
         .fill(0)
         .map((_, index) => {
+            console.log('index: ', index);
+
             if (index in oneTimePaymentsMap) {
                 return {
                     outcome: outcomeAmount + oneTimePaymentsMap[index].outcome,
@@ -129,10 +133,6 @@ export function getPaymentsByMonth(
             return { outcome: outcomeAmount, income: incomeAmount };
         })
         .reduce((acc, { outcome, income }, index) => {
-            if (index < todayMonth) {
-                return acc;
-            }
-
             return { ...acc, [index]: { outcome, income } };
         }, {});
 }

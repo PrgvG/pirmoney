@@ -34,7 +34,7 @@ export const getColumns = ({
         columnHelper.accessor('label', {
             header: headerRenderer.renderLabel,
             cell: cellRenderer.renderLabel,
-            size: 150,
+            size: 180,
         }),
 
         columnHelper.accessor('payment_type', {
