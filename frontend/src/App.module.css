@@ -3,6 +3,7 @@
     flex-direction: row;
     justify-content: space-between;
     gap: 24px;
+    flex-wrap: wrap-reverse;
 }
 
 .registration_warning {

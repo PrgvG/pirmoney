@@ -18,6 +18,7 @@
 
 .button:has(input:checked) {
     outline: 3px solid #007bff;
+    outline-offset: -3px;
 }
 
 .amounts {

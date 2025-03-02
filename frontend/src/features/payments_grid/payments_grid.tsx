@@ -37,10 +37,12 @@ export const PaymentsGrid: FC<Props> = ({
         },
     });
 
+    const hasPayments =
+        payments.filter((payment) => payment._id !== 'separator').length > 0;
+
     return (
-        <div style={{ width: table.getTotalSize() }}>
-            {payments.filter((payment) => payment._id !== 'separator').length >
-            0 ? (
+        <div style={{ width: table.getTotalSize(), maxWidth: '100%' }}>
+            {hasPayments ? (
                 <>
                     <div className={styles.month_wrapper}>{monthSwitcher}</div>
                     <Table table={table} />
