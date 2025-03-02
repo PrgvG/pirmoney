@@ -41,11 +41,13 @@ export const PaymentsGrid: FC<Props> = ({
         payments.filter((payment) => payment._id !== 'separator').length > 0;
 
     return (
-        <div style={{ width: table.getTotalSize(), maxWidth: '100%' }}>
+        <div style={{ maxWidth: '100%' }}>
             {hasPayments ? (
                 <>
-                    <div className={styles.month_wrapper}>{monthSwitcher}</div>
-                    <Table table={table} />
+                    <div className={styles.wrapper}>{monthSwitcher}</div>
+                    <div className={styles.wrapper}>
+                        {<Table table={table} />}
+                    </div>
                 </>
             ) : (
                 <Alert message="Пока что тут нет платежей" type="info" />

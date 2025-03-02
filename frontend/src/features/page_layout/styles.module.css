@@ -12,3 +12,12 @@
     width: 900px;
     max-width: 100%;
 }
+
+@media (max-width: 768px) {
+    .container {
+        padding: 24px 12px;
+    }
+    .content {
+        gap: 16px;
+    }
+}
