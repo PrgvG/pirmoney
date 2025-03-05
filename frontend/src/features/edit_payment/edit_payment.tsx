@@ -1,8 +1,7 @@
 import { PatchPayment, Payment, paymentApi } from '../../entities';
-import { FC, useRef, useState } from 'react';
+import { FC, useRef } from 'react';
 import { Button } from 'antd';
 import { EditPaymentForm } from './components/edit_payment_form/edit_payment_form';
-import styles from './edit_payment.module.css';
 
 type Props = {
     payment: Payment;
