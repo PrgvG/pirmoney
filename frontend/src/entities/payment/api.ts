@@ -138,9 +138,26 @@ async function savePayment(
     }
 }
 
+async function patchPayment(
+    payment: Pick<
+        Payment,
+        '_id' | 'category_id' | 'payment_amount' | 'payment_type'
+    >,
+) {
+    try {
+        return await httpService.patch(
+            `${getUrlByType(payment.payment_type)}/${payment._id}`,
+            payment,
+        );
+    } catch (error) {
+        console.error('Ошибка при обновлении платежа:', error);
+    }
+}
+
 export const paymentApi = {
     completePayment,
     getAllPayments,
     deletePayment,
     savePayment,
+    patchPayment,
 };

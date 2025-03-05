@@ -3,6 +3,7 @@ export {
     type BankPayment,
     type Payment,
     type RepeatPayment,
+    type PatchPayment,
 } from './model';
 
 export { bankPaymentsRepository } from './repository/bank_payments';

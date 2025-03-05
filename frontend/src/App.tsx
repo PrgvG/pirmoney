@@ -9,6 +9,7 @@ import {
     MonthSwitcher,
     UserButton,
     CategoryButton,
+    EditPayment,
 } from './features';
 import {
     enrichByPaymentDate,
@@ -126,6 +127,23 @@ export const App: FC = () => {
                                     );
 
                                     setActiveDate(initialActiveDate);
+                                }}
+                            />
+                        )}
+                        renderEditButton={(editingPayment) => (
+                            <EditPayment
+                                payment={editingPayment}
+                                onSave={(patchPayment) => {
+                                    setPayments((prev) =>
+                                        prev.map((payment) =>
+                                            payment._id === editingPayment._id
+                                                ? {
+                                                      ...payment,
+                                                      ...patchPayment,
+                                                  }
+                                                : payment,
+                                        ),
+                                    );
                                 }}
                             />
                         )}

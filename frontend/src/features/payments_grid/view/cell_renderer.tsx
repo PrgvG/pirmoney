@@ -10,15 +10,18 @@ import { paymentTypeIcons } from '../../../entities/payment/types';
 export class CellRenderer {
     private renderDeleteButton;
     private renderCheckboxInput;
+    private renderEditButton;
     private activeDate;
 
     constructor(
         renderDeleteButton: (payment: Payment) => ReactNode,
         renderCheckboxInput: (payment: Payment) => ReactNode,
+        renderEditButton: (payment: Payment) => ReactNode,
         activeDate: { month: number; year: number },
     ) {
         this.renderDeleteButton = renderDeleteButton;
         this.renderCheckboxInput = renderCheckboxInput;
+        this.renderEditButton = renderEditButton;
         this.activeDate = activeDate;
     }
 
@@ -53,7 +56,12 @@ export class CellRenderer {
             return null;
         }
 
-        return <>{this.renderDeleteButton(row.original)}</>;
+        return (
+            <>
+                {this.renderEditButton(row.original)}
+                {this.renderDeleteButton(row.original)}
+            </>
+        );
     };
 
     renderPaymentAmount = ({ getValue, row }: CellContext<Payment, number>) => {

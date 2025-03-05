@@ -9,17 +9,20 @@ const columnHelper = createColumnHelper<Payment>();
 type Props = {
     renderDeleteButton(payment: Payment): ReactNode;
     renderCheckboxInput(payment: Payment): ReactNode;
+    renderEditButton(payment: Payment): ReactNode;
     activeDate: { month: number; year: number };
 };
 
 export const getColumns = ({
     renderDeleteButton,
     renderCheckboxInput,
+    renderEditButton,
     activeDate,
 }: Props) => {
     const cellRenderer = new CellRenderer(
         renderDeleteButton,
         renderCheckboxInput,
+        renderEditButton,
         activeDate,
     );
     const headerRenderer = new HeaderRenderer();
@@ -59,13 +62,13 @@ export const getColumns = ({
         columnHelper.accessor('bank', {
             header: headerRenderer.renderBank,
             cell: cellRenderer.renderBank,
-            size: 150,
+            size: 120,
         }),
         columnHelper.display({
             id: 'actions',
             enableResizing: false,
             cell: cellRenderer.renderActions,
-            size: 30,
+            size: 60,
         }),
     ];
 };

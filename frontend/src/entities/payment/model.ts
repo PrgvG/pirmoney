@@ -16,6 +16,11 @@ type CommonPaymentDto = {
     completed_at: Date | null;
 };
 
+export type PatchPayment = Pick<
+    Payment,
+    '_id' | 'category_id' | 'payment_amount' | 'payment_type' | 'label'
+>;
+
 export type OneTimePayment = CommonPaymentDto & {
     payment_date: Date;
     payment_type: OneTimePaymentType;

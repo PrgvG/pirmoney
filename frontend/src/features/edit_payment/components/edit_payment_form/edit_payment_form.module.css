@@ -1,0 +1,19 @@
+.form {
+    top: 250px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    > label {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+    }
+}
+
+.controls {
+    display: flex;
+    align-self: flex-end;
+    gap: 8px;
+}

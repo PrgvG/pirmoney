@@ -13,35 +13,35 @@ router
     .route('/one_time_payments')
     .get(authMiddleware, oneTimePaymentsController.getAll)
     .post(authMiddleware, oneTimePaymentsController.createOne)
-    .put(authMiddleware, oneTimePaymentsController.updateOne)
-    .patch(authMiddleware, oneTimePaymentsController.patchOne);
+    .put(authMiddleware, oneTimePaymentsController.updateOne);
 
 router
     .route('/one_time_payments/:id')
-    .delete(authMiddleware, oneTimePaymentsController.deleteOne);
+    .delete(authMiddleware, oneTimePaymentsController.deleteOne)
+    .patch(authMiddleware, oneTimePaymentsController.patchOne);
 
 // Repeat payments routes
 router
     .route('/repeat_payments')
     .get(authMiddleware, repeatPaymentsController.getAll)
     .post(authMiddleware, repeatPaymentsController.createOne)
-    .put(authMiddleware, repeatPaymentsController.updateOne)
-    .patch(authMiddleware, repeatPaymentsController.patchOne);
+    .put(authMiddleware, repeatPaymentsController.updateOne);
 
 router
     .route('/repeat_payments/:id')
-    .delete(authMiddleware, repeatPaymentsController.deleteOne);
+    .delete(authMiddleware, repeatPaymentsController.deleteOne)
+    .patch(authMiddleware, repeatPaymentsController.patchOne);
 
 // Bank payments routes
 router
     .route('/bank_payments')
     .get(authMiddleware, bankPaymentsController.getAll)
     .post(authMiddleware, bankPaymentsController.createOne)
-    .put(authMiddleware, bankPaymentsController.updateOne)
-    .patch(authMiddleware, bankPaymentsController.patchOne);
+    .put(authMiddleware, bankPaymentsController.updateOne);
 
 router
     .route('/bank_payments/:id')
-    .delete(authMiddleware, bankPaymentsController.deleteOne);
+    .delete(authMiddleware, bankPaymentsController.deleteOne)
+    .patch(authMiddleware, bankPaymentsController.patchOne);
 
 export const paymentRoutes = router;

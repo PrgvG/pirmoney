@@ -11,6 +11,7 @@ type Props = {
     payments: (Payment & { payment_date: Date })[];
     renderDeleteButton(payment: Payment): ReactNode;
     renderCheckboxInput(payment: Payment): ReactNode;
+    renderEditButton(payment: Payment): ReactNode;
     activeDate: { month: number; year: number };
     monthSwitcher: ReactNode;
 };
@@ -19,6 +20,7 @@ export const PaymentsGrid: FC<Props> = ({
     payments,
     renderDeleteButton,
     renderCheckboxInput,
+    renderEditButton,
     activeDate,
     monthSwitcher,
 }) => {
@@ -27,6 +29,7 @@ export const PaymentsGrid: FC<Props> = ({
         columns: getColumns({
             renderDeleteButton,
             renderCheckboxInput,
+            renderEditButton,
             activeDate,
         }),
         getCoreRowModel: getCoreRowModel(),

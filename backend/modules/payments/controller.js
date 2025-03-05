@@ -64,12 +64,12 @@ class PaymentController {
     };
 
     patchOne = async (req, res) => {
-        const { id, ...restBody } = req.body;
+        const { id } = req.params;
 
         try {
             const updatedPayment = await this.Model.findByIdAndUpdate(
                 id,
-                { $set: restBody },
+                { $set: req.body },
                 { new: true, runValidators: true },
             );
 
