@@ -1,6 +1,6 @@
-import { BankPaymentModel } from '../models/bank_payment.js';
-import { OneTimePaymentModel } from '../models/one_time_payment.js';
-import { RepeatPaymentModel } from '../models/repeat_payment.js';
+import { BankPaymentModel } from './models/bank_payment.js';
+import { OneTimePaymentModel } from './models/one_time_payment.js';
+import { RepeatPaymentModel } from './models/repeat_payment.js';
 
 class PaymentController {
     Model;

@@ -1,18 +1,10 @@
 import express, { json } from 'express';
 import cors from 'cors';
-import { UserModel } from './models/users.js';
-import jwt from 'jsonwebtoken';
-import { authMiddleware } from './auth_middleware.js';
-import { compareSync } from 'bcrypt';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
-import { setupRoutes } from './setup_routes.js';
-import { categoriesController } from './modules/categories/controller.js';
-import {
-    bankPaymentsController,
-    oneTimePaymentsController,
-    repeatPaymentsController,
-} from './modules/payments/controllers/payments.js';
+import { userRoutes } from './modules/users/routes.js';
+import { categoryRoutes } from './modules/categories/routes.js';
+import { paymentRoutes } from './modules/payments/routes.js';
 
 dotenv.config();
 export const JWT_SECRET = process.env.JWT_SECRET || 'secret';
@@ -26,90 +18,10 @@ connectDB();
 app.use(json());
 app.use(cors());
 
-app.post('/api/register', async (req, res) => {
-    const { username, password } = req.body;
-
-    if (!username || !password) {
-        return res.status(400).send('Все поля обязательны.');
-    }
-
-    try {
-        const user = new UserModel({ username, password });
-
-        await user.save();
-
-        res.status(201).json({ token: generateAccessToken(user._id) });
-    } catch (err) {
-        if (err.code === 11000) {
-            return res
-                .status(400)
-                .send('Пользователь с таким логином уже существует.');
-        }
-        res.status(500).send('Ошибка при регистрации пользователя.');
-    }
-});
-
-const generateAccessToken = (id) => {
-    return jwt.sign({ id }, JWT_SECRET, { expiresIn: '30d' });
-};
-
-app.post('/api/login', async (req, res) => {
-    const { username, password } = req.body;
-
-    if (!username || !password) {
-        return res.status(400).send('Все поля обязательны.');
-    }
-
-    try {
-        const user = await UserModel.findOne({ username });
-        if (!user) {
-            return res
-                .status(401)
-                .send('Неверное имя пользователя или пароль.');
-        }
-
-        const validPassword = compareSync(password, user.password);
-
-        if (!validPassword) {
-            return res
-                .status(401)
-                .send('Неверное имя пользователя или пароль.');
-        }
-
-        const token = generateAccessToken(user.id);
-
-        res.status(200).json({ token });
-    } catch (err) {
-        res.status(500).send({
-            message: 'Ошибка при авторизации.',
-            error: err,
-        });
-    }
-});
-
-app.get('/api/user', authMiddleware, async (req, res) => {
-    const { userId } = req.body;
-
-    if (!userId) {
-        return res.status(400).send('Нет id пользователя.');
-    }
-
-    try {
-        const user = await UserModel.findById(userId);
-        if (!user) {
-            return res.status(401).send('Неверный id пользователя.');
-        }
-
-        res.status(200).json({ username: user.username });
-    } catch (err) {
-        res.status(500).send('Ошибка при авторизации.');
-    }
-});
-
-setupRoutes(app, '/api/one_time_payments', oneTimePaymentsController);
-setupRoutes(app, '/api/repeat_payments', repeatPaymentsController);
-setupRoutes(app, '/api/bank_payments', bankPaymentsController);
-setupRoutes(app, '/api/categories', categoriesController);
+// Подключаем все роуты
+app.use('/api', userRoutes);
+app.use('/api', categoryRoutes);
+app.use('/api', paymentRoutes);
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
