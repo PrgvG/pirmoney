@@ -1,4 +1,23 @@
 .wrapper {
-    overflow-x: scroll;
+    overflow-x: auto;
     width: 100%;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -16px;
+    padding: 0 16px;
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        margin: 0 -12px;
+        padding: 0 12px;
+    }
+
+    .wrapper::-webkit-scrollbar {
+        display: none;
+    }
+
+    .wrapper {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
 }
