@@ -17,16 +17,15 @@ export const EditPaymentForm: FC<Props> = ({
 }) => {
     const { categories, hasCategories } = useCategories();
 
-    const { handleSubmit, register, formState, getValues, reset } =
-        useForm<PatchPayment>({
-            defaultValues: {
-                _id: initialValues._id,
-                category_id: initialValues.category_id,
-                payment_amount: initialValues.payment_amount,
-                payment_type: initialValues.payment_type,
-                label: initialValues.label,
-            },
-        });
+    const { handleSubmit, register, formState, reset } = useForm<PatchPayment>({
+        defaultValues: {
+            _id: initialValues._id,
+            category_id: initialValues.category_id,
+            payment_amount: initialValues.payment_amount,
+            payment_type: initialValues.payment_type,
+            label: initialValues.label,
+        },
+    });
 
     return (
         <form
