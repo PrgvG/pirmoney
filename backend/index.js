@@ -50,7 +50,7 @@ app.post('/api/register', async (req, res) => {
 });
 
 const generateAccessToken = (id) => {
-    return jwt.sign({ id }, JWT_SECRET);
+    return jwt.sign({ id }, JWT_SECRET, { expiresIn: '30d' });
 };
 
 app.post('/api/login', async (req, res) => {

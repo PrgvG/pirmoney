@@ -6,7 +6,10 @@ type TokenService = {
 
 class AuthService implements TokenService {
     setToken(token: string): void {
-        document.cookie = `jwt=${token}; path=/; samesite=strict;`;
+        const expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + 30);
+
+        document.cookie = `jwt=${token}; path=/; samesite=strict; expires=${expirationDate.toUTCString()};`;
     }
 
     getToken(): string | null {
