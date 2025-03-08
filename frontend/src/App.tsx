@@ -80,18 +80,16 @@ export const App: FC = () => {
 
             {payments.length ? (
                 <>
-                    <div className={styles.totals}>
-                        <Summary
-                            closestPayment={closestPayment}
-                            paymentsAmountLeft={paymentsAmountLeft}
-                        />
-                        <PieChart
-                            paymentByCategory={getFiltersByCategories(
-                                payments,
-                                activeDate,
-                            )}
-                        />
-                    </div>
+                    <Summary
+                        closestPayment={closestPayment}
+                        paymentsAmountLeft={paymentsAmountLeft}
+                    />
+                    <PieChart
+                        paymentByCategory={getFiltersByCategories(
+                            payments,
+                            activeDate,
+                        )}
+                    />
 
                     <PaymentsGrid
                         monthSwitcher={

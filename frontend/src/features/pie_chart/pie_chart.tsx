@@ -1,9 +1,15 @@
 import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, ChartData } from 'chart.js';
+import {
+    Chart as ChartJS,
+    ArcElement,
+    Tooltip,
+    ChartData,
+    Legend,
+} from 'chart.js';
 import { FC } from 'react';
 import { useCategories } from '../../entities';
 import { getRandomHexColor } from './utils';
-ChartJS.register(ArcElement, Tooltip);
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 type Props = {
     paymentByCategory: Record<string, number>;
@@ -28,8 +34,17 @@ export const PieChart: FC<Props> = ({ paymentByCategory }) => {
     };
 
     return (
-        <div style={{ width: 100, height: 100 }}>
-            <Pie data={dataset} />
+        <div style={{ height: 200 }}>
+            <Pie
+                data={dataset}
+                options={{
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        },
+                    },
+                }}
+            />
         </div>
     );
 };
