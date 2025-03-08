@@ -44,10 +44,12 @@ async function completePayment({
     completed_at: Date | null;
 }) {
     try {
-        return await httpService.patch(getUrlByType(paymentType), {
-            id: paymentId,
-            completed_at,
-        });
+        return await httpService.patch(
+            `${getUrlByType(paymentType)}/${paymentId}`,
+            {
+                completed_at,
+            },
+        );
     } catch (error) {
         console.error('Ошибка при завершении платежа:', error);
     }
