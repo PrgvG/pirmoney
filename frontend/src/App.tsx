@@ -14,6 +14,7 @@ import {
 import {
     enrichByPaymentDate,
     filterByActiveDate,
+    getFiltersByCategories,
     getPaymentsByMonth,
     getPaymentsSummary,
     mapPaymentDtoToPayment,
@@ -23,6 +24,7 @@ import {
 } from './entities';
 import styles from './App.module.css';
 import { AddMomentPaymentButton } from './features/add_moment_payment/add_moment_payment';
+import { PieChart } from './features/pie_chart/pie_chart';
 
 export const App: FC = () => {
     const today = new Date();
@@ -78,10 +80,18 @@ export const App: FC = () => {
 
             {payments.length ? (
                 <>
-                    <Summary
-                        closestPayment={closestPayment}
-                        paymentsAmountLeft={paymentsAmountLeft}
-                    />
+                    <div className={styles.totals}>
+                        <Summary
+                            closestPayment={closestPayment}
+                            paymentsAmountLeft={paymentsAmountLeft}
+                        />
+                        <PieChart
+                            paymentByCategory={getFiltersByCategories(
+                                payments,
+                                activeDate,
+                            )}
+                        />
+                    </div>
 
                     <PaymentsGrid
                         monthSwitcher={

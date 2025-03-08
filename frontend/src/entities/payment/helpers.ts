@@ -176,3 +176,23 @@ export function getPaymentsSummary(payments: Payment[]): {
 export function sortPaymentsByPaymentDay(a: Payment, b: Payment): 1 | -1 {
     return a.payment_day > b.payment_day ? 1 : -1;
 }
+
+export const getFiltersByCategories = (
+    payments: Payment[],
+    activeDate: {
+        month: number;
+        year: number;
+    },
+) => {
+    return filterByActiveDate(payments, activeDate)
+        .filter((payment) => payment.payment_kind === 'outcome')
+        .reduce<Record<string, number>>((acc, payment) => {
+            if (payment.category_id in acc) {
+                acc[payment.category_id] += Number(payment.payment_amount);
+            } else {
+                acc[payment.category_id] = Number(payment.payment_amount);
+            }
+
+            return acc;
+        }, {});
+};
