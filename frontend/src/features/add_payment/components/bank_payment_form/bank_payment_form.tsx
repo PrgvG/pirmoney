@@ -53,6 +53,7 @@ export const BankPaymentForm: FC<Props> = ({
                 <input
                     type="number"
                     step={0.01}
+                    inputMode="decimal"
                     {...register('payment_amount', {
                         required: true,
                         valueAsNumber: true,
@@ -66,6 +67,7 @@ export const BankPaymentForm: FC<Props> = ({
                     step={1}
                     min={1}
                     max={31}
+                    inputMode="numeric"
                     {...register('payment_day', {
                         required: true,
                         valueAsNumber: true,

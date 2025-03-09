@@ -50,6 +50,7 @@ export const EditPaymentForm: FC<Props> = ({
                 Сумма платежа
                 <input
                     type="number"
+                    inputMode="decimal"
                     step={0.01}
                     {...register('payment_amount', {
                         required: true,
