@@ -44,7 +44,7 @@ export const PieChart: FC<Props> = ({ paymentByCategory }) => {
             <Pie
                 data={dataset}
                 options={{
-                    onClick: (event, elements, chart) => {
+                    onClick: (_, elements, chart) => {
                         console.log(elements);
                         chart.hide(elements[0].datasetIndex, elements[0].index);
                         setHiddenSections((prev) => {
@@ -69,7 +69,7 @@ export const PieChart: FC<Props> = ({ paymentByCategory }) => {
                                     return item.index in hiddenSections;
                                 },
                             },
-                            onClick: (e, item) => {
+                            onClick: (_, item) => {
                                 console.log('item: ', item);
                                 const index = item.index;
 
