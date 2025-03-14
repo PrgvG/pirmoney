@@ -37,8 +37,8 @@
     .dialog {
         display: flex;
         flex-direction: column;
-        gap: 16px;
-        padding: 24px;
+        padding: 32px;
+        box-sizing: border-box;
         width: 100vw;
         height: 100vh;
     }
