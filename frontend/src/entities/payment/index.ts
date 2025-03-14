@@ -25,5 +25,4 @@ export {
     getPaymentsByMonth,
     getPaymentsSummary,
     sortPaymentsByPaymentDay,
-    getFiltersByCategories,
 } from './helpers';
