@@ -5,11 +5,11 @@ import {
     PageLayout,
     AddPaymentButton,
     CompletePayment,
-    DeletePayment,
     MonthSwitcher,
     UserButton,
     CategoryButton,
     EditPayment,
+    editPaymentEmitter,
 } from './features';
 import {
     enrichByPaymentDate,
@@ -25,6 +25,7 @@ import {
 import styles from './App.module.css';
 import { AddMomentPaymentButton } from './features/add_moment_payment/add_moment_payment';
 import { PieChart } from './features/pie_chart/pie_chart';
+import { Button } from 'antd';
 
 export const App: FC = () => {
     const today = new Date();
@@ -123,9 +124,14 @@ export const App: FC = () => {
                             />
                         )}
                         renderDeleteButton={(deletingPayment) => (
-                            <DeletePayment
-                                payment={deletingPayment}
-                                onDelete={() => {
+                            <Button
+                                size="small"
+                                type="text"
+                                onClick={async () => {
+                                    const cachedPayments =
+                                        JSON.stringify(payments);
+                                    const cachedActiveDate =
+                                        JSON.stringify(activeDate);
                                     setPayments((prev) =>
                                         prev.filter(
                                             (payment) =>
@@ -133,33 +139,59 @@ export const App: FC = () => {
                                                 deletingPayment._id,
                                         ),
                                     );
-
                                     setActiveDate(initialActiveDate);
+                                    paymentApi
+                                        .deletePayment({
+                                            paymentId: deletingPayment._id,
+                                            paymentType:
+                                                deletingPayment.payment_type,
+                                        })
+                                        .catch(() => {
+                                            setPayments(
+                                                JSON.parse(cachedPayments),
+                                            );
+                                            setActiveDate(
+                                                JSON.parse(cachedActiveDate),
+                                            );
+                                        });
                                 }}
-                            />
+                            >
+                                🗑️
+                            </Button>
                         )}
-                        renderEditButton={(editingPayment) => (
-                            <EditPayment
-                                payment={editingPayment}
-                                onSave={(patchPayment) => {
-                                    setPayments((prev) =>
-                                        prev.map((payment) =>
-                                            payment._id === editingPayment._id
-                                                ? {
-                                                      ...payment,
-                                                      ...patchPayment,
-                                                  }
-                                                : payment,
-                                        ),
+                        renderEditButton={(payment) => (
+                            <Button
+                                size="small"
+                                type="text"
+                                onClick={() => {
+                                    editPaymentEmitter.emit(
+                                        'dialog:show',
+                                        payment,
                                     );
                                 }}
-                            />
+                            >
+                                ⚙️
+                            </Button>
                         )}
                     />
                 </>
             ) : (
                 'Получаю данные...'
             )}
+            <EditPayment
+                onSave={(patchPayment) => {
+                    setPayments((prev) =>
+                        prev.map((payment) =>
+                            payment._id === patchPayment._id
+                                ? {
+                                      ...payment,
+                                      ...patchPayment,
+                                  }
+                                : payment,
+                        ),
+                    );
+                }}
+            />
         </PageLayout>
     );
 };

@@ -28,6 +28,7 @@ export const AddMomentPaymentButton: FC<Props> = ({ onAdd }) => {
             _id: nanoid(),
         });
         handleCloseDialog();
+        // TODO: на catch сделать откат данных
         paymentApi.savePayment(data);
         onAdd(data);
     };
