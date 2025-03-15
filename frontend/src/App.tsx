@@ -23,7 +23,6 @@ import {
 } from './entities';
 import styles from './App.module.css';
 import { AddMomentPaymentButton } from './features/add_moment_payment/add_moment_payment';
-import { Button } from 'antd';
 
 export const App: FC = () => {
     const today = new Date();
@@ -116,9 +115,8 @@ export const App: FC = () => {
                             />
                         )}
                         renderDeleteButton={(deletingPayment) => (
-                            <Button
-                                size="small"
-                                type="text"
+                            <button
+                                type="button"
                                 onClick={async () => {
                                     const cachedPayments =
                                         JSON.stringify(payments);
@@ -149,12 +147,11 @@ export const App: FC = () => {
                                 }}
                             >
                                 🗑️
-                            </Button>
+                            </button>
                         )}
                         renderEditButton={(payment) => (
-                            <Button
-                                size="small"
-                                type="text"
+                            <button
+                                type="button"
                                 onClick={() => {
                                     editPaymentEmitter.emit(
                                         'dialog:show',
@@ -163,7 +160,7 @@ export const App: FC = () => {
                                 }}
                             >
                                 ⚙️
-                            </Button>
+                            </button>
                         )}
                     />
                 </>

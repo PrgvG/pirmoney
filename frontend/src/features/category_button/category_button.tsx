@@ -1,4 +1,3 @@
-import { Alert, Button, Input, Space } from 'antd';
 import { FC, useRef, useState } from 'react';
 import styles from './category_button.module.css';
 import { categoryApi, useCategories } from '../../entities';
@@ -17,19 +16,19 @@ export const CategoryButton: FC = () => {
 
     return (
         <>
-            <Button
+            <button
+                type="button"
                 onClick={() => {
                     dialogRef.current?.showModal();
                 }}
             >
                 Категории
-            </Button>
+            </button>
             <dialog ref={dialogRef}>
                 <section className={styles.dialog}>
-                    <Space.Compact>
-                        <Input
+                    <section>
+                        <input
                             placeholder="Название категории"
-                            allowClear
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
                             onKeyDown={(event) => {
@@ -38,23 +37,22 @@ export const CategoryButton: FC = () => {
                                 }
                             }}
                         />
-                        <Button
-                            type="primary"
+                        <button
+                            type="button"
                             onClick={() => {
                                 handleSubmit(inputValue);
                             }}
                         >
                             Добавить
-                        </Button>
-                    </Space.Compact>
+                        </button>
+                    </section>
+
                     <section className={styles.list}>
                         {hasCategories ? (
                             categories.map((category) => (
                                 <div key={category._id} className={styles.row}>
                                     {category.name}
-                                    <Button
-                                        size="small"
-                                        type="text"
+                                    <button
                                         onClick={async () => {
                                             await categoryApi.delCategory(
                                                 category._id,
@@ -68,24 +66,22 @@ export const CategoryButton: FC = () => {
                                         }}
                                     >
                                         🗑️
-                                    </Button>
+                                    </button>
                                 </div>
                             ))
                         ) : (
-                            <Alert
-                                message="Пока что тут нет категорий"
-                                type="info"
-                            />
+                            <div>Пока что тут нет категорий</div>
                         )}
                     </section>
-                    <Button
+                    <button
+                        type="button"
                         onClick={() => {
                             dialogRef.current?.close();
                             setInputValue('');
                         }}
                     >
                         Закрыть
-                    </Button>
+                    </button>
                 </section>
             </dialog>
         </>

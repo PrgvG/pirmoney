@@ -26,3 +26,5 @@ export {
     getPaymentsSummary,
     sortPaymentsByPaymentDay,
 } from './helpers';
+
+export * from './view';

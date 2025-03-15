@@ -2,12 +2,6 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-
-    > label {
-        display: flex;
-        justify-content: space-between;
-        gap: 4px;
-    }
 }
 
 .controls {

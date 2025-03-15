@@ -1,10 +1,9 @@
 import { FC, useState } from 'react';
 import { userApi } from '../../entities';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import styles from './register_form.module.css';
 import { useAuth } from '../../context';
-import { Alert, Button, Form, Input, Typography } from 'antd';
-const { Title } = Typography;
+import { InputField } from '../../components';
 
 type Props = {
     onChangeMode: () => void;
@@ -14,7 +13,7 @@ export const RegisterForm: FC<Props> = ({ onChangeMode }) => {
     const [error, setError] = useState<string | null>(null);
     const { setUser } = useAuth();
 
-    const { handleSubmit, control, formState } = useForm<{
+    const { handleSubmit, formState, register } = useForm<{
         username: string;
         password: string;
     }>();
@@ -43,55 +42,30 @@ export const RegisterForm: FC<Props> = ({ onChangeMode }) => {
                 await handleRegister(data);
             })}
         >
-            <Title level={2} style={{ textAlign: 'center' }}>
-                Регистрация
-            </Title>
-            <Controller
+            <h2 style={{ textAlign: 'center' }}>Регистрация</h2>
+            <InputField
+                register={register}
                 name="username"
-                rules={{ required: true }}
-                control={control}
-                render={({ field }) => (
-                    <Form.Item label="Логин">
-                        <Input
-                            size="large"
-                            readOnly={formState.isSubmitting}
-                            {...field}
-                        />
-                    </Form.Item>
-                )}
+                label="Логин"
+                type="text"
+                registerOptions={{ required: true }}
             />
-            <Controller
+            <InputField
+                register={register}
                 name="password"
-                rules={{ required: true }}
-                control={control}
-                render={({ field }) => (
-                    <Form.Item label="Пароль">
-                        <Input.Password
-                            size="large"
-                            readOnly={formState.isSubmitting}
-                            {...field}
-                        />
-                    </Form.Item>
-                )}
+                label="Пароль"
+                type="password"
+                registerOptions={{ required: true }}
             />
 
-            {error && <Alert message={error} type="error" />}
+            {error && <div>{error}</div>}
 
-            <Button
-                type="primary"
-                size="large"
-                htmlType="submit"
-                loading={formState.isSubmitting}
-            >
+            <button type="submit" disabled={formState.isSubmitting}>
                 Зарегистрироваться
-            </Button>
-            <Button
-                onClick={onChangeMode}
-                type="link"
-                disabled={formState.isSubmitting}
-            >
+            </button>
+            <button onClick={onChangeMode} disabled={formState.isSubmitting}>
                 Войти
-            </Button>
+            </button>
         </form>
     );
 };

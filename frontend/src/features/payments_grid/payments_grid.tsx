@@ -5,7 +5,6 @@ import { getColumns } from './model/column_config';
 import { Table } from './view/table';
 import { Payment } from '../../entities';
 import styles from './payments_grid.module.css';
-import { Alert } from 'antd';
 
 type Props = {
     payments: (Payment & { payment_date: Date })[];
@@ -53,7 +52,7 @@ export const PaymentsGrid: FC<Props> = ({
                     </div>
                 </>
             ) : (
-                <Alert message="Пока что тут нет платежей" type="info" />
+                <div>Пока что тут нет платежей</div>
             )}
         </div>
     );

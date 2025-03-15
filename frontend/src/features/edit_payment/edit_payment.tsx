@@ -1,14 +1,16 @@
 import {
+    CategoryField,
+    LabelField,
     PatchPayment,
     Payment,
+    PaymentAmountField,
     paymentApi,
-    useCategories,
 } from '../../entities';
 import { FC, useRef } from 'react';
 import { EventEmitter } from '../../services/eventEmitter';
 import { useForm } from 'react-hook-form';
-import { Button } from 'antd';
 import styles from './edit_payment.module.css';
+import { DialogTitle } from '../../components';
 
 type Props = {
     onSave: (payment: PatchPayment) => void;
@@ -20,8 +22,6 @@ export const editPaymentEmitter = new EventEmitter<{
 
 export const EditPayment: FC<Props> = ({ onSave }) => {
     const dialogRef = useRef<HTMLDialogElement>(null);
-
-    const { categories, hasCategories } = useCategories();
 
     const { handleSubmit, register, formState, reset } = useForm<PatchPayment>(
         {},
@@ -50,51 +50,25 @@ export const EditPayment: FC<Props> = ({ onSave }) => {
                     reset();
                 }}
             >
-                <label>
-                    Название
-                    <input
-                        type="text"
-                        autoComplete="off"
-                        {...register('label', { required: true })}
+                <DialogTitle title="Редактирование платежа" />
+
+                <section className={styles.fields}>
+                    <LabelField register={register} name="label" />
+
+                    <PaymentAmountField
+                        register={register}
+                        name="payment_amount"
                     />
-                </label>
-                <label>
-                    Сумма платежа
-                    <input
-                        type="number"
-                        inputMode="decimal"
-                        step={0.01}
-                        {...register('payment_amount', {
-                            required: true,
-                            valueAsNumber: true,
-                        })}
-                    />
-                </label>
-                {hasCategories && (
-                    <label>
-                        Категория
-                        <select
-                            {...register('category_id', { required: true })}
-                        >
-                            {categories.map((category) => (
-                                <option key={category._id} value={category._id}>
-                                    {category.name}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-                )}
+
+                    <CategoryField register={register} name="category_id" />
+                </section>
                 <div className={styles.controls}>
-                    <Button
-                        htmlType="submit"
-                        type="primary"
-                        loading={formState.isSubmitting}
-                    >
+                    <button type="submit" disabled={formState.isSubmitting}>
                         Изменить
-                    </Button>
-                    <Button htmlType="reset" disabled={formState.isSubmitting}>
+                    </button>
+                    <button type="reset" disabled={formState.isSubmitting}>
                         Закрыть
-                    </Button>
+                    </button>
                 </div>
             </form>
         </dialog>

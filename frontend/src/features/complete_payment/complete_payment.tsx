@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Payment, paymentApi } from '../../entities';
-import { Checkbox } from 'antd';
 
 type Props = {
     payment: Payment;
@@ -28,7 +27,8 @@ export const CompletePayment: FC<Props> = ({
     const isPaid = getIsPaid(payment.completed_at);
 
     return (
-        <Checkbox
+        <input
+            type="checkbox"
             checked={isPaid}
             onChange={async () => {
                 const date = new Date();

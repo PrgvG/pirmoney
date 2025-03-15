@@ -11,8 +11,8 @@ import { BankPaymentForm } from './components/bank_payment_form/bank_payment_for
 import { OneTimePaymentForm } from './components/one_time_payment_form/one_time_payment_form';
 import { RepeatPaymentForm } from './components/repeat_payment_form/repeat_payment_form';
 import { nanoid } from 'nanoid';
-import { Button } from 'antd';
 import { paymentTypeIcons } from '../../entities/payment/types';
+import { DialogTitle } from '../../components';
 
 type Props = {
     onAdd(data: BankPayment | RepeatPayment | OneTimePayment): void;
@@ -58,12 +58,14 @@ export const AddPaymentButton: FC<Props> = ({ onAdd }) => {
 
     return (
         <>
-            <Button type="primary" onClick={handleOpenDialog}>
+            <button type="button" onClick={handleOpenDialog}>
                 Запланировать
-            </Button>
+            </button>
 
             <dialog ref={dialogRef}>
                 <div className={styles.dialog}>
+                    <DialogTitle title="Планирование платежа" />
+
                     <div className={styles.paymentTypes}>
                         {paymentTypes.map(({ value, label }) => (
                             <label key={value}>
@@ -81,6 +83,7 @@ export const AddPaymentButton: FC<Props> = ({ onAdd }) => {
                             </label>
                         ))}
                     </div>
+
                     {paymentType === 'repeat_payment' && (
                         <RepeatPaymentForm
                             onReset={handleCloseDialog}
@@ -103,16 +106,12 @@ export const AddPaymentButton: FC<Props> = ({ onAdd }) => {
                         />
                     )}
                     <div className={styles.controls}>
-                        <Button
-                            htmlType="submit"
-                            type="primary"
-                            form="addPaymentForm"
-                        >
+                        <button type="submit" form="addPaymentForm">
                             Добавить
-                        </Button>
-                        <Button htmlType="reset" form="addPaymentForm">
+                        </button>
+                        <button type="reset" form="addPaymentForm">
                             Закрыть
-                        </Button>
+                        </button>
                     </div>
                 </div>
             </dialog>
