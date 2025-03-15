@@ -4,8 +4,9 @@ import styles from './add_moment_payment.module.css';
 import { OneTimePayment, paymentApi, useCategories } from '../../entities';
 
 import { nanoid } from 'nanoid';
-import { Button, Form, Input, InputNumber, Switch } from 'antd';
+import { Button, Input, InputNumber, Switch, Typography } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
+const { Title } = Typography;
 
 type Props = {
     onAdd(data: OneTimePayment): void;
@@ -62,20 +63,24 @@ export const AddMomentPaymentButton: FC<Props> = ({ onAdd }) => {
                         reset();
                     }}
                 >
-                    <section>
+                    <Title level={2} className={styles.title}>
+                        Внесение платежа
+                    </Title>
+                    <section className={styles.fields}>
                         <Controller
                             name="label"
                             rules={{ required: true }}
                             control={control}
                             render={({ field }) => (
-                                <Form.Item label="Название">
+                                <label>
+                                    Название:
                                     <Input
                                         size="middle"
                                         autoComplete="off"
                                         readOnly={formState.isSubmitting}
                                         {...field}
                                     />
-                                </Form.Item>
+                                </label>
                             )}
                         />
                         <Controller
@@ -83,9 +88,10 @@ export const AddMomentPaymentButton: FC<Props> = ({ onAdd }) => {
                             rules={{ required: true }}
                             control={control}
                             render={({ field }) => (
-                                <Form.Item label="Сумма платежа">
+                                <label>
+                                    Сумма платежа:
                                     <InputNumber
-                                        style={{ width: '100%' }}
+                                        className={styles.numberInput}
                                         size="middle"
                                         step={0.01}
                                         min={0}
@@ -93,11 +99,11 @@ export const AddMomentPaymentButton: FC<Props> = ({ onAdd }) => {
                                         readOnly={formState.isSubmitting}
                                         {...field}
                                     />
-                                </Form.Item>
+                                </label>
                             )}
                         />
                         {hasCategories && (
-                            <label className={styles.selectField}>
+                            <label>
                                 Категория:
                                 <select
                                     className={styles.select}
@@ -116,7 +122,8 @@ export const AddMomentPaymentButton: FC<Props> = ({ onAdd }) => {
                                 </select>
                             </label>
                         )}
-                        <Form.Item label="Тип транзакции">
+                        <label>
+                            Тип транзакции:
                             <Switch
                                 checkedChildren="Расход"
                                 unCheckedChildren="Приход"
@@ -128,7 +135,7 @@ export const AddMomentPaymentButton: FC<Props> = ({ onAdd }) => {
                                     );
                                 }}
                             />
-                        </Form.Item>
+                        </label>
                     </section>
                     <div className={styles.controls}>
                         <Button htmlType="submit" type="primary">

@@ -16,11 +16,19 @@ const CategoriesContext = createContext<{
     hasCategories: boolean;
 } | null>(null);
 
+const initialCategory: Category = {
+    _id: 'empty',
+    name: '<Без категории>',
+};
+
 export const CategoriesProvider: FC<PropsWithChildren> = ({ children }) => {
     const [categories, setCategories] = useState<Category[]>([]);
 
     useEffect(() => {
-        categoryApi.getCategories().then(setCategories);
+        categoryApi.getCategories().then((categories) => {
+            categories.sort((a, b) => a.name.localeCompare(b.name));
+            return setCategories([initialCategory, ...categories]);
+        });
     }, []);
 
     return (
