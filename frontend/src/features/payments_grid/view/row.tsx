@@ -30,7 +30,6 @@ export const Row: FC<Props> = ({
     const labelDate = date.toLocaleDateString('ru', {
         month: 'long',
         day: 'numeric',
-        year: 'numeric',
     });
     if (kind === 'separator') {
         return (
