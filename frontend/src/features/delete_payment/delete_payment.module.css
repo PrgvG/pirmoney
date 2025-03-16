@@ -1,0 +1,11 @@
+.dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.controls {
+    display: flex;
+    align-self: flex-end;
+    gap: 8px;
+}

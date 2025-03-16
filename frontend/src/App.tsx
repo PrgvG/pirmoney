@@ -10,6 +10,8 @@ import {
     CategoryButton,
     EditPayment,
     editPaymentEmitter,
+    deletePaymentEmitter,
+    DeletePayment,
 } from './features';
 import {
     enrichByPaymentDate,
@@ -94,7 +96,6 @@ export const App: FC = () => {
                             filterByActiveDate(payments, activeDate),
                             activeDate,
                         )}
-                        activeDate={activeDate}
                         renderCheckboxInput={(completePayment) => (
                             <CompletePayment
                                 payment={completePayment}
@@ -113,36 +114,14 @@ export const App: FC = () => {
                                 }
                             />
                         )}
-                        renderDeleteButton={(deletingPayment) => (
+                        renderDeleteButton={(payment) => (
                             <button
                                 type="button"
-                                onClick={async () => {
-                                    const cachedPayments =
-                                        JSON.stringify(payments);
-                                    const cachedActiveDate =
-                                        JSON.stringify(activeDate);
-                                    setPayments((prev) =>
-                                        prev.filter(
-                                            (payment) =>
-                                                payment._id !==
-                                                deletingPayment._id,
-                                        ),
+                                onClick={() => {
+                                    deletePaymentEmitter.emit(
+                                        'dialog:show',
+                                        payment,
                                     );
-                                    setActiveDate(initialActiveDate);
-                                    paymentApi
-                                        .deletePayment({
-                                            paymentId: deletingPayment._id,
-                                            paymentType:
-                                                deletingPayment.payment_type,
-                                        })
-                                        .catch(() => {
-                                            setPayments(
-                                                JSON.parse(cachedPayments),
-                                            );
-                                            setActiveDate(
-                                                JSON.parse(cachedActiveDate),
-                                            );
-                                        });
                                 }}
                             >
                                 🗑️
@@ -176,6 +155,15 @@ export const App: FC = () => {
                                       ...patchPayment,
                                   }
                                 : payment,
+                        ),
+                    );
+                }}
+            />
+            <DeletePayment
+                onDelete={(patchPayment) => {
+                    setPayments((prev) =>
+                        prev.filter(
+                            (payment) => payment._id !== patchPayment._id,
                         ),
                     );
                 }}
