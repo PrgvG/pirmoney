@@ -35,25 +35,35 @@ export const PaymentsGrid: FC<Props> = ({
             <div className={styles.wrapper}>{monthSwitcher}</div>
 
             <div className={styles.wrapper}>
-                {payments.map((payment) => (
-                    <Row
-                        completePaymentSlot={renderCheckboxInput(payment)}
-                        deletePaymentSlot={renderDeleteButton(payment)}
-                        editPaymentSlot={renderEditButton(payment)}
-                        key={payment._id}
-                        type={paymentTypeIcons[payment.payment_type]}
-                        label={payment.label}
-                        amount={payment.payment_amount}
-                        date={payment.payment_date}
-                        category={
-                            categoriesById[payment.category_id]
-                                ? categoriesById[payment.category_id].name
-                                : ''
-                        }
-                        bank={payment.bank ? bankLabels[payment.bank] : ''}
-                        isSeparator={payment._id === 'separator'}
-                    />
-                ))}
+                {payments.map((payment) => {
+                    const kind =
+                        payment._id === 'separator'
+                            ? 'separator'
+                            : payment.payment_kind;
+
+                    return (
+                        <Row
+                            completePaymentSlot={
+                                payment.payment_kind === 'outcome' &&
+                                renderCheckboxInput(payment)
+                            }
+                            deletePaymentSlot={renderDeleteButton(payment)}
+                            editPaymentSlot={renderEditButton(payment)}
+                            key={payment._id}
+                            type={paymentTypeIcons[payment.payment_type]}
+                            label={payment.label}
+                            amount={payment.payment_amount}
+                            date={payment.payment_date}
+                            category={
+                                categoriesById[payment.category_id]
+                                    ? categoriesById[payment.category_id].name
+                                    : ''
+                            }
+                            bank={payment.bank ? bankLabels[payment.bank] : ''}
+                            kind={kind}
+                        />
+                    );
+                })}
             </div>
         </div>
     );

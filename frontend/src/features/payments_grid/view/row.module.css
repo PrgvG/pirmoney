@@ -20,15 +20,20 @@
 }
 
 .separator {
-    display: grid;
+    display: flex;
+    width: 820px;
+    height: 32px;
     padding: 0 48px;
-    grid-template-rows: 32px;
+    align-items: center;
     background-color: rgba(0, 0, 0, 0.05);
     line-height: 20px;
-    width: 820px;
     box-sizing: border-box;
 }
 
 .rightAligned {
     text-align: right;
+}
+
+.income {
+    color: green;
 }

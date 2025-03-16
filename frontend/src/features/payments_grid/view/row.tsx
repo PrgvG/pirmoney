@@ -3,7 +3,7 @@ import styles from './row.module.css';
 import cx from 'classnames';
 
 type Props = {
-    completePaymentSlot: ReactNode;
+    completePaymentSlot?: ReactNode;
     deletePaymentSlot: ReactNode;
     editPaymentSlot: ReactNode;
     type: string;
@@ -12,7 +12,7 @@ type Props = {
     date: Date;
     category: string;
     bank: string;
-    isSeparator: boolean;
+    kind: 'separator' | 'outcome' | 'income';
 };
 
 export const Row: FC<Props> = ({
@@ -25,19 +25,17 @@ export const Row: FC<Props> = ({
     date,
     category,
     bank,
-    isSeparator,
+    kind,
 }) => {
     const labelDate = date.toLocaleDateString('ru', {
         month: 'long',
         day: 'numeric',
         year: 'numeric',
     });
-    if (isSeparator) {
+    if (kind === 'separator') {
         return (
             <div className={styles.separator}>
-                <div className={styles.cell}>
-                    {label} — {labelDate}
-                </div>
+                {label} — {labelDate}
             </div>
         );
     }
@@ -53,7 +51,13 @@ export const Row: FC<Props> = ({
             <div className={styles.cell} title={label}>
                 {label}
             </div>
-            <div className={cx(styles.cell, styles.rightAligned)}>
+            <div
+                className={cx(
+                    styles.cell,
+                    styles.rightAligned,
+                    kind === 'income' && styles.income,
+                )}
+            >
                 {shownAmount}
             </div>
             <div className={cx(styles.cell, styles.rightAligned)}>
