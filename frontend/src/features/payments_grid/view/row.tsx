@@ -27,22 +27,25 @@ export const Row: FC<Props> = ({
     bank,
     isSeparator,
 }) => {
+    const labelDate = date.toLocaleDateString('ru', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+    });
     if (isSeparator) {
         return (
             <div className={styles.separator}>
-                <div></div>
-                <div className={styles.cell}>{label}</div>
-                <div className={cx(styles.cell, styles.rightAligned)}>
-                    {date.toLocaleDateString('ru', {
-                        month: 'long',
-                        day: 'numeric',
-                        year: 'numeric',
-                    })}
+                <div className={styles.cell}>
+                    {label} — {labelDate}
                 </div>
-                <div></div>
             </div>
         );
     }
+    const shownAmount = amount.toLocaleString('ru-RU', {
+        style: 'currency',
+        currency: 'RUB',
+    });
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.action}>{completePaymentSlot}</div>
@@ -51,16 +54,10 @@ export const Row: FC<Props> = ({
                 {label}
             </div>
             <div className={cx(styles.cell, styles.rightAligned)}>
-                {amount.toLocaleString('ru-RU', {
-                    style: 'currency',
-                    currency: 'RUB',
-                })}
+                {shownAmount}
             </div>
             <div className={cx(styles.cell, styles.rightAligned)}>
-                {date.toLocaleDateString('ru', {
-                    month: 'long',
-                    day: 'numeric',
-                })}
+                {labelDate}
             </div>
             <div className={styles.cell}>{category}</div>
             <div className={styles.cell}>{bank}</div>
