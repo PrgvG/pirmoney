@@ -85,6 +85,7 @@ export const App: FC = () => {
                     />
 
                     <PaymentsGrid
+                        isCurrentMonth={activeDate.month === today.getMonth()}
                         monthSwitcher={
                             <MonthSwitcher
                                 onDateChange={setActiveDate}

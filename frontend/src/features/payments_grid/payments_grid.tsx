@@ -13,6 +13,7 @@ type Props = {
     renderCheckboxInput(payment: Payment): ReactNode;
     renderEditButton(payment: Payment): ReactNode;
     monthSwitcher: ReactNode;
+    isCurrentMonth: boolean;
 };
 
 export const PaymentsGrid: FC<Props> = ({
@@ -21,6 +22,7 @@ export const PaymentsGrid: FC<Props> = ({
     renderCheckboxInput,
     renderEditButton,
     monthSwitcher,
+    isCurrentMonth,
 }) => {
     const { categoriesById } = useCategories();
     const [showPrev, setShowPrev] = useState(false);
@@ -37,6 +39,9 @@ export const PaymentsGrid: FC<Props> = ({
         next: (Payment & { payment_date: Date })[];
     }>(
         (acc, payment) => {
+            if (!isCurrentMonth) {
+                return { prev: [], next: [...acc.next, payment] };
+            }
             const today = new Date().getDate();
             const isPrevPayment = payment.payment_date.getDate() < today;
             if (isPrevPayment) {
