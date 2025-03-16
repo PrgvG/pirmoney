@@ -19,27 +19,29 @@ class PaymentController {
 
         const validPassword = compareSync(req.body.password, user.password);
 
-        if (validPassword) {
-            const payment = new OneTimePaymentModel({
-                _id: nanoid(),
-                label: req.body.label,
-                payment_amount: req.body.amount,
-                payment_date: new Date(),
-                completed_at: new Date(),
-                status: 'active',
-                userId: user._id,
-                payment_kind: 'outcome',
-                payment_type: 'one_time_payment',
+        if (!validPassword) {
+            return res.status(400).send('Неверный пароль.');
+        }
+
+        const payment = new OneTimePaymentModel({
+            _id: nanoid(),
+            label: req.body.label,
+            payment_amount: req.body.amount,
+            payment_date: new Date(),
+            completed_at: new Date(),
+            status: 'active',
+            userId: user._id,
+            payment_kind: 'outcome',
+            payment_type: 'one_time_payment',
+        });
+        try {
+            const savedPayment = await payment.save();
+            res.status(201).send(savedPayment);
+        } catch (err) {
+            res.status(400).send({
+                message: 'Ошибка при создании платежа',
+                error: err,
             });
-            try {
-                const savedPayment = await payment.save();
-                res.status(201).send(savedPayment);
-            } catch (err) {
-                res.status(400).send({
-                    message: 'Ошибка при создании платежа',
-                    error: err,
-                });
-            }
         }
     };
 }
