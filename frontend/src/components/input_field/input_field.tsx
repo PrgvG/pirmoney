@@ -6,13 +6,14 @@ import {
 } from 'react-hook-form';
 import { Input } from '..';
 import { ComponentProps } from 'react';
+import { LabelTitle } from '../label_title/label_title';
+import styles from './input_field.module.css';
 
 type Props<T extends FieldValues> = {
     register: UseFormRegister<T>;
     name: Path<T>;
     label: string;
     registerOptions?: RegisterOptions<T, Path<T>>;
-    labelClassName?: string;
 } & ComponentProps<typeof Input>;
 
 export const InputField = <T extends FieldValues>({
@@ -20,19 +21,10 @@ export const InputField = <T extends FieldValues>({
     name,
     label,
     registerOptions,
-    labelClassName,
     ...rest
 }: Props<T>) => (
-    <label
-        className={labelClassName}
-        style={{
-            display: 'flex',
-            flexDirection: 'column',
-            width: '100%',
-            maxWidth: '300px',
-        }}
-    >
-        {label}
+    <label className={styles.wrapper}>
+        <LabelTitle title={label} />
         <Input {...rest} {...register(name, registerOptions)} />
     </label>
 );
