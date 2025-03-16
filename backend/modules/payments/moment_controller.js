@@ -11,6 +11,12 @@ class PaymentController {
 
         const user = await UserModel.findOne({ username: req.body.username });
 
+        if (!user) {
+            return res
+                .status(400)
+                .send('Пользователь с таким логином не найден.');
+        }
+
         const validPassword = compareSync(req.body.password, user.password);
 
         if (validPassword) {
