@@ -3,7 +3,7 @@ import { userApi } from '../../entities';
 import { useForm } from 'react-hook-form';
 import styles from './login_form.module.css';
 import { useAuth } from '../../context';
-import { InputField } from '../../components';
+import { Button, InputField } from '../../components';
 
 type Props = {
     onChangeMode: () => void;
@@ -60,12 +60,12 @@ export const LoginForm: FC<Props> = ({ onChangeMode }) => {
 
             {error && <div>{error}</div>}
 
-            <button type="submit" disabled={formState.isSubmitting}>
+            <Button type="submit" disabled={formState.isSubmitting}>
                 Войти
-            </button>
-            <button onClick={onChangeMode} disabled={formState.isSubmitting}>
+            </Button>
+            <Button onClick={onChangeMode} disabled={formState.isSubmitting}>
                 Зарегистрироваться
-            </button>
+            </Button>
         </form>
     );
 };

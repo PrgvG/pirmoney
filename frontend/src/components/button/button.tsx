@@ -1,12 +1,12 @@
-import { ComponentProps, FC } from 'react';
+import { ComponentProps, FC, forwardRef } from 'react';
 import styles from './button.module.css';
 
 type Props = Omit<ComponentProps<'button'>, 'className'>;
 
-export const Button: FC<Props> = ({ children, ...rest }) => {
+export const Button: FC<Props> = forwardRef(({ children, ...rest }, ref) => {
     return (
-        <button {...rest} className={styles.button}>
+        <button ref={ref} {...rest} className={styles.button}>
             {children}
         </button>
     );
-};
+});

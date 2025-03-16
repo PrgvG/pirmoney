@@ -5,6 +5,7 @@ import {
     RegisterOptions,
     UseFormRegister,
 } from 'react-hook-form';
+import styles from './select_field.module.css';
 
 type Props<T extends FieldValues> = {
     register: UseFormRegister<T>;
@@ -13,7 +14,7 @@ type Props<T extends FieldValues> = {
     options: { value: string; label: string }[];
     registerOptions?: RegisterOptions<T, Path<T>>;
     labelClassName?: string;
-} & ComponentProps<'select'>;
+} & Omit<ComponentProps<'select'>, 'className'>;
 
 export const SelectField = <T extends FieldValues>({
     register,
@@ -34,7 +35,11 @@ export const SelectField = <T extends FieldValues>({
         }}
     >
         {label}
-        <select {...rest} {...register(name, registerOptions)}>
+        <select
+            className={styles.select}
+            {...rest}
+            {...register(name, registerOptions)}
+        >
             {options.map((option) => (
                 <option key={option.value} value={option.value}>
                     {option.label}
