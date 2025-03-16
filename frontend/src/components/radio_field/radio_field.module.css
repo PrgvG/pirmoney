@@ -1,0 +1,16 @@
+.label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+
+    line-height: 20px;
+    font-size: 16px;
+    padding: 8px;
+}
+
+.radio {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+}

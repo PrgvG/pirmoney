@@ -5,7 +5,7 @@ import {
     UseFormRegister,
 } from 'react-hook-form';
 import { ComponentProps } from 'react';
-
+import styles from './radio_field.module.css';
 type Props<T extends FieldValues> = {
     register: UseFormRegister<T>;
     name: Path<T>;
@@ -14,7 +14,7 @@ type Props<T extends FieldValues> = {
     options: { value: string; label: string }[];
     labelClassName?: string;
     direction?: 'row' | 'column';
-} & ComponentProps<'input'>;
+} & Omit<ComponentProps<'input'>, 'type' | 'value' | 'className'>;
 
 export const RadioField = <T extends FieldValues>({
     register,
@@ -29,9 +29,10 @@ export const RadioField = <T extends FieldValues>({
     return (
         <section style={{ display: 'flex', flexDirection: direction }}>
             {options.map((option) => (
-                <label className={labelClassName} key={option.value}>
+                <label className={styles.label} key={option.value}>
                     <input
                         {...rest}
+                        className={styles.radio}
                         type="radio"
                         value={option.value}
                         {...register(name, registerOptions)}
