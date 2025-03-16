@@ -8,6 +8,9 @@
 .cell {
     align-self: center;
     padding: 0 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .action {
@@ -18,11 +21,12 @@
 
 .separator {
     display: grid;
-    grid-template-columns: 32px 150px 1fr 300px;
+    grid-template-columns: 32px 150px 338px 300px;
     grid-template-rows: 32px;
     background-color: rgba(0, 0, 0, 0.05);
     line-height: 20px;
     font-weight: 700;
+    width: 820px;
 }
 
 .rightAligned {

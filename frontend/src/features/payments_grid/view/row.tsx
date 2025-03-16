@@ -19,12 +19,12 @@ export const Row: FC<Props> = ({
     completePaymentSlot,
     deletePaymentSlot,
     editPaymentSlot,
-    type = 'type',
-    label = 'label',
-    amount = 1_000,
-    date = new Date(),
-    category = 'category',
-    bank = 'bank',
+    type,
+    label,
+    amount,
+    date,
+    category,
+    bank,
     isSeparator,
 }) => {
     if (isSeparator) {
@@ -47,7 +47,9 @@ export const Row: FC<Props> = ({
         <div className={styles.wrapper}>
             <div className={styles.action}>{completePaymentSlot}</div>
             <div className={styles.cell}>{type}</div>
-            <div className={styles.cell}>{label}</div>
+            <div className={styles.cell} title={label}>
+                {label}
+            </div>
             <div className={cx(styles.cell, styles.rightAligned)}>
                 {amount.toLocaleString('ru-RU', {
                     style: 'currency',
