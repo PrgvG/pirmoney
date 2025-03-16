@@ -14,6 +14,7 @@ type Props = {
     bank: string;
     kind: 'separator' | 'outcome' | 'income';
     onSeparatorClick?: () => void;
+    separatorButtonLabel?: string;
 };
 
 export const Row: FC<Props> = ({
@@ -28,6 +29,7 @@ export const Row: FC<Props> = ({
     bank,
     kind,
     onSeparatorClick,
+    separatorButtonLabel,
 }) => {
     const labelDate = date.toLocaleDateString('ru', {
         month: 'long',
@@ -41,7 +43,7 @@ export const Row: FC<Props> = ({
                         className={styles.separatorButton}
                         onClick={onSeparatorClick}
                     >
-                        Показать
+                        {separatorButtonLabel}
                     </div>
                 )}
                 {label} — {labelDate}

@@ -117,6 +117,9 @@ export const PaymentsGrid: FC<Props> = ({
                                     ? () => setShowPrev((prev) => !prev)
                                     : undefined
                             }
+                            separatorButtonLabel={
+                                showPrev ? 'Скрыть' : 'Показать'
+                            }
                         />
                     );
                 })}
