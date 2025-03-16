@@ -25,7 +25,6 @@
     grid-template-rows: 32px;
     background-color: rgba(0, 0, 0, 0.05);
     line-height: 20px;
-    font-weight: 700;
     width: 820px;
     box-sizing: border-box;
 }
