@@ -13,6 +13,7 @@ export const LabelField = <T extends FieldValues>({
     <InputField
         label="Название"
         register={register}
+        autoComplete="off"
         name={name}
         registerOptions={{ required: true }}
     />
