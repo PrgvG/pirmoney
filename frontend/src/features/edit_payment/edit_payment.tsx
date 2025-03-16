@@ -10,7 +10,7 @@ import { FC, useRef } from 'react';
 import { EventEmitter } from '../../services/eventEmitter';
 import { useForm } from 'react-hook-form';
 import styles from './edit_payment.module.css';
-import { DialogTitle } from '../../components';
+import { Button, DialogTitle } from '../../components';
 
 type Props = {
     onSave: (payment: PatchPayment) => void;
@@ -63,12 +63,12 @@ export const EditPayment: FC<Props> = ({ onSave }) => {
                     <CategoryField register={register} name="category_id" />
                 </section>
                 <div className={styles.controls}>
-                    <button type="submit" disabled={formState.isSubmitting}>
+                    <Button type="submit" disabled={formState.isSubmitting}>
                         Изменить
-                    </button>
-                    <button type="reset" disabled={formState.isSubmitting}>
+                    </Button>
+                    <Button type="reset" disabled={formState.isSubmitting}>
                         Закрыть
-                    </button>
+                    </Button>
                 </div>
             </form>
         </dialog>

@@ -13,7 +13,7 @@ import {
 import { nanoid } from 'nanoid';
 
 import { useForm } from 'react-hook-form';
-import { DialogTitle } from '../../components';
+import { Button, DialogTitle } from '../../components';
 
 type Props = {
     onAdd(data: OneTimePayment): void;
@@ -51,9 +51,9 @@ export const AddMomentPaymentButton: FC<Props> = ({ onAdd }) => {
 
     return (
         <>
-            <button type="button" onClick={handleOpenDialog}>
+            <Button type="button" onClick={handleOpenDialog}>
                 Записать
-            </button>
+            </Button>
 
             <dialog ref={dialogRef}>
                 <form
@@ -86,12 +86,12 @@ export const AddMomentPaymentButton: FC<Props> = ({ onAdd }) => {
                         />
                     </section>
                     <div className={styles.controls}>
-                        <button type="submit" disabled={formState.isSubmitting}>
+                        <Button type="submit" disabled={formState.isSubmitting}>
                             Добавить
-                        </button>
-                        <button type="reset" disabled={formState.isSubmitting}>
+                        </Button>
+                        <Button type="reset" disabled={formState.isSubmitting}>
                             Закрыть
-                        </button>
+                        </Button>
                     </div>
                 </form>
             </dialog>

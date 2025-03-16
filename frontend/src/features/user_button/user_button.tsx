@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import styles from './user_button.module.css';
 import { useAuth } from '../../context';
+import { Button } from '../../components';
 
 type Props = {
     onLogout: () => void;
@@ -12,7 +13,7 @@ export const UserButton: FC<Props> = ({ onLogout }) => {
     return (
         <div className={styles.user}>
             {user?.username}
-            <button
+            <Button
                 type="button"
                 onClick={() => {
                     clearUser();
@@ -20,7 +21,7 @@ export const UserButton: FC<Props> = ({ onLogout }) => {
                 }}
             >
                 Выйти
-            </button>
+            </Button>
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import { FC, useRef, useState } from 'react';
 import styles from './category_button.module.css';
 import { categoryApi, useCategories } from '../../entities';
+import { Button } from '../../components';
 
 export const CategoryButton: FC = () => {
     const dialogRef = useRef<HTMLDialogElement>(null);
@@ -16,14 +17,14 @@ export const CategoryButton: FC = () => {
 
     return (
         <>
-            <button
+            <Button
                 type="button"
                 onClick={() => {
                     dialogRef.current?.showModal();
                 }}
             >
                 Категории
-            </button>
+            </Button>
             <dialog ref={dialogRef}>
                 <section className={styles.dialog}>
                     <section>
@@ -37,14 +38,14 @@ export const CategoryButton: FC = () => {
                                 }
                             }}
                         />
-                        <button
+                        <Button
                             type="button"
                             onClick={() => {
                                 handleSubmit(inputValue);
                             }}
                         >
                             Добавить
-                        </button>
+                        </Button>
                     </section>
 
                     <section className={styles.list}>
@@ -73,7 +74,8 @@ export const CategoryButton: FC = () => {
                             <div>Пока что тут нет категорий</div>
                         )}
                     </section>
-                    <button
+                    <Button
+                        style={{ alignSelf: 'flex-end' }}
                         type="button"
                         onClick={() => {
                             dialogRef.current?.close();
@@ -81,7 +83,7 @@ export const CategoryButton: FC = () => {
                         }}
                     >
                         Закрыть
-                    </button>
+                    </Button>
                 </section>
             </dialog>
         </>

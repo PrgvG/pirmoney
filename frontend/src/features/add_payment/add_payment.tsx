@@ -12,7 +12,7 @@ import { OneTimePaymentForm } from './components/one_time_payment_form/one_time_
 import { RepeatPaymentForm } from './components/repeat_payment_form/repeat_payment_form';
 import { nanoid } from 'nanoid';
 import { paymentTypeIcons } from '../../entities/payment/types';
-import { DialogTitle } from '../../components';
+import { Button, DialogTitle } from '../../components';
 
 type Props = {
     onAdd(data: BankPayment | RepeatPayment | OneTimePayment): void;
@@ -58,9 +58,9 @@ export const AddPaymentButton: FC<Props> = ({ onAdd }) => {
 
     return (
         <>
-            <button type="button" onClick={handleOpenDialog}>
+            <Button type="button" onClick={handleOpenDialog}>
                 Запланировать
-            </button>
+            </Button>
 
             <dialog ref={dialogRef}>
                 <div className={styles.dialog}>
@@ -106,12 +106,12 @@ export const AddPaymentButton: FC<Props> = ({ onAdd }) => {
                         />
                     )}
                     <div className={styles.controls}>
-                        <button type="submit" form="addPaymentForm">
+                        <Button type="submit" form="addPaymentForm">
                             Добавить
-                        </button>
-                        <button type="reset" form="addPaymentForm">
+                        </Button>
+                        <Button type="reset" form="addPaymentForm">
                             Закрыть
-                        </button>
+                        </Button>
                     </div>
                 </div>
             </dialog>

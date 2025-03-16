@@ -5,7 +5,6 @@
     column-gap: 40px;
     row-gap: 12px;
     flex-wrap: wrap-reverse;
-    padding: 16px;
 }
 
 .registration_warning {
@@ -21,11 +20,3 @@
     gap: 16px;
     flex-wrap: wrap;
 }
-/* 
-@media (max-width: 768px) {
-    .buttons {
-        gap: 8px;
-        width: 100%;
-        justify-content: center;
-    }
-} */
