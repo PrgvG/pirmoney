@@ -1,0 +1,17 @@
+.header {
+    display: grid;
+    grid-template-columns: 32px 50px 124px 125px 150px 150px 125px 32px 32px;
+    grid-template-rows: 32px;
+    line-height: 20px;
+}
+
+.cell {
+    align-self: center;
+    line-height: 20px;
+    padding: 0 8px;
+    font-weight: 700;
+}
+
+.rightAligned {
+    text-align: right;
+}

@@ -5,6 +5,7 @@ import styles from './payments_grid.module.css';
 import { Row } from './view/row';
 import { bankLabels } from '../../shared';
 import { paymentTypeIcons } from '../../entities/payment/types';
+import { Header } from './view/header';
 
 type Props = {
     payments: (Payment & { payment_date: Date })[];
@@ -53,6 +54,7 @@ export const PaymentsGrid: FC<Props> = ({
             <div className={styles.wrapper}>{monthSwitcher}</div>
 
             <div className={styles.wrapper}>
+                <Header />
                 {showPrev &&
                     prev.map((payment) => {
                         const kind =
