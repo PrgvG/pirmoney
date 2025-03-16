@@ -14,3 +14,11 @@
     align-self: flex-end;
     gap: 8px;
 }
+
+@media (max-width: 768px) {
+    .dialog {
+        width: calc(100vw - 40px);
+        height: calc(100vh - 40px);
+        box-sizing: border-box;
+    }
+}
