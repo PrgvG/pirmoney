@@ -12,6 +12,7 @@ export const DateField = <T extends FieldValues>({
 }: Props<T>) => {
     return (
         <UiDateField
+            style={{ lineHeight: '18px' }}
             label="Дата платежа"
             register={register}
             name={name}
