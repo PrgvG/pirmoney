@@ -3,7 +3,7 @@ import {
     LabelField,
     PatchPayment,
     Payment,
-    PaymentAmountField,
+    AmountField,
     paymentApi,
 } from '../../entities';
 import { FC, useRef } from 'react';
@@ -55,10 +55,7 @@ export const EditPayment: FC<Props> = ({ onSave }) => {
                 <section className={styles.fields}>
                     <LabelField register={register} name="label" />
 
-                    <PaymentAmountField
-                        register={register}
-                        name="payment_amount"
-                    />
+                    <AmountField register={register} name="payment_amount" />
 
                     <CategoryField register={register} name="category_id" />
                 </section>

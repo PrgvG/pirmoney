@@ -5,9 +5,9 @@ import {
     CategoryField,
     LabelField,
     OneTimePayment,
-    PaymentAmountField,
+    AmountField,
     paymentApi,
-    PaymentKindField,
+    KindField,
 } from '../../entities';
 
 import { nanoid } from 'nanoid';
@@ -73,17 +73,14 @@ export const AddMomentPaymentButton: FC<Props> = ({ onAdd }) => {
                     <section className={styles.fields}>
                         <LabelField register={register} name="label" />
 
-                        <PaymentAmountField
+                        <AmountField
                             register={register}
                             name="payment_amount"
                         />
 
                         <CategoryField register={register} name="category_id" />
 
-                        <PaymentKindField
-                            register={register}
-                            name="payment_kind"
-                        />
+                        <KindField register={register} name="payment_kind" />
                     </section>
                     <div className={styles.controls}>
                         <Button type="submit" disabled={formState.isSubmitting}>

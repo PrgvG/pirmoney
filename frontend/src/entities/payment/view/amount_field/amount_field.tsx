@@ -6,7 +6,7 @@ type Props<T extends FieldValues> = {
     name: Path<T>;
 };
 
-export const PaymentAmountField = <T extends FieldValues>({
+export const AmountField = <T extends FieldValues>({
     register,
     name,
 }: Props<T>) => {

@@ -1,20 +1,12 @@
+.dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
 .paymentTypes {
     display: flex;
     flex-direction: column;
-}
-
-.dialog {
-    top: 250px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 300px;
 }
 
 .controls {

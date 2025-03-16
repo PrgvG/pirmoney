@@ -1,59 +1,6 @@
-.dialog {
-    z-index: 1;
-    background-color: white;
-    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
-    top: 250px;
-}
-
 .form {
     display: flex;
     flex-direction: column;
     gap: 4px;
     width: 300px;
-}
-
-.paymentKind {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.radioGroup {
-    display: flex;
-    flex-direction: row;
-    height: 21.5px;
-}
-
-.radioGroup label {
-    display: inline-block;
-    cursor: pointer;
-    padding: 0 4px;
-    border: 1px solid #999;
-    border-right: none;
-    user-select: none;
-}
-
-.radioGroup label input {
-    display: none;
-}
-
-.radioGroup :first-child {
-    border-radius: 6px 0 0 6px;
-}
-.radioGroup :last-child {
-    border-radius: 0 6px 6px 0;
-    border-right: 1px solid #999;
-}
-
-.radioGroup :has(input[type='radio']:checked) {
-    background: #a6d5ff;
-}
-
-.radioGroup label:hover {
-    color: #666;
-}
-
-.radioGroup input[type='radio']:disabled + label {
-    background: #efefef;
-    color: #666;
 }
