@@ -12,6 +12,7 @@ export const PaymentKindField = <T extends FieldValues>({
 }: Props<T>) => {
     return (
         <RadioField
+            direction="row"
             register={register}
             name={name}
             label="Тип транзакции"

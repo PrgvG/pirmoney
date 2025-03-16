@@ -13,6 +13,7 @@ type Props<T extends FieldValues> = {
     registerOptions?: RegisterOptions<T, Path<T>>;
     options: { value: string; label: string }[];
     labelClassName?: string;
+    direction?: 'row' | 'column';
 } & InputHTMLAttributes<HTMLInputElement>;
 
 export const RadioField = <T extends FieldValues>({
@@ -22,10 +23,11 @@ export const RadioField = <T extends FieldValues>({
     registerOptions,
     options,
     labelClassName,
+    direction = 'column',
     ...rest
 }: Props<T>) => {
     return (
-        <section>
+        <section style={{ display: 'flex', flexDirection: direction }}>
             {options.map((option) => (
                 <label className={labelClassName} key={option.value}>
                     <input
