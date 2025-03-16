@@ -36,12 +36,14 @@ export const Row: FC<Props> = ({
     if (kind === 'separator') {
         return (
             <div className={styles.separator}>
-                <div
-                    className={styles.separatorButton}
-                    onClick={onSeparatorClick}
-                >
-                    Показать
-                </div>
+                {onSeparatorClick && (
+                    <div
+                        className={styles.separatorButton}
+                        onClick={onSeparatorClick}
+                    >
+                        Показать
+                    </div>
+                )}
                 {label} — {labelDate}
             </div>
         );

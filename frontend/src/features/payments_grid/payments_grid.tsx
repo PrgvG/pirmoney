@@ -31,7 +31,7 @@ export const PaymentsGrid: FC<Props> = ({
         return <div>Пока что тут нет платежей</div>;
     }
 
-    const paymentsPrevNext = payments.reduce<{
+    const { prev, next } = payments.reduce<{
         prev: (Payment & { payment_date: Date })[];
         next: (Payment & { payment_date: Date })[];
     }>(
@@ -46,13 +46,15 @@ export const PaymentsGrid: FC<Props> = ({
         { prev: [], next: [] },
     );
 
+    const showPrevPayments = prev.length > 0;
+
     return (
         <div style={{ maxWidth: '100%' }}>
             <div className={styles.wrapper}>{monthSwitcher}</div>
 
             <div className={styles.wrapper}>
                 {showPrev &&
-                    paymentsPrevNext.prev.map((payment) => {
+                    prev.map((payment) => {
                         const kind =
                             payment._id === 'separator'
                                 ? 'separator'
@@ -84,7 +86,7 @@ export const PaymentsGrid: FC<Props> = ({
                             />
                         );
                     })}
-                {paymentsPrevNext.next.map((payment) => {
+                {next.map((payment) => {
                     const kind =
                         payment._id === 'separator'
                             ? 'separator'
@@ -110,8 +112,10 @@ export const PaymentsGrid: FC<Props> = ({
                             }
                             bank={payment.bank ? bankLabels[payment.bank] : ''}
                             kind={kind}
-                            onSeparatorClick={() =>
-                                setShowPrev((prev) => !prev)
+                            onSeparatorClick={
+                                showPrevPayments
+                                    ? () => setShowPrev((prev) => !prev)
+                                    : undefined
                             }
                         />
                     );
