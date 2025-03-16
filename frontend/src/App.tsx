@@ -23,6 +23,7 @@ import {
 } from './entities';
 import styles from './App.module.css';
 import { AddMomentPaymentButton } from './features/add_moment_payment/add_moment_payment';
+import { Input } from './components';
 
 export const App: FC = () => {
     const today = new Date();
@@ -75,7 +76,6 @@ export const App: FC = () => {
                     <UserButton onLogout={() => setPayments([])} />
                 </div>
             </header>
-
             {payments.length ? (
                 <>
                     <Summary

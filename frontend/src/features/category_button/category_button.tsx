@@ -1,7 +1,7 @@
 import { FC, useRef, useState } from 'react';
 import styles from './category_button.module.css';
 import { categoryApi, useCategories } from '../../entities';
-import { Button } from '../../components';
+import { Button, Input } from '../../components';
 
 export const CategoryButton: FC = () => {
     const dialogRef = useRef<HTMLDialogElement>(null);
@@ -28,7 +28,7 @@ export const CategoryButton: FC = () => {
             <dialog ref={dialogRef}>
                 <section className={styles.dialog}>
                     <section>
-                        <input
+                        <Input
                             placeholder="Название категории"
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}

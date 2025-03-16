@@ -4,7 +4,8 @@ import {
     RegisterOptions,
     UseFormRegister,
 } from 'react-hook-form';
-import { InputHTMLAttributes } from 'react';
+import { Input } from '..';
+import { ComponentProps } from 'react';
 
 type Props<T extends FieldValues> = {
     register: UseFormRegister<T>;
@@ -12,7 +13,7 @@ type Props<T extends FieldValues> = {
     label: string;
     registerOptions?: RegisterOptions<T, Path<T>>;
     labelClassName?: string;
-} & InputHTMLAttributes<HTMLInputElement>;
+} & ComponentProps<typeof Input>;
 
 export const InputField = <T extends FieldValues>({
     register,
@@ -32,6 +33,6 @@ export const InputField = <T extends FieldValues>({
         }}
     >
         {label}
-        <input {...rest} {...register(name, registerOptions)} />
+        <Input {...rest} {...register(name, registerOptions)} />
     </label>
 );

@@ -1,7 +1,7 @@
-import { ButtonHTMLAttributes, FC } from 'react';
+import { ComponentProps, FC } from 'react';
 import styles from './button.module.css';
 
-type Props = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'>;
+type Props = Omit<ComponentProps<'button'>, 'className'>;
 
 export const Button: FC<Props> = ({ children, ...rest }) => {
     return (

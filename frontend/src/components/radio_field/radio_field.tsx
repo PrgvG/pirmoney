@@ -4,7 +4,7 @@ import {
     RegisterOptions,
     UseFormRegister,
 } from 'react-hook-form';
-import { InputHTMLAttributes } from 'react';
+import { ComponentProps } from 'react';
 
 type Props<T extends FieldValues> = {
     register: UseFormRegister<T>;
@@ -14,7 +14,7 @@ type Props<T extends FieldValues> = {
     options: { value: string; label: string }[];
     labelClassName?: string;
     direction?: 'row' | 'column';
-} & InputHTMLAttributes<HTMLInputElement>;
+} & ComponentProps<'input'>;
 
 export const RadioField = <T extends FieldValues>({
     register,

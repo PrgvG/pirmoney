@@ -1,4 +1,4 @@
-import { SelectHTMLAttributes } from 'react';
+import { ComponentProps } from 'react';
 import {
     FieldValues,
     Path,
@@ -13,7 +13,7 @@ type Props<T extends FieldValues> = {
     options: { value: string; label: string }[];
     registerOptions?: RegisterOptions<T, Path<T>>;
     labelClassName?: string;
-} & SelectHTMLAttributes<HTMLSelectElement>;
+} & ComponentProps<'select'>;
 
 export const SelectField = <T extends FieldValues>({
     register,
