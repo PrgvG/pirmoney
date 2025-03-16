@@ -5,6 +5,7 @@ import {
     oneTimePaymentsController,
     repeatPaymentsController,
 } from './controller.js';
+import { momentPaymentsController } from './moment_controller.js';
 
 const router = Router();
 
@@ -14,6 +15,8 @@ router
     .get(authMiddleware, oneTimePaymentsController.getAll)
     .post(authMiddleware, oneTimePaymentsController.createOne)
     .put(authMiddleware, oneTimePaymentsController.updateOne);
+
+router.route('/moment_payments').post(momentPaymentsController.createOne);
 
 router
     .route('/one_time_payments/:id')
