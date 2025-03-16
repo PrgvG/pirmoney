@@ -1,8 +1,14 @@
 import { FC } from 'react';
-import { Payment, paymentApi } from '../../entities';
+import { paymentApi } from '../../entities';
+import { PaymentType } from '../../shared';
+import styles from './complete_payment.module.css';
 
 type Props = {
-    payment: Payment;
+    payment: {
+        _id: string;
+        payment_type: PaymentType;
+        completed_at: Date | null;
+    };
     activeDate: { month: number; year: number };
     onChange: (completed_at: Date | null) => void;
 };
@@ -28,6 +34,7 @@ export const CompletePayment: FC<Props> = ({
 
     return (
         <input
+            className={styles.checkbox}
             type="checkbox"
             checked={isPaid}
             onChange={async () => {

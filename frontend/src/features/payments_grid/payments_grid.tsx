@@ -1,17 +1,16 @@
 import { FC, ReactNode } from 'react';
-import { getCoreRowModel, useReactTable } from '@tanstack/react-table';
-import { getColumns } from './model/column_config';
 
-import { Table } from './view/table';
-import { Payment } from '../../entities';
+import { Payment, useCategories } from '../../entities';
 import styles from './payments_grid.module.css';
+import { Row } from './view/row';
+import { bankLabels } from '../../shared';
+import { paymentTypeIcons } from '../../entities/payment/types';
 
 type Props = {
     payments: (Payment & { payment_date: Date })[];
     renderDeleteButton(payment: Payment): ReactNode;
     renderCheckboxInput(payment: Payment): ReactNode;
     renderEditButton(payment: Payment): ReactNode;
-    activeDate: { month: number; year: number };
     monthSwitcher: ReactNode;
 };
 
@@ -20,40 +19,42 @@ export const PaymentsGrid: FC<Props> = ({
     renderDeleteButton,
     renderCheckboxInput,
     renderEditButton,
-    activeDate,
     monthSwitcher,
 }) => {
-    const table = useReactTable({
-        data: payments,
-        columns: getColumns({
-            renderDeleteButton,
-            renderCheckboxInput,
-            renderEditButton,
-            activeDate,
-        }),
-        getCoreRowModel: getCoreRowModel(),
-        columnResizeMode: 'onChange',
-        defaultColumn: {
-            size: 220,
-            maxSize: 400,
-        },
-    });
+    const { categoriesById } = useCategories();
 
     const hasPayments =
         payments.filter((payment) => payment._id !== 'separator').length > 0;
 
+    if (!hasPayments) {
+        return <div>Пока что тут нет платежей</div>;
+    }
+
     return (
         <div style={{ maxWidth: '100%' }}>
-            {hasPayments ? (
-                <>
-                    <div className={styles.wrapper}>{monthSwitcher}</div>
-                    <div className={styles.wrapper}>
-                        {<Table table={table} />}
-                    </div>
-                </>
-            ) : (
-                <div>Пока что тут нет платежей</div>
-            )}
+            <div className={styles.wrapper}>{monthSwitcher}</div>
+
+            <div className={styles.wrapper}>
+                {payments.map((payment) => (
+                    <Row
+                        completePaymentSlot={renderCheckboxInput(payment)}
+                        deletePaymentSlot={renderDeleteButton(payment)}
+                        editPaymentSlot={renderEditButton(payment)}
+                        key={payment._id}
+                        type={paymentTypeIcons[payment.payment_type]}
+                        label={payment.label}
+                        amount={payment.payment_amount}
+                        date={payment.payment_date}
+                        category={
+                            categoriesById[payment.category_id]
+                                ? categoriesById[payment.category_id].name
+                                : ''
+                        }
+                        bank={payment.bank ? bankLabels[payment.bank] : ''}
+                        isSeparator={payment._id === 'separator'}
+                    />
+                ))}
+            </div>
         </div>
     );
 };
