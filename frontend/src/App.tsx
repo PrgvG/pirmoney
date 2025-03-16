@@ -117,6 +117,7 @@ export const App: FC = () => {
                         renderDeleteButton={(payment) => (
                             <button
                                 type="button"
+                                className={styles.iconButton}
                                 onClick={() => {
                                     deletePaymentEmitter.emit(
                                         'dialog:show',
@@ -130,6 +131,7 @@ export const App: FC = () => {
                         renderEditButton={(payment) => (
                             <button
                                 type="button"
+                                className={styles.iconButton}
                                 onClick={() => {
                                     editPaymentEmitter.emit(
                                         'dialog:show',
