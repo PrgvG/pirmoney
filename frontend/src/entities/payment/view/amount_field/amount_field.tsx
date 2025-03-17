@@ -19,7 +19,7 @@ export const AmountField = <T extends FieldValues>({
             step={0.01}
             min={0}
             inputMode="decimal"
-            registerOptions={{ required: true }}
+            registerOptions={{ required: true, valueAsNumber: true }}
         />
     );
 };
