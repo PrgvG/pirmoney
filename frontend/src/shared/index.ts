@@ -1,4 +1,3 @@
-export { type Bank, bankLabels, bankOptions } from './bank';
 export {
     type PaymentType,
     paymentTypeLabels,

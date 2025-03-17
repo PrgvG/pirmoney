@@ -21,7 +21,6 @@ const mapBankPaymentToPayment = (payment: BankPayment): Payment => {
         payment_day: payment.payment_day,
         payment_amount: payment.payment_amount,
         payment_type: payment.payment_type,
-        bank: payment.bank,
         completed_at: payment.completed_at,
         payment_kind: payment.payment_kind,
         category_id: payment.category_id,

@@ -4,3 +4,15 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
         'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+:root {
+    --ROW_HEIGHT: 32px;
+    --ACTION_CELL: 32px;
+    --TYPE_CELL: 50px;
+    --LABEL_CELL: 124px;
+    --AMOUNT_CELL: 125px;
+    --DATE_CELL: 150px;
+    --CATEGORY_CELL: 150px;
+    --ROW_WIDTH: var(--ACTION_CELL) + var(--TYPE_CELL) + var(--LABEL_CELL) +
+        var(--AMOUNT_CELL) + var(--DATE_CELL) + var(--CATEGORY_CELL) +
+        var(--ACTION_CELL) + var(--ACTION_CELL);
+}

@@ -11,7 +11,6 @@ type Props = {
     amount: number;
     date: Date;
     category: string;
-    bank: string;
     kind: 'separator' | 'outcome' | 'income';
     onSeparatorClick?: () => void;
     separatorButtonLabel?: string;
@@ -26,7 +25,6 @@ export const Row: FC<Props> = ({
     amount,
     date,
     category,
-    bank,
     kind,
     onSeparatorClick,
     separatorButtonLabel,
@@ -75,7 +73,6 @@ export const Row: FC<Props> = ({
                 {labelDate}
             </div>
             <div className={styles.cell}>{category}</div>
-            <div className={styles.cell}>{bank}</div>
             {editPaymentSlot}
             {deletePaymentSlot}
         </div>

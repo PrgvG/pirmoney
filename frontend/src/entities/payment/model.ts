@@ -1,5 +1,4 @@
 import {
-    Bank,
     BankPaymentType,
     DayOfMonth,
     OneTimePaymentType,
@@ -34,12 +33,10 @@ export type RepeatPayment = CommonPaymentDto & {
 export type BankPayment = CommonPaymentDto & {
     payment_day: DayOfMonth;
     payment_type: BankPaymentType;
-    bank: Bank;
 };
 
 export type Payment = CommonPaymentDto & {
     payment_day: DayOfMonth;
     payment_type: PaymentType;
     payment_date?: Date;
-    bank?: Bank;
 };

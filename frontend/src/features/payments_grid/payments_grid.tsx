@@ -3,7 +3,6 @@ import { FC, ReactNode, useState } from 'react';
 import { Payment, useCategories } from '../../entities';
 import styles from './payments_grid.module.css';
 import { Row } from './view/row';
-import { bankLabels } from '../../shared';
 import { paymentTypeIcons } from '../../entities/payment/types';
 import { Header } from './view/header';
 
@@ -86,9 +85,6 @@ export const PaymentsGrid: FC<Props> = ({
                                               .name
                                         : ''
                                 }
-                                bank={
-                                    payment.bank ? bankLabels[payment.bank] : ''
-                                }
                                 kind={kind}
                             />
                         );
@@ -117,7 +113,6 @@ export const PaymentsGrid: FC<Props> = ({
                                     ? categoriesById[payment.category_id].name
                                     : ''
                             }
-                            bank={payment.bank ? bankLabels[payment.bank] : ''}
                             kind={kind}
                             onSeparatorClick={
                                 showPrevPayments

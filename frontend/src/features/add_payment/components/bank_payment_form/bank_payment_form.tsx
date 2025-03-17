@@ -3,7 +3,6 @@ import styles from './bank_payment_form.module.css';
 
 import { useForm } from 'react-hook-form';
 import {
-    BankField,
     BankPayment,
     CategoryField,
     LabelField,
@@ -50,8 +49,6 @@ export const BankPaymentForm: FC<Props> = ({
             <AmountField register={register} name="payment_amount" />
 
             <DayField register={register} name="payment_day" />
-
-            <BankField register={register} name="bank" />
 
             <CategoryField register={register} name="category_id" />
 

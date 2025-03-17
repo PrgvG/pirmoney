@@ -24,7 +24,6 @@ function getSeparator(): Payment {
     return {
         _id: 'separator',
         label: 'Сегодня',
-        bank: 'sberbank',
         payment_kind: 'income',
         payment_day: isDayOfMonth(date) ? date : 1,
         payment_amount: 0,
