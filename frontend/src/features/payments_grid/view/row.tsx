@@ -41,13 +41,6 @@ export const Row: FC<Props> = ({
                     <TextButton onClick={onSeparatorClick}>
                         {separatorButtonLabel}
                     </TextButton>
-                    // <button
-                    //     type="button"
-                    //     className={styles.separatorButton}
-                    //     onClick={onSeparatorClick}
-                    // >
-                    //     {separatorButtonLabel}
-                    // </button>
                 )}
                 {label} — {labelDate}
             </div>

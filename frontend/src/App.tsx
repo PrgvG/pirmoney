@@ -16,6 +16,7 @@ import {
 import {
     enrichByPaymentDate,
     filterByActiveDate,
+    getPaymentsByCategories,
     getPaymentsByMonth,
     getPaymentsSummary,
     mapPaymentDtoToPayment,
@@ -82,6 +83,10 @@ export const App: FC = () => {
                     <Summary
                         closestPayment={closestPayment}
                         paymentsAmountLeft={paymentsAmountLeft}
+                        paymentsByCategories={getPaymentsByCategories(
+                            payments,
+                            activeDate,
+                        )}
                     />
 
                     <PaymentsGrid

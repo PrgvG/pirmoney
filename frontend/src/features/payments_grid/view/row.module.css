@@ -30,24 +30,6 @@
     box-sizing: border-box;
 }
 
-.separatorButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 16px;
-    height: 32px;
-    border-radius: 4px;
-    cursor: pointer;
-    color: #007bff;
-    border: none;
-    line-height: 20px;
-    font-size: 16px;
-}
-
-.separatorButton:hover {
-    color: #015dc0;
-}
-
 .rightAligned {
     text-align: right;
 }

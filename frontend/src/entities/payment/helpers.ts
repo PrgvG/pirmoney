@@ -177,7 +177,7 @@ export function sortPaymentsByPaymentDay(a: Payment, b: Payment): 1 | -1 {
     return a.payment_day > b.payment_day ? 1 : -1;
 }
 
-export const getFiltersByCategories = (
+export const getPaymentsByCategories = (
     payments: Payment[],
     activeDate: {
         month: number;
