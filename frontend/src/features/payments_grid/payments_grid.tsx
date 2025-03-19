@@ -1,6 +1,6 @@
 import { FC, ReactNode, useState } from 'react';
 
-import { Payment, useCategories } from '../../entities';
+import { Category, Payment, useCategories } from '../../entities';
 import styles from './payments_grid.module.css';
 import { Row } from './view/row';
 import { paymentTypeIcons } from '../../entities/payment/types';
@@ -14,6 +14,16 @@ type Props = {
     monthSwitcher: ReactNode;
     isCurrentMonth: boolean;
 };
+
+function getCategoryNameById(
+    categoryId: string | null,
+    categoryById: Record<string, Category>,
+) {
+    if (!categoryId) {
+        return 'N/A';
+    }
+    return categoryById[categoryId].name;
+}
 
 export const PaymentsGrid: FC<Props> = ({
     payments,
@@ -79,12 +89,10 @@ export const PaymentsGrid: FC<Props> = ({
                                 label={payment.label}
                                 amount={payment.payment_amount}
                                 date={payment.payment_date}
-                                category={
-                                    categoriesById[payment.category_id]
-                                        ? categoriesById[payment.category_id]
-                                              .name
-                                        : ''
-                                }
+                                category={getCategoryNameById(
+                                    payment.category_id,
+                                    categoriesById,
+                                )}
                                 kind={kind}
                             />
                         );
@@ -108,11 +116,10 @@ export const PaymentsGrid: FC<Props> = ({
                             label={payment.label}
                             amount={payment.payment_amount}
                             date={payment.payment_date}
-                            category={
-                                categoriesById[payment.category_id]
-                                    ? categoriesById[payment.category_id].name
-                                    : ''
-                            }
+                            category={getCategoryNameById(
+                                payment.category_id,
+                                categoriesById,
+                            )}
                             kind={kind}
                             onSeparatorClick={
                                 showPrevPayments
