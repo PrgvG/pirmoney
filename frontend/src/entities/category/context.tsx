@@ -24,8 +24,8 @@ export const CategoriesProvider: FC<PropsWithChildren> = ({ children }) => {
         categoryId: string | null,
         categoryById: Record<string, Category>,
     ) {
-        if (!categoryId) {
-            return '—';
+        if (!categoryId || categoryId === 'N/A') {
+            return 'N/A';
         }
         return categoryById[categoryId].name;
     }
