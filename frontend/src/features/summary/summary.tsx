@@ -15,7 +15,7 @@ export const Summary: FC<Props> = ({
     paymentsByCategories,
 }) => {
     const [showCategories, setShowCategories] = useState(false);
-    const { categoriesById } = useCategories();
+    const { getCategoryNameById } = useCategories();
     const fullAmount = Object.values(paymentsByCategories).reduce(
         (acc, amount) => acc + amount,
         0,
@@ -58,7 +58,7 @@ export const Summary: FC<Props> = ({
                         return (
                             <Fragment key={categoryId}>
                                 <span className={styles.text}>
-                                    {categoriesById[categoryId].name}
+                                    {getCategoryNameById(categoryId)}
                                 </span>
                                 <span className={styles.money}>
                                     {formattedAmount}

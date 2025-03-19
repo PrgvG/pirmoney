@@ -14,10 +14,21 @@ const CategoriesContext = createContext<{
     categoriesById: Record<string, Category>;
     setCategories: (categories: Category[]) => void;
     hasCategories: boolean;
+    getCategoryNameById: (categoryId: string | null) => string;
 } | null>(null);
 
 export const CategoriesProvider: FC<PropsWithChildren> = ({ children }) => {
     const [categories, setCategories] = useState<Category[]>([]);
+
+    function getCategoryNameById(
+        categoryId: string | null,
+        categoryById: Record<string, Category>,
+    ) {
+        if (!categoryId) {
+            return '—';
+        }
+        return categoryById[categoryId].name;
+    }
 
     useEffect(() => {
         categoryApi.getCategories().then((categories) => {
@@ -26,16 +37,20 @@ export const CategoriesProvider: FC<PropsWithChildren> = ({ children }) => {
         });
     }, []);
 
+    const categoriesById = categories.reduce(
+        (acc, category) => ({ ...acc, [category._id]: category }),
+        {},
+    );
+
     return (
         <CategoriesContext.Provider
             value={{
                 categories,
                 setCategories,
+                getCategoryNameById: (categoryId) =>
+                    getCategoryNameById(categoryId, categoriesById),
                 hasCategories: categories.length > 0,
-                categoriesById: categories.reduce(
-                    (acc, category) => ({ ...acc, [category._id]: category }),
-                    {},
-                ),
+                categoriesById,
             }}
         >
             {children}

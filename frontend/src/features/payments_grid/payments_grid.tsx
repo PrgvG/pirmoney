@@ -1,6 +1,6 @@
 import { FC, ReactNode, useState } from 'react';
 
-import { Category, Payment, useCategories } from '../../entities';
+import { Payment, useCategories } from '../../entities';
 import styles from './payments_grid.module.css';
 import { Row } from './view/row';
 import { paymentTypeIcons } from '../../entities/payment/types';
@@ -15,16 +15,6 @@ type Props = {
     isCurrentMonth: boolean;
 };
 
-function getCategoryNameById(
-    categoryId: string | null,
-    categoryById: Record<string, Category>,
-) {
-    if (!categoryId) {
-        return 'N/A';
-    }
-    return categoryById[categoryId].name;
-}
-
 export const PaymentsGrid: FC<Props> = ({
     payments,
     renderDeleteButton,
@@ -33,7 +23,7 @@ export const PaymentsGrid: FC<Props> = ({
     monthSwitcher,
     isCurrentMonth,
 }) => {
-    const { categoriesById } = useCategories();
+    const { getCategoryNameById } = useCategories();
     const [showPrev, setShowPrev] = useState(false);
 
     const hasPayments =
@@ -91,7 +81,6 @@ export const PaymentsGrid: FC<Props> = ({
                                 date={payment.payment_date}
                                 category={getCategoryNameById(
                                     payment.category_id,
-                                    categoriesById,
                                 )}
                                 kind={kind}
                             />
@@ -116,10 +105,7 @@ export const PaymentsGrid: FC<Props> = ({
                             label={payment.label}
                             amount={payment.payment_amount}
                             date={payment.payment_date}
-                            category={getCategoryNameById(
-                                payment.category_id,
-                                categoriesById,
-                            )}
+                            category={getCategoryNameById(payment.category_id)}
                             kind={kind}
                             onSeparatorClick={
                                 showPrevPayments
