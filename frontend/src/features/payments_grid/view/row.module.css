@@ -39,6 +39,13 @@
     border-radius: 4px;
     cursor: pointer;
     color: #007bff;
+    border: none;
+    line-height: 20px;
+    font-size: 16px;
+}
+
+.separatorButton:hover {
+    color: #015dc0;
 }
 
 .rightAligned {

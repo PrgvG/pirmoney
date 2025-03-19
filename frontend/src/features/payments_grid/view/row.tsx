@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
 import styles from './row.module.css';
 import cx from 'classnames';
+import { TextButton } from '../../../components';
 
 type Props = {
     completePaymentSlot?: ReactNode;
@@ -37,12 +38,16 @@ export const Row: FC<Props> = ({
         return (
             <div className={styles.separator}>
                 {onSeparatorClick && (
-                    <div
-                        className={styles.separatorButton}
-                        onClick={onSeparatorClick}
-                    >
+                    <TextButton onClick={onSeparatorClick}>
                         {separatorButtonLabel}
-                    </div>
+                    </TextButton>
+                    // <button
+                    //     type="button"
+                    //     className={styles.separatorButton}
+                    //     onClick={onSeparatorClick}
+                    // >
+                    //     {separatorButtonLabel}
+                    // </button>
                 )}
                 {label} — {labelDate}
             </div>

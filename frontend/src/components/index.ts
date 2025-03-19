@@ -7,3 +7,4 @@ export { DialogTitle } from './dialog_title/dialog_title';
 
 export { Button } from './button/button';
 export { Input } from './input/input';
+export { TextButton } from './text_button/text_button';
