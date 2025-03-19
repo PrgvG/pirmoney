@@ -187,10 +187,18 @@ export const getPaymentsByCategories = (
     return filterByActiveDate(payments, activeDate)
         .filter((payment) => payment.payment_kind === 'outcome')
         .reduce<Record<string, number>>((acc, payment) => {
-            if (payment.category_id in acc) {
-                acc[payment.category_id] += Number(payment.payment_amount);
+            if (!payment.category_id) {
+                if ('N/A' in acc) {
+                    acc['N/A'] += Number(payment.payment_amount);
+                } else {
+                    acc['N/A'] = Number(payment.payment_amount);
+                }
             } else {
-                acc[payment.category_id] = Number(payment.payment_amount);
+                if (payment.category_id in acc) {
+                    acc[payment.category_id] += Number(payment.payment_amount);
+                } else {
+                    acc[payment.category_id] = Number(payment.payment_amount);
+                }
             }
 
             return acc;
