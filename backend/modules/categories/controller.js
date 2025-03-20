@@ -13,7 +13,6 @@ class CategoryController {
         try {
             const categories = await this.Model.find({
                 userId,
-                status: 'active',
             });
             res.status(200).send(categories);
         } catch (err) {

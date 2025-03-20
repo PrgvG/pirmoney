@@ -18,38 +18,107 @@ const CategoriesContext = createContext<{
 } | null>(null);
 
 export const CategoriesProvider: FC<PropsWithChildren> = ({ children }) => {
-    const [categories, setCategories] = useState<Category[]>([]);
+    const [categoriesState, setCategoriesState] = useState<{
+        data: Category[] | null;
+        archive: Category[] | null;
+        loading: Boolean;
+        error: Error | null;
+    }>({
+        data: null,
+        archive: null,
+        loading: true,
+        error: null,
+    });
 
     function getCategoryNameById(
         categoryId: string | null,
         categoryById: Record<string, Category>,
     ) {
-        if (!categoryId || categoryId === 'N/A') {
-            return 'N/A';
+        if (!categoryId || categoryId === '—') {
+            return '—';
         }
-        return categoryById[categoryId].name;
+
+        if (!categoryById[categoryId]) {
+            return '—';
+        }
+
+        return categoryById[categoryId]?.name;
     }
 
     useEffect(() => {
-        categoryApi.getCategories().then((categories) => {
-            categories.sort((a, b) => a.name.localeCompare(b.name));
-            return setCategories(categories);
-        });
+        categoryApi
+            .getCategories()
+            .then((categories) => {
+                categories.sort((a, b) => a.name.localeCompare(b.name));
+
+                const { data, archive } = categories.reduce<{
+                    data: Category[];
+                    archive: Category[];
+                }>(
+                    (acc, category) => {
+                        if (category.status === 'active') {
+                            acc.data.push(category);
+                        }
+                        if (category.status === 'deleted') {
+                            acc.archive.push({
+                                _id: category._id,
+                                name: '[а] ' + category.name,
+                                status: category.status,
+                            });
+                        }
+
+                        return acc;
+                    },
+                    { data: [], archive: [] },
+                );
+
+                setCategoriesState({
+                    data,
+                    archive,
+                    loading: false,
+                    error: null,
+                });
+            })
+            .catch((error) => {
+                setCategoriesState({
+                    data: null,
+                    archive: null,
+                    loading: false,
+                    error,
+                });
+            });
     }, []);
 
-    const categoriesById = categories.reduce(
-        (acc, category) => ({ ...acc, [category._id]: category }),
-        {},
-    );
+    if (categoriesState.error) {
+        return <div>Ошибка: {categoriesState.error.message}</div>;
+    }
+
+    if (categoriesState.loading) {
+        return <div>Загружаю список категорий</div>;
+    }
+
+    if (!categoriesState.data || !categoriesState.archive) {
+        return <div>Не удалось загрузить категории</div>;
+    }
+
+    const categoriesById = categoriesState.data
+        .concat(categoriesState.archive)
+        .reduce((acc, category) => ({ ...acc, [category._id]: category }), {});
+
+    console.log(categoriesById);
 
     return (
         <CategoriesContext.Provider
             value={{
-                categories,
-                setCategories,
+                categories: categoriesState.data,
+                setCategories: (categories) =>
+                    setCategoriesState((prev) => ({
+                        ...prev,
+                        data: categories,
+                    })),
                 getCategoryNameById: (categoryId) =>
                     getCategoryNameById(categoryId, categoriesById),
-                hasCategories: categories.length > 0,
+                hasCategories: categoriesState.data.length > 0,
                 categoriesById,
             }}
         >
