@@ -10,7 +10,10 @@ export const CategoryButton: FC = () => {
 
     const handleSubmit = async (value: string) => {
         await categoryApi.addCategory(value).then(({ _id }) => {
-            setCategories([...categories, { name: value, _id: _id }]);
+            setCategories([
+                ...categories,
+                { name: value, _id: _id, status: 'active' },
+            ]);
             setInputValue('');
         });
     };
