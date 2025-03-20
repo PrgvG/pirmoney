@@ -6,9 +6,10 @@ export const CommonPaymentSchema = new Schema({
     payment_amount: { type: Number, required: true },
     payment_type: { type: String, required: true },
     payment_kind: { type: String, enum: ['income', 'outcome'], required: true },
-    completed_at: { type: Date, default: null },
+    completed_at: { type: String, default: null },
     status: { type: String, enum: ['active', 'deleted'], default: 'active' },
-    deleted_at: { type: Date, default: null },
+    created_at: { type: String, default: new Date().toISOString() },
+    deleted_at: { type: String, default: null },
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User',

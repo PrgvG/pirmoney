@@ -14,12 +14,12 @@ const UserSchema = new Schema({
         minlength: 6, // Минимальная длина пароля
     },
     createdAt: {
-        type: Date,
-        default: Date.now, // Дата создания пользователя
+        type: String,
+        default: new Date().toISOString, // Дата создания пользователя
     },
     updatedAt: {
-        type: Date,
-        default: Date.now, // Дата последнего обновления
+        type: String,
+        default: new Date().toISOString, // Дата последнего обновления
     },
 });
 
