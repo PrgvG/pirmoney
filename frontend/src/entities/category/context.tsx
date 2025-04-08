@@ -105,8 +105,6 @@ export const CategoriesProvider: FC<PropsWithChildren> = ({ children }) => {
         .concat(categoriesState.archive)
         .reduce((acc, category) => ({ ...acc, [category._id]: category }), {});
 
-    console.log(categoriesById);
-
     return (
         <CategoriesContext.Provider
             value={{

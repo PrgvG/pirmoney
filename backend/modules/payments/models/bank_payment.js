@@ -5,6 +5,7 @@ const BankPaymentSchema = new Schema();
 
 BankPaymentSchema.add(CommonPaymentSchema).add({
     payment_day: { type: Number, required: true },
+    last_payment_at: { type: String, default: null },
     payment_type: { type: String, required: true, enum: ['bank_payment'] },
 });
 

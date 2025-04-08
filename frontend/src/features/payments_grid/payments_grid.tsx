@@ -15,6 +15,8 @@ type Props = {
     isCurrentMonth: boolean;
 };
 
+const LOCAL_STORAGE_KEY = 'showPrevPayments';
+
 export const PaymentsGrid: FC<Props> = ({
     payments,
     renderDeleteButton,
@@ -24,7 +26,9 @@ export const PaymentsGrid: FC<Props> = ({
     isCurrentMonth,
 }) => {
     const { getCategoryNameById } = useCategories();
-    const [showPrev, setShowPrev] = useState(false);
+    const [showPrev, setShowPrev] = useState(
+        localStorage.getItem(LOCAL_STORAGE_KEY) === 'true' || false,
+    );
 
     const hasPayments =
         payments.filter((payment) => payment._id !== 'separator').length > 0;
@@ -109,7 +113,15 @@ export const PaymentsGrid: FC<Props> = ({
                             kind={kind}
                             onSeparatorClick={
                                 showPrevPayments
-                                    ? () => setShowPrev((prev) => !prev)
+                                    ? () => {
+                                          const newValue = !showPrev;
+                                          localStorage.setItem(
+                                              LOCAL_STORAGE_KEY,
+                                              `${newValue}`,
+                                          );
+
+                                          return setShowPrev(newValue);
+                                      }
                                     : undefined
                             }
                             separatorButtonLabel={

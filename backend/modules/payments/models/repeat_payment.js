@@ -5,6 +5,7 @@ const RepeatPaymentSchema = new Schema();
 
 RepeatPaymentSchema.add(CommonPaymentSchema).add({
     payment_day: { type: Number, required: true },
+    last_payment_at: { type: String, default: null },
     payment_type: { type: String, required: true, enum: ['repeat_payment'] },
 });
 
