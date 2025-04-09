@@ -87,6 +87,7 @@ export const AddMomentPaymentButton: FC<Props> = ({ onAdd }) => {
                         </section>
                         <div className={styles.controls}>
                             <Button
+                                className={styles.test}
                                 type="submit"
                                 disabled={formState.isSubmitting}
                             >

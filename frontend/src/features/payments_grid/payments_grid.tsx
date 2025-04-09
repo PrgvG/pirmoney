@@ -46,8 +46,13 @@ export const PaymentsGrid: FC<Props> = ({
                 return { prev: [], next: [...acc.next, payment] };
             }
 
+            const today = new Date();
+
+            today.setHours(0, 0, 0, 0);
+
             const isPrevPayment =
-                new Date(payment.payment_date).getTime() < new Date().getTime();
+                new Date(payment.payment_date).getTime() <= today.getTime() &&
+                payment._id !== 'separator';
             if (isPrevPayment) {
                 return { prev: [...acc.prev, payment], next: acc.next };
             }
@@ -66,10 +71,10 @@ export const PaymentsGrid: FC<Props> = ({
                 <Header />
                 {showPrev &&
                     prev.map((payment) => {
-                        const kind =
-                            payment._id === 'separator'
-                                ? 'separator'
-                                : payment.payment_kind;
+                        // const kind =
+                        //     payment._id === 'separator'
+                        //         ? 'separator'
+                        //         : payment.payment_kind;
 
                         return (
                             <Row
@@ -87,7 +92,7 @@ export const PaymentsGrid: FC<Props> = ({
                                 category={getCategoryNameById(
                                     payment.category_id,
                                 )}
-                                kind={kind}
+                                kind={payment.payment_kind}
                             />
                         );
                     })}

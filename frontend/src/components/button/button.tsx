@@ -1,12 +1,20 @@
 import { ComponentProps, FC, forwardRef } from 'react';
 import styles from './button.module.css';
 
-type Props = Omit<ComponentProps<'button'>, 'className'>;
+type Props = ComponentProps<'button'>;
 
-export const Button: FC<Props> = forwardRef(({ children, ...rest }, ref) => {
-    return (
-        <button ref={ref} {...rest} className={styles.button}>
-            {children}
-        </button>
-    );
-});
+export const Button: FC<Props> = forwardRef(
+    ({ children, className, ...rest }, ref) => {
+        return (
+            <button
+                ref={ref}
+                {...rest}
+                className={
+                    className ? `${className} ${styles.button}` : styles.button
+                }
+            >
+                {children}
+            </button>
+        );
+    },
+);
