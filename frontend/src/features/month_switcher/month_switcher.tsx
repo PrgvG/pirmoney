@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import styles from './month_switcher.module.css';
 import { Amount } from './amount';
 
@@ -13,6 +13,7 @@ export const MonthSwitcher: FC<Props> = ({
     activeDate,
     paymentsByMonth,
 }) => {
+    const ref = useRef<HTMLLabelElement>(null);
     const months = Object.keys(paymentsByMonth);
 
     const date = new Date();
@@ -22,6 +23,10 @@ export const MonthSwitcher: FC<Props> = ({
         activeDate.year > currentYear
             ? (activeDate.year - currentYear) * 12 + activeDate.month
             : activeDate.month;
+
+    useEffect(() => {
+        ref.current?.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+    }, []);
 
     return (
         <section className={styles.wrapper}>
@@ -38,7 +43,11 @@ export const MonthSwitcher: FC<Props> = ({
                         },
                     );
                     return (
-                        <label key={month} className={styles.button}>
+                        <label
+                            ref={isCurrentMonthActive ? ref : null}
+                            key={month}
+                            className={styles.button}
+                        >
                             <input
                                 name="month"
                                 type="radio"
