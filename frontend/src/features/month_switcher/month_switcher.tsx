@@ -12,12 +12,14 @@ export const MonthSwitcher: FC<Props> = ({
     activeDate,
     paymentsByMonth,
 }) => {
+    const months = Object.keys(paymentsByMonth);
+
+    const date = new Date();
+    const currentYear = date.getFullYear();
+
     return (
         <div className={styles.container}>
-            {Object.keys(paymentsByMonth).map((month) => {
-                const date = new Date();
-                const currentYear = date.getFullYear();
-
+            {months.map((month) => {
                 const parsedMonth = Number(month);
                 const activeMonthCount =
                     activeDate.year > currentYear
@@ -25,13 +27,22 @@ export const MonthSwitcher: FC<Props> = ({
                           activeDate.month
                         : activeDate.month;
 
+                const isCurrentMonthActive = parsedMonth === activeMonthCount;
+
+                const localeDate = new Date(0, parsedMonth).toLocaleString(
+                    'ru',
+                    {
+                        month: 'long',
+                    },
+                );
+
                 return (
                     <label key={month} className={styles.button}>
                         <div>
                             <input
                                 name="month"
                                 type="radio"
-                                checked={parsedMonth === activeMonthCount}
+                                checked={isCurrentMonthActive}
                                 onChange={() => {
                                     if (parsedMonth > 12) {
                                         const years = Math.floor(
@@ -59,9 +70,7 @@ export const MonthSwitcher: FC<Props> = ({
                                     });
                                 }}
                             />
-                            {new Date(0, parsedMonth).toLocaleString('ru', {
-                                month: 'long',
-                            })}
+                            {localeDate}
                         </div>
                         <div className={styles.amounts}>
                             <span className={styles.outcome}>
