@@ -1,15 +1,14 @@
 .wrapper {
-    overflow-x: auto;
-    overflow-y: hidden;
-    width: 100%;
-    -webkit-overflow-scrolling: touch;
-
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
 .container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
     display: flex;
     gap: 16px;
 }
