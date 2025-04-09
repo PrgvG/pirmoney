@@ -10,7 +10,7 @@ type Props = {
     type: string;
     label: string;
     amount: number;
-    date: Date;
+    date: string;
     category: string;
     kind: 'separator' | 'outcome' | 'income';
     onSeparatorClick?: () => void;
@@ -30,7 +30,7 @@ export const Row: FC<Props> = ({
     onSeparatorClick,
     separatorButtonLabel,
 }) => {
-    const labelDate = date.toLocaleDateString('ru', {
+    const labelDate = new Date(date).toLocaleDateString('ru', {
         month: 'long',
         day: 'numeric',
     });

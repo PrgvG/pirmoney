@@ -1,8 +1,13 @@
 .form {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
     width: 300px;
+}
+
+.wrapper {
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .controls {
@@ -38,5 +43,9 @@
         width: calc(100vw - 40px);
         height: calc(100vh - 40px);
         box-sizing: border-box;
+    }
+
+    .wrapper {
+        width: 300px;
     }
 }

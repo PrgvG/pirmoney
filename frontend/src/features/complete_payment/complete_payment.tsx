@@ -7,10 +7,10 @@ type Props = {
     payment: {
         _id: string;
         payment_type: PaymentType;
-        completed_at: Date | null;
+        completed_at: string | null;
     };
     activeDate: { month: number; year: number };
-    onChange: (completed_at: Date | null) => void;
+    onChange: (completed_at: string | null) => void;
 };
 
 export const CompletePayment: FC<Props> = ({
@@ -18,7 +18,7 @@ export const CompletePayment: FC<Props> = ({
     payment,
     onChange,
 }) => {
-    function getIsPaid(paymentDate: Date | null): boolean {
+    function getIsPaid(paymentDate: string | null): boolean {
         if (!paymentDate) {
             return false;
         }
@@ -42,7 +42,7 @@ export const CompletePayment: FC<Props> = ({
                 date.setMonth(activeDate.month);
                 date.setFullYear(activeDate.year);
 
-                const completed_at = isPaid ? null : date;
+                const completed_at = isPaid ? null : date.toISOString();
 
                 onChange(completed_at);
 

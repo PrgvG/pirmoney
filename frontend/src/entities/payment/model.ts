@@ -12,7 +12,7 @@ type CommonPaymentDto = {
     payment_amount: number;
     category_id: string | null;
     payment_kind: 'income' | 'outcome';
-    completed_at: Date | null;
+    completed_at: string | null;
 };
 
 export type PatchPayment = Pick<
@@ -21,7 +21,7 @@ export type PatchPayment = Pick<
 >;
 
 export type OneTimePayment = CommonPaymentDto & {
-    payment_date: Date;
+    payment_date: string;
     payment_type: OneTimePaymentType;
 };
 
@@ -38,5 +38,5 @@ export type BankPayment = CommonPaymentDto & {
 export type Payment = CommonPaymentDto & {
     payment_day: DayOfMonth;
     payment_type: PaymentType;
-    payment_date?: Date;
+    payment_date?: string;
 };

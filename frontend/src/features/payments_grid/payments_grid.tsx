@@ -7,7 +7,7 @@ import { paymentTypeIcons } from '../../entities/payment/types';
 import { Header } from './view/header';
 
 type Props = {
-    payments: (Payment & { payment_date: Date })[];
+    payments: (Payment & { payment_date: string })[];
     renderDeleteButton(payment: Payment): ReactNode;
     renderCheckboxInput(payment: Payment): ReactNode;
     renderEditButton(payment: Payment): ReactNode;
@@ -38,15 +38,16 @@ export const PaymentsGrid: FC<Props> = ({
     }
 
     const { prev, next } = payments.reduce<{
-        prev: (Payment & { payment_date: Date })[];
-        next: (Payment & { payment_date: Date })[];
+        prev: (Payment & { payment_date: string })[];
+        next: (Payment & { payment_date: string })[];
     }>(
         (acc, payment) => {
             if (!isCurrentMonth) {
                 return { prev: [], next: [...acc.next, payment] };
             }
-            const today = new Date().getDate();
-            const isPrevPayment = payment.payment_date.getDate() < today;
+
+            const isPrevPayment =
+                new Date(payment.payment_date).getTime() < new Date().getTime();
             if (isPrevPayment) {
                 return { prev: [...acc.prev, payment], next: acc.next };
             }

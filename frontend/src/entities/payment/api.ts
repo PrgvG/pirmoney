@@ -40,7 +40,7 @@ async function completePayment({
 }: {
     paymentId: string;
     paymentType: PaymentType;
-    completed_at: Date | null;
+    completed_at: string | null;
 }) {
     try {
         return await httpService.patch(

@@ -53,30 +53,8 @@ export const App: FC = () => {
     return (
         <PageLayout>
             <header className={styles.header}>
-                <div className={styles.buttons}>
-                    <AddPaymentButton
-                        onAdd={async (payment) => {
-                            setPayments((prev) =>
-                                prev
-                                    .concat(mapPaymentDtoToPayment(payment))
-                                    .sort(sortPaymentsByPaymentDay),
-                            );
-                        }}
-                    />
-                    <AddMomentPaymentButton
-                        onAdd={async (payment) => {
-                            setPayments((prev) =>
-                                prev
-                                    .concat(mapPaymentDtoToPayment(payment))
-                                    .sort(sortPaymentsByPaymentDay),
-                            );
-                        }}
-                    />
-                </div>
-                <div className={styles.buttons}>
-                    <CategoryButton />
-                    <UserButton onLogout={() => setPayments([])} />
-                </div>
+                <CategoryButton />
+                <UserButton onLogout={() => setPayments([])} />
             </header>
             {payments.length ? (
                 <>
@@ -153,6 +131,26 @@ export const App: FC = () => {
             ) : (
                 'Получаю данные...'
             )}
+            <footer className={styles.footer}>
+                <AddPaymentButton
+                    onAdd={async (payment) => {
+                        setPayments((prev) =>
+                            prev
+                                .concat(mapPaymentDtoToPayment(payment))
+                                .sort(sortPaymentsByPaymentDay),
+                        );
+                    }}
+                />
+                <AddMomentPaymentButton
+                    onAdd={async (payment) => {
+                        setPayments((prev) =>
+                            prev
+                                .concat(mapPaymentDtoToPayment(payment))
+                                .sort(sortPaymentsByPaymentDay),
+                        );
+                    }}
+                />
+            </footer>
             <EditPayment
                 onSave={(patchPayment) => {
                     setPayments((prev) =>

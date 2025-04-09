@@ -4,6 +4,7 @@ export function filterByActiveDate(
     payments: Payment[],
     activeDate: { month: number; year: number },
 ): Payment[] {
+    //TODO добавить фильтрацию по дате начала и дате конца у повторяющихся платежей
     return payments.filter((payment) => {
         if ('payment_date' in payment && payment.payment_date) {
             const paymentDate = new Date(payment.payment_date);
@@ -31,12 +32,12 @@ export function filterByActiveDate(
 export function enrichByPaymentDate(
     payments: Payment[],
     activeDate: { month: number; year: number },
-): (Payment & { payment_date: Date })[] {
+): (Payment & { payment_date: string })[] {
     return payments.map((payment) => {
         if ('payment_date' in payment && payment.payment_date) {
             return {
                 ...payment,
-                payment_date: new Date(payment.payment_date),
+                payment_date: payment.payment_date,
             };
         }
 
@@ -55,7 +56,7 @@ export function enrichByPaymentDate(
 
             return {
                 ...payment,
-                payment_date: date,
+                payment_date: date.toISOString(),
             };
         }
 
@@ -65,7 +66,7 @@ export function enrichByPaymentDate(
 
         return {
             ...payment,
-            payment_date: date,
+            payment_date: date.toISOString(),
         };
     });
 }

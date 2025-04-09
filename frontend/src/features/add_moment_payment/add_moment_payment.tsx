@@ -27,8 +27,8 @@ export const AddMomentPaymentButton: FC<Props> = ({ onAdd }) => {
             defaultValues: {
                 payment_kind: 'outcome',
                 payment_type: 'one_time_payment',
-                payment_date: new Date(),
-                completed_at: new Date(),
+                payment_date: new Date().toISOString(),
+                completed_at: new Date().toISOString(),
             },
         });
 
@@ -68,27 +68,37 @@ export const AddMomentPaymentButton: FC<Props> = ({ onAdd }) => {
                         reset();
                     }}
                 >
-                    <DialogTitle title="Внесение платежа" />
-
-                    <section className={styles.fields}>
-                        <LabelField register={register} name="label" />
-
-                        <AmountField
-                            register={register}
-                            name="payment_amount"
-                        />
-
-                        <CategoryField register={register} name="category_id" />
-
-                        <KindField register={register} name="payment_kind" />
-                    </section>
-                    <div className={styles.controls}>
-                        <Button type="submit" disabled={formState.isSubmitting}>
-                            Добавить
-                        </Button>
-                        <Button type="reset" disabled={formState.isSubmitting}>
-                            Закрыть
-                        </Button>
+                    <div className={styles.wrapper}>
+                        <DialogTitle title="Внесение платежа" />
+                        <section className={styles.fields}>
+                            <LabelField register={register} name="label" />
+                            <AmountField
+                                register={register}
+                                name="payment_amount"
+                            />
+                            <CategoryField
+                                register={register}
+                                name="category_id"
+                            />
+                            <KindField
+                                register={register}
+                                name="payment_kind"
+                            />
+                        </section>
+                        <div className={styles.controls}>
+                            <Button
+                                type="submit"
+                                disabled={formState.isSubmitting}
+                            >
+                                Добавить
+                            </Button>
+                            <Button
+                                type="reset"
+                                disabled={formState.isSubmitting}
+                            >
+                                Закрыть
+                            </Button>
+                        </div>
                     </div>
                 </form>
             </dialog>
