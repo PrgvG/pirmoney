@@ -1,3 +1,14 @@
+.wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
 .container {
     display: flex;
     gap: 16px;
@@ -23,8 +34,12 @@
 
 .amounts {
     display: flex;
-    flex-direction: column;
-    align-items: end;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.date {
+    width: 75px;
 }
 
 .income {

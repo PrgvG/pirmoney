@@ -65,17 +65,12 @@ export const PaymentsGrid: FC<Props> = ({
 
     return (
         <div style={{ maxWidth: '100%' }}>
-            <div className={styles.wrapper}>{monthSwitcher}</div>
+            {monthSwitcher}
 
             <div className={styles.wrapper}>
                 <Header />
                 {showPrev &&
                     prev.map((payment) => {
-                        // const kind =
-                        //     payment._id === 'separator'
-                        //         ? 'separator'
-                        //         : payment.payment_kind;
-
                         return (
                             <Row
                                 completePaymentSlot={

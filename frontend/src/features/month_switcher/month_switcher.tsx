@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import styles from './month_switcher.module.css';
+import { Amount } from './amount';
 
 type Props = {
     onDateChange: (props: { month: number; year: number }) => void;
@@ -17,28 +18,27 @@ export const MonthSwitcher: FC<Props> = ({
     const date = new Date();
     const currentYear = date.getFullYear();
 
+    const activeMonthCount =
+        activeDate.year > currentYear
+            ? (activeDate.year - currentYear) * 12 + activeDate.month
+            : activeDate.month;
+
     return (
-        <div className={styles.container}>
-            {months.map((month) => {
-                const parsedMonth = Number(month);
-                const activeMonthCount =
-                    activeDate.year > currentYear
-                        ? (activeDate.year - currentYear) * 12 +
-                          activeDate.month
-                        : activeDate.month;
+        <section className={styles.wrapper}>
+            <div className={styles.container}>
+                {months.map((month) => {
+                    const parsedMonth = Number(month);
 
-                const isCurrentMonthActive = parsedMonth === activeMonthCount;
-
-                const localeDate = new Date(0, parsedMonth).toLocaleString(
-                    'ru',
-                    {
-                        month: 'long',
-                    },
-                );
-
-                return (
-                    <label key={month} className={styles.button}>
-                        <div>
+                    const isCurrentMonthActive =
+                        parsedMonth === activeMonthCount;
+                    const localeDate = new Date(0, parsedMonth).toLocaleString(
+                        'ru',
+                        {
+                            month: 'long',
+                        },
+                    );
+                    return (
+                        <label key={month} className={styles.button}>
                             <input
                                 name="month"
                                 type="radio"
@@ -49,7 +49,6 @@ export const MonthSwitcher: FC<Props> = ({
                                             parsedMonth / 12,
                                         );
                                         const months = parsedMonth % 12;
-
                                         if (months === 0) {
                                             return onDateChange({
                                                 month: 12,
@@ -57,13 +56,11 @@ export const MonthSwitcher: FC<Props> = ({
                                                     activeDate.year + years - 1,
                                             });
                                         }
-
                                         return onDateChange({
                                             month: months,
                                             year: activeDate.year + years,
                                         });
                                     }
-
                                     return onDateChange({
                                         month: parsedMonth,
                                         year: currentYear,
@@ -71,28 +68,11 @@ export const MonthSwitcher: FC<Props> = ({
                                 }}
                             />
                             {localeDate}
-                        </div>
-                        <div className={styles.amounts}>
-                            <span className={styles.outcome}>
-                                {paymentsByMonth[
-                                    parsedMonth
-                                ].outcome.toLocaleString('ru-RU', {
-                                    style: 'currency',
-                                    currency: 'RUB',
-                                })}
-                            </span>
-                            <span className={styles.income}>
-                                {paymentsByMonth[
-                                    parsedMonth
-                                ].income.toLocaleString('ru-RU', {
-                                    style: 'currency',
-                                    currency: 'RUB',
-                                })}
-                            </span>
-                        </div>
-                    </label>
-                );
-            })}
-        </div>
+                        </label>
+                    );
+                })}
+            </div>
+            <Amount activeDate={activeDate} paymentsByMonth={paymentsByMonth} />
+        </section>
     );
 };
