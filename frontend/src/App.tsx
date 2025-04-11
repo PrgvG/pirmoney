@@ -12,6 +12,7 @@ import {
     editPaymentEmitter,
     deletePaymentEmitter,
     DeletePayment,
+    PaymentsByCategories,
 } from './features';
 import {
     enrichByPaymentDate,
@@ -58,14 +59,18 @@ export const App: FC = () => {
             </header>
             {payments.length ? (
                 <>
-                    <Summary
-                        closestPayment={closestPayment}
-                        paymentsAmountLeft={paymentsAmountLeft}
-                        paymentsByCategories={getPaymentsByCategories(
-                            payments,
-                            activeDate,
-                        )}
-                    />
+                    <section>
+                        <Summary
+                            closestPayment={closestPayment}
+                            paymentsAmountLeft={paymentsAmountLeft}
+                        />
+                        <PaymentsByCategories
+                            paymentsByCategories={getPaymentsByCategories(
+                                payments,
+                                activeDate,
+                            )}
+                        />
+                    </section>
 
                     <PaymentsGrid
                         isCurrentMonth={activeDate.month === today.getMonth()}

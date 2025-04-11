@@ -13,3 +13,4 @@ export {
     DeletePayment,
     deletePaymentEmitter,
 } from './delete_payment/delete_payment';
+export { PaymentsByCategories } from './payments_by_categories/payments_by_categories';

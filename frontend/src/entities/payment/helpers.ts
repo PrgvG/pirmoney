@@ -184,24 +184,46 @@ export const getPaymentsByCategories = (
         month: number;
         year: number;
     },
-) => {
+): Record<string, { amount: number; payments: Payment[] }> => {
     return filterByActiveDate(payments, activeDate)
         .filter((payment) => payment.payment_kind === 'outcome')
-        .reduce<Record<string, number>>((acc, payment) => {
-            if (!payment.category_id) {
-                if ('N/A' in acc) {
-                    acc['N/A'] += Number(payment.payment_amount);
+        .reduce<Record<string, { amount: number; payments: Payment[] }>>(
+            (acc, payment) => {
+                if (!payment.category_id) {
+                    if ('N/A' in acc) {
+                        acc['N/A'] = {
+                            amount: (acc['N/A'].amount += Number(
+                                payment.payment_amount,
+                            )),
+                            payments: [...acc['N/A'].payments, payment],
+                        };
+                    } else {
+                        acc['N/A'] = {
+                            amount: Number(payment.payment_amount),
+                            payments: [payment],
+                        };
+                    }
                 } else {
-                    acc['N/A'] = Number(payment.payment_amount);
+                    if (payment.category_id in acc) {
+                        acc[payment.category_id] = {
+                            amount: (acc[payment.category_id].amount += Number(
+                                payment.payment_amount,
+                            )),
+                            payments: [
+                                ...acc[payment.category_id].payments,
+                                payment,
+                            ],
+                        };
+                    } else {
+                        acc[payment.category_id] = {
+                            amount: Number(payment.payment_amount),
+                            payments: [payment],
+                        };
+                    }
                 }
-            } else {
-                if (payment.category_id in acc) {
-                    acc[payment.category_id] += Number(payment.payment_amount);
-                } else {
-                    acc[payment.category_id] = Number(payment.payment_amount);
-                }
-            }
 
-            return acc;
-        }, {});
+                return acc;
+            },
+            {},
+        );
 };

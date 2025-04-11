@@ -9,20 +9,3 @@
 .money {
     text-align: right;
 }
-
-.text {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.wrapper {
-    position: absolute;
-    background: white;
-    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
-    padding: 16px;
-    display: grid;
-    column-gap: 8px;
-    grid-template-columns: 125px 125px 50px;
-    z-index: 10;
-}

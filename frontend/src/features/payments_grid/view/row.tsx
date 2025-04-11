@@ -35,8 +35,6 @@ export const Row: FC<Props> = ({
         day: 'numeric',
     });
 
-    console.log('onSeparatorClick: ', onSeparatorClick, kind);
-
     if (kind === 'separator') {
         return (
             <div className={styles.separator}>

@@ -1,0 +1,46 @@
+.text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.wrapper {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+    padding: 8px;
+    gap: 4px;
+    z-index: 10;
+}
+
+.row {
+    display: grid;
+    column-gap: 8px;
+    padding: 0 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    grid-template-columns: 125px 125px 50px;
+}
+
+.row:hover {
+    background-color: #f2f1f1;
+}
+
+.categoryRow {
+    display: grid;
+    column-gap: 8px;
+    padding: 0 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    grid-template-columns: 110px 100px 90px;
+}
+
+.categoryRow:hover {
+    background-color: #f2f1f1;
+}
+
+.money {
+    text-align: right;
+}

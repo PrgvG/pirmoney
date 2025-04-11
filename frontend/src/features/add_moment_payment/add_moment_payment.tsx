@@ -51,7 +51,11 @@ export const AddMomentPaymentButton: FC<Props> = ({ onAdd }) => {
 
     return (
         <>
-            <Button type="button" onClick={handleOpenDialog}>
+            <Button
+                className={styles.button}
+                type="button"
+                onClick={handleOpenDialog}
+            >
                 Записать
             </Button>
 
@@ -87,7 +91,6 @@ export const AddMomentPaymentButton: FC<Props> = ({ onAdd }) => {
                         </section>
                         <div className={styles.controls}>
                             <Button
-                                className={styles.test}
                                 type="submit"
                                 disabled={formState.isSubmitting}
                             >
