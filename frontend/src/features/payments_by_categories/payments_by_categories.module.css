@@ -24,23 +24,30 @@
     grid-template-columns: 125px 125px 50px;
 }
 
-.row:hover {
-    background-color: #f2f1f1;
-}
-
 .categoryRow {
     display: grid;
     column-gap: 8px;
     padding: 0 4px;
     border-radius: 4px;
     cursor: pointer;
-    grid-template-columns: 110px 100px 90px;
+    grid-template-columns: 125px 100px 75px;
 }
 
-.categoryRow:hover {
-    background-color: #f2f1f1;
+.label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .money {
     text-align: right;
+}
+
+@media (hover: hover) {
+    .row:hover {
+        background-color: #f2f1f1;
+    }
+    .categoryRow:hover {
+        background-color: #f2f1f1;
+    }
 }

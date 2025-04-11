@@ -35,17 +35,20 @@ export const PaymentsByCategories: FC<Props> = ({ paymentsByCategories }) => {
                             setSelectedCategory(null);
                         }}
                     >
-                        {paymentsByCategories[selectedCategory].payments.map(
-                            (payment) => {
-                                const labelDate = payment.completed_at
-                                    ? new Date(
-                                          payment.completed_at,
-                                      ).toLocaleDateString('ru', {
-                                          month: 'long',
-                                          day: 'numeric',
-                                      })
-                                    : '—';
-
+                        {paymentsByCategories[selectedCategory].payments
+                            .sort((a, b) => {
+                                if (!a.payment_day) {
+                                    return 1;
+                                }
+                                if (!b.payment_day) {
+                                    return -1;
+                                }
+                                return (
+                                    new Date(a.payment_day).getTime() -
+                                    new Date(b.payment_day).getTime()
+                                );
+                            })
+                            .map((payment) => {
                                 const formattedAmount =
                                     payment.payment_amount.toLocaleString(
                                         'ru-RU',
@@ -55,22 +58,30 @@ export const PaymentsByCategories: FC<Props> = ({ paymentsByCategories }) => {
                                         },
                                     );
 
+                                const date = new Date();
+
+                                date.setDate(payment.payment_day);
+
                                 return (
                                     <section
                                         key={payment._id}
                                         className={styles.categoryRow}
                                     >
-                                        <div>{payment.label}</div>
+                                        <div className={styles.label}>
+                                            {payment.label}
+                                        </div>
                                         <div className={styles.money}>
                                             {formattedAmount}
                                         </div>
                                         <div className={styles.money}>
-                                            {labelDate}
+                                            {date.toLocaleDateString('ru-RU', {
+                                                day: 'numeric',
+                                                month: 'short',
+                                            })}
                                         </div>
                                     </section>
                                 );
-                            },
-                        )}
+                            })}
                     </div>
                 ) : (
                     <div className={styles.wrapper}>
