@@ -75,11 +75,11 @@ export const AddMomentPaymentButton: FC<Props> = ({ onAdd }) => {
                     <div className={styles.wrapper}>
                         <DialogTitle title="Внесение платежа" />
                         <section className={styles.fields}>
-                            <LabelField register={register} name="label" />
                             <AmountField
                                 register={register}
                                 name="payment_amount"
                             />
+                            <LabelField register={register} name="label" />
                             <CategoryField
                                 register={register}
                                 name="category_id"
