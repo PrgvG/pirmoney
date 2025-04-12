@@ -31,16 +31,6 @@
     outline-offset: -3px;
 }
 
-.amounts {
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
-}
-
-.date {
-    width: 75px;
-}
-
 .income {
     color: green;
 }

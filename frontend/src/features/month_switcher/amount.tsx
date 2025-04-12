@@ -15,13 +15,8 @@ export const Amount: FC<Props> = ({ activeDate, paymentsByMonth }) => {
             ? (activeDate.year - currentYear) * 12 + activeDate.month
             : activeDate.month;
 
-    const localeDate = new Date(0, activeMonthCount).toLocaleString('ru', {
-        month: 'long',
-    });
-
     return (
         <div className={styles.amounts}>
-            <span className={styles.date}>{localeDate}</span>
             <span className={styles.outcome}>
                 {paymentsByMonth[activeMonthCount].outcome.toLocaleString(
                     'ru-RU',
