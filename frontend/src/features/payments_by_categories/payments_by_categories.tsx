@@ -85,38 +85,44 @@ export const PaymentsByCategories: FC<Props> = ({ paymentsByCategories }) => {
                     </div>
                 ) : (
                     <div className={styles.wrapper}>
-                        {Object.keys(paymentsByCategories).map((categoryId) => {
-                            const formattedAmount = paymentsByCategories[
-                                categoryId
-                            ].amount.toLocaleString('ru-RU', {
-                                style: 'currency',
-                                currency: 'RUB',
-                            });
-                            const percent = Math.round(
-                                (paymentsByCategories[categoryId].amount /
-                                    fullAmount) *
-                                    100,
-                            );
-                            return (
-                                <section
-                                    key={categoryId}
-                                    className={styles.row}
-                                    onClick={() => {
-                                        setSelectedCategory(categoryId);
-                                    }}
-                                >
-                                    <span className={styles.text}>
-                                        {getCategoryNameById(categoryId)}
-                                    </span>
-                                    <span className={styles.money}>
-                                        {formattedAmount}
-                                    </span>
-                                    <span className={styles.money}>
-                                        {percent}%
-                                    </span>
-                                </section>
-                            );
-                        })}
+                        {Object.keys(paymentsByCategories)
+                            .sort(
+                                (a, b) =>
+                                    paymentsByCategories[b].amount -
+                                    paymentsByCategories[a].amount,
+                            )
+                            .map((categoryId) => {
+                                const formattedAmount = paymentsByCategories[
+                                    categoryId
+                                ].amount.toLocaleString('ru-RU', {
+                                    style: 'currency',
+                                    currency: 'RUB',
+                                });
+                                const percent = Math.round(
+                                    (paymentsByCategories[categoryId].amount /
+                                        fullAmount) *
+                                        100,
+                                );
+                                return (
+                                    <section
+                                        key={categoryId}
+                                        className={styles.row}
+                                        onClick={() => {
+                                            setSelectedCategory(categoryId);
+                                        }}
+                                    >
+                                        <span className={styles.text}>
+                                            {getCategoryNameById(categoryId)}
+                                        </span>
+                                        <span className={styles.money}>
+                                            {formattedAmount}
+                                        </span>
+                                        <span className={styles.money}>
+                                            {percent}%
+                                        </span>
+                                    </section>
+                                );
+                            })}
                     </div>
                 ))}
         </>
