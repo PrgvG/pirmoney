@@ -1,7 +1,8 @@
 import { FC, useState } from 'react';
-import { TextButton } from '../../components';
+import { IconButton, TextButton } from '../../components';
 import { Payment, useCategories } from '../../entities';
 import styles from './payments_by_categories.module.css';
+import { EditPaymentButton } from '../edit_payment/edit_payment_button';
 
 type Props = {
     paymentsByCategories: Record<
@@ -12,7 +13,7 @@ type Props = {
 
 export const PaymentsByCategories: FC<Props> = ({ paymentsByCategories }) => {
     const [showCategories, setShowCategories] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState<string | null>(
+    const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
         null,
     );
     const { getCategoryNameById } = useCategories();
@@ -28,14 +29,20 @@ export const PaymentsByCategories: FC<Props> = ({ paymentsByCategories }) => {
                 {showCategories ? 'Скрыть' : 'Показать'} траты по категориям
             </TextButton>
             {showCategories &&
-                (selectedCategory ? (
-                    <div
-                        className={styles.wrapper}
-                        onClick={() => {
-                            setSelectedCategory(null);
-                        }}
-                    >
-                        {paymentsByCategories[selectedCategory].payments
+                (selectedCategoryId ? (
+                    <div className={styles.wrapper}>
+                        <div className={styles.titleBlock}>
+                            <span className={styles.title}>
+                                {getCategoryNameById(selectedCategoryId)}
+                            </span>
+                            <IconButton
+                                label="⏎"
+                                onClick={() => {
+                                    setSelectedCategoryId(null);
+                                }}
+                            />
+                        </div>
+                        {paymentsByCategories[selectedCategoryId].payments
                             .sort((a, b) => {
                                 if (!a.payment_day) {
                                     return 1;
@@ -67,11 +74,11 @@ export const PaymentsByCategories: FC<Props> = ({ paymentsByCategories }) => {
                                         key={payment._id}
                                         className={styles.categoryRow}
                                     >
-                                        <div className={styles.label}>
-                                            {payment.label}
-                                        </div>
-                                        <div className={styles.money}>
-                                            {formattedAmount}
+                                        <div>
+                                            <div className={styles.label}>
+                                                {payment.label}
+                                            </div>
+                                            <div>{formattedAmount}</div>
                                         </div>
                                         <div className={styles.money}>
                                             {date.toLocaleDateString('ru-RU', {
@@ -79,6 +86,7 @@ export const PaymentsByCategories: FC<Props> = ({ paymentsByCategories }) => {
                                                 month: 'short',
                                             })}
                                         </div>
+                                        <EditPaymentButton payment={payment} />
                                     </section>
                                 );
                             })}
@@ -108,7 +116,7 @@ export const PaymentsByCategories: FC<Props> = ({ paymentsByCategories }) => {
                                         key={categoryId}
                                         className={styles.row}
                                         onClick={() => {
-                                            setSelectedCategory(categoryId);
+                                            setSelectedCategoryId(categoryId);
                                         }}
                                     >
                                         <span className={styles.text}>

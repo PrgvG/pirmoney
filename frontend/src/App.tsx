@@ -9,10 +9,11 @@ import {
     UserButton,
     CategoryButton,
     EditPayment,
-    editPaymentEmitter,
-    deletePaymentEmitter,
     DeletePayment,
     PaymentsByCategories,
+    AddMomentPaymentButton,
+    EditPaymentButton,
+    DeletePaymentButton,
 } from './features';
 import {
     enrichByPaymentDate,
@@ -26,7 +27,6 @@ import {
     sortPaymentsByPaymentDay,
 } from './entities';
 import styles from './App.module.css';
-import { AddMomentPaymentButton } from './features/add_moment_payment/add_moment_payment';
 
 export const App: FC = () => {
     const today = new Date();
@@ -104,32 +104,10 @@ export const App: FC = () => {
                             />
                         )}
                         renderDeleteButton={(payment) => (
-                            <button
-                                type="button"
-                                className={styles.iconButton}
-                                onClick={() => {
-                                    deletePaymentEmitter.emit(
-                                        'dialog:show',
-                                        payment,
-                                    );
-                                }}
-                            >
-                                🗑️
-                            </button>
+                            <DeletePaymentButton payment={payment} />
                         )}
                         renderEditButton={(payment) => (
-                            <button
-                                type="button"
-                                className={styles.iconButton}
-                                onClick={() => {
-                                    editPaymentEmitter.emit(
-                                        'dialog:show',
-                                        payment,
-                                    );
-                                }}
-                            >
-                                ⚙️
-                            </button>
+                            <EditPaymentButton payment={payment} />
                         )}
                     />
                 </>

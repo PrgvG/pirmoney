@@ -9,8 +9,11 @@ export { LoginForm } from './login_form/login_form';
 export { RegisterForm } from './register_form/register_form';
 export { CategoryButton } from './category_button/category_button';
 export { EditPayment, editPaymentEmitter } from './edit_payment/edit_payment';
+export { EditPaymentButton } from './edit_payment/edit_payment_button';
 export {
     DeletePayment,
     deletePaymentEmitter,
 } from './delete_payment/delete_payment';
+export { DeletePaymentButton } from './delete_payment/delete_payment_button';
 export { PaymentsByCategories } from './payments_by_categories/payments_by_categories';
+export { AddMomentPaymentButton } from './add_moment_payment/add_moment_payment';

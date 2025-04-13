@@ -20,16 +20,6 @@
     margin-top: auto;
 }
 
-.iconButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .buttons {
     display: flex;
     gap: 16px;
