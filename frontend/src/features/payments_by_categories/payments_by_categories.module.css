@@ -33,7 +33,11 @@
     align-items: center;
     padding: 0 4px;
     border-radius: 4px;
-    grid-template-columns: 168px 100px 32px;
+    grid-template-columns: 136px 100px 64px;
+}
+
+.actions {
+    display: inline-flex;
 }
 
 .label {

@@ -3,6 +3,7 @@ import { IconButton, TextButton } from '../../components';
 import { Payment, useCategories } from '../../entities';
 import styles from './payments_by_categories.module.css';
 import { EditPaymentButton } from '../edit_payment/edit_payment_button';
+import { DeletePaymentButton } from '../delete_payment/delete_payment_button';
 
 type Props = {
     paymentsByCategories: Record<
@@ -86,7 +87,15 @@ export const PaymentsByCategories: FC<Props> = ({ paymentsByCategories }) => {
                                                 month: 'short',
                                             })}
                                         </div>
-                                        <EditPaymentButton payment={payment} />
+
+                                        <div className={styles.actions}>
+                                            <EditPaymentButton
+                                                payment={payment}
+                                            />
+                                            <DeletePaymentButton
+                                                payment={payment}
+                                            />
+                                        </div>
                                     </section>
                                 );
                             })}
