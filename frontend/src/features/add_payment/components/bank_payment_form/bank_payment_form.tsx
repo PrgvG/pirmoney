@@ -44,9 +44,9 @@ export const BankPaymentForm: FC<Props> = ({
                 reset();
             }}
         >
-            <LabelField register={register} name="label" />
-
             <AmountField register={register} name="payment_amount" />
+
+            <LabelField register={register} name="label" />
 
             <DayField register={register} name="payment_day" />
 

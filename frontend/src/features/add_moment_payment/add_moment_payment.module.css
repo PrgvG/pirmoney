@@ -1,12 +1,8 @@
-.form {
-    width: 300px;
-}
-
 .wrapper {
     display: flex;
     gap: 24px;
     flex-direction: column;
-    width: 100%;
+    width: 300px;
     margin: 0 auto;
 }
 
@@ -47,9 +43,5 @@
         width: calc(100vw - 40px);
         height: calc(100vh - 40px);
         box-sizing: border-box;
-    }
-
-    .wrapper {
-        width: 300px;
     }
 }

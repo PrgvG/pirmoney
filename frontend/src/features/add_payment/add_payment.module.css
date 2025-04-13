@@ -1,7 +1,9 @@
-.dialog {
+.wrapper {
+    width: 300px;
     display: flex;
     flex-direction: column;
     gap: 24px;
+    margin: 0 auto;
 }
 
 .paymentTypes {

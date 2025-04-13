@@ -68,54 +68,54 @@ export const AddPaymentButton: FC<Props> = ({ onAdd }) => {
 
             <dialog ref={dialogRef}>
                 <div className={styles.dialog}>
-                    <DialogTitle title="Планирование платежа" />
-
-                    <div className={styles.paymentTypes}>
-                        {paymentTypes.map(({ value, label }) => (
-                            <label key={value}>
-                                <input
-                                    type="radio"
-                                    value={value}
-                                    checked={paymentType === value}
-                                    onChange={(e) => {
-                                        setPaymentType(
-                                            e.target.value as PaymentType,
-                                        );
-                                    }}
-                                />
-                                {label}
-                            </label>
-                        ))}
-                    </div>
-
-                    {paymentType === 'repeat_payment' && (
-                        <RepeatPaymentForm
-                            onReset={handleCloseDialog}
-                            onSubmit={handleSubmit}
-                            formId="addPaymentForm"
-                        />
-                    )}
-                    {paymentType === 'bank_payment' && (
-                        <BankPaymentForm
-                            onReset={handleCloseDialog}
-                            onSubmit={handleSubmit}
-                            formId="addPaymentForm"
-                        />
-                    )}
-                    {paymentType === 'one_time_payment' && (
-                        <OneTimePaymentForm
-                            onReset={handleCloseDialog}
-                            onSubmit={handleSubmit}
-                            formId="addPaymentForm"
-                        />
-                    )}
-                    <div className={styles.controls}>
-                        <Button type="submit" form="addPaymentForm">
-                            Добавить
-                        </Button>
-                        <Button type="reset" form="addPaymentForm">
-                            Закрыть
-                        </Button>
+                    <div className={styles.wrapper}>
+                        <DialogTitle title="Планирование платежа" />
+                        <div className={styles.paymentTypes}>
+                            {paymentTypes.map(({ value, label }) => (
+                                <label key={value}>
+                                    <input
+                                        type="radio"
+                                        value={value}
+                                        checked={paymentType === value}
+                                        onChange={(e) => {
+                                            setPaymentType(
+                                                e.target.value as PaymentType,
+                                            );
+                                        }}
+                                    />
+                                    {label}
+                                </label>
+                            ))}
+                        </div>
+                        {paymentType === 'repeat_payment' && (
+                            <RepeatPaymentForm
+                                onReset={handleCloseDialog}
+                                onSubmit={handleSubmit}
+                                formId="addPaymentForm"
+                            />
+                        )}
+                        {paymentType === 'bank_payment' && (
+                            <BankPaymentForm
+                                onReset={handleCloseDialog}
+                                onSubmit={handleSubmit}
+                                formId="addPaymentForm"
+                            />
+                        )}
+                        {paymentType === 'one_time_payment' && (
+                            <OneTimePaymentForm
+                                onReset={handleCloseDialog}
+                                onSubmit={handleSubmit}
+                                formId="addPaymentForm"
+                            />
+                        )}
+                        <div className={styles.controls}>
+                            <Button type="submit" form="addPaymentForm">
+                                Добавить
+                            </Button>
+                            <Button type="reset" form="addPaymentForm">
+                                Закрыть
+                            </Button>
+                        </div>
                     </div>
                 </div>
             </dialog>

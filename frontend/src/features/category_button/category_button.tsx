@@ -1,7 +1,7 @@
 import { FC, useRef, useState } from 'react';
 import styles from './category_button.module.css';
 import { categoryApi, useCategories } from '../../entities';
-import { Button, Input } from '../../components';
+import { Button, IconButton, Input } from '../../components';
 
 export const CategoryButton: FC = () => {
     const dialogRef = useRef<HTMLDialogElement>(null);
@@ -56,7 +56,8 @@ export const CategoryButton: FC = () => {
                             categories.map((category) => (
                                 <div key={category._id} className={styles.row}>
                                     {category.name}
-                                    <button
+                                    <IconButton
+                                        label="🗑️"
                                         onClick={async () => {
                                             await categoryApi.delCategory(
                                                 category._id,
@@ -68,9 +69,7 @@ export const CategoryButton: FC = () => {
                                                 ),
                                             );
                                         }}
-                                    >
-                                        🗑️
-                                    </button>
+                                    />
                                 </div>
                             ))
                         ) : (

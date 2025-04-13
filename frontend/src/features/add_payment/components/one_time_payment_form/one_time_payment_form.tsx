@@ -43,9 +43,9 @@ export const OneTimePaymentForm: FC<Props> = ({
                 reset();
             }}
         >
-            <LabelField register={register} name="label" />
-
             <AmountField register={register} name="payment_amount" />
+
+            <LabelField register={register} name="label" />
 
             <DateField register={register} name="payment_date" />
 
