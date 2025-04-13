@@ -27,6 +27,7 @@ import {
     sortPaymentsByPaymentDay,
 } from './entities';
 import styles from './App.module.css';
+import { IconButton } from './components';
 
 export const App: FC = () => {
     const today = new Date();
@@ -47,17 +48,25 @@ export const App: FC = () => {
         [payments, outcomeAmount, incomeAmount],
     );
 
+    const handleLoadPayments = async () => {
+        const payments = await paymentApi.getAllPayments();
+        setPayments(payments);
+    };
+
     useEffect(() => {
-        paymentApi.getAllPayments().then(setPayments);
+        handleLoadPayments();
     }, []);
 
     return (
         <PageLayout>
             <header className={styles.header}>
-                <CategoryButton />
+                <div className={styles.headerActions}>
+                    <IconButton label="🔄" onClick={handleLoadPayments} />
+                    <CategoryButton />
+                </div>
                 <UserButton onLogout={() => setPayments([])} />
             </header>
-            {payments.length ? (
+            {payments.length > 0 ? (
                 <>
                     <section>
                         <Summary

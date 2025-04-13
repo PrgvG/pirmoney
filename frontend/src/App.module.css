@@ -7,6 +7,13 @@
     flex-wrap: wrap-reverse;
 }
 
+.headerActions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3px;
+}
+
 .footer {
     position: sticky;
     display: flex;
