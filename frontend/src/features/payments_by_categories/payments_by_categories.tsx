@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { IconButton, TextButton } from '../../components';
 import { Payment, useCategories } from '../../entities';
 import styles from './payments_by_categories.module.css';
@@ -24,6 +24,12 @@ export const PaymentsByCategories: FC<Props> = ({ paymentsByCategories }) => {
         0,
     );
 
+    useEffect(() => {
+        if (selectedCategoryId && !(selectedCategoryId in paymentsByCategories)) {
+            setSelectedCategoryId(null)
+        }
+    },[paymentsByCategories])
+
     return (
         <>
             <TextButton onClick={() => setShowCategories((prev) => !prev)}>
@@ -43,7 +49,7 @@ export const PaymentsByCategories: FC<Props> = ({ paymentsByCategories }) => {
                                 }}
                             />
                         </div>
-                        {paymentsByCategories[selectedCategoryId].payments
+                        {paymentsByCategories[selectedCategoryId]?.payments
                             .sort((a, b) => {
                                 if (!a.payment_day) {
                                     return 1;
