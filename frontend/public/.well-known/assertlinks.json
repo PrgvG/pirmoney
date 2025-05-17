@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "net.unisim.app",
+    "sha256_cert_fingerprints":
+    ["6C:A8:27:DB:EC:1C:98:5A:BF:70:8B:09:3A:09:7E:8C:E7:4D:13:22:28:C5:41:A8:8B:AC:DE:C0:6F:2B:CC:6B"]
+  }
+}] 
