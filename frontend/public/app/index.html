@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Открытие приложения</title>
+    <script>
+        // Пытаемся открыть приложение
+        window.location.href = "net.unisim.app://app";
+        
+        // Ожидаем 2 секунды и перенаправляем на главную страницу сайта, если приложение не открылось
+        setTimeout(function() {
+            window.location.href = "/";
+        }, 2000);
+    </script>
+</head>
+<body>
+    <div style="text-align: center; padding: 40px;">
+        <h1>Открываем приложение...</h1>
+        <p>Если приложение не открылось автоматически, <a href="/">вернитесь на главную страницу</a>.</p>
+    </div>
+</body>
+</html> 
